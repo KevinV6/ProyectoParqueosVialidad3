@@ -205,6 +205,36 @@ class _MenuPrinciState extends State<MenuPrinci> {
         ],
       ),
 
+      
+      //Navigation Bar
+      bottomNavigationBar: BottomNavigationBar (
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        iconSize: 30,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_alert_rounded),
+            label: "Notificaciones",
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_balance_sharp),
+            label: "Home",
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: "Mapas(rutas)",
+          ),
+        ],
+        onTap: (index){
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
+
+
       body: Stack(
         children: [
           GoogleMap(
