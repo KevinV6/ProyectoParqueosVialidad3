@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyectoparqueovialidad/buscador_datos/buscadordatos.dart';
+import 'package:proyectoparqueovialidad/menu/menu.dart';
+
+import 'menu/menu.dart';
 
 void main() {
   runApp(MyApp());
@@ -188,7 +191,7 @@ class _MenuPrinciState extends State<MenuPrinci> {
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
 
     return Scaffold(
-      drawer: Drawer(), //Boton de menu
+      drawer: MenuLateral(), //Boton de menu
       appBar: AppBar(title: Text(""),
         actions: [
           IconButton(    //Boton de buscador
