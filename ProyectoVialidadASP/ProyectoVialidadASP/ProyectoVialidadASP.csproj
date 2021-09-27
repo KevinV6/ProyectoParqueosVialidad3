@@ -94,11 +94,13 @@
     <Content Include="Imagen\imgHome\menu.png" />
     <Content Include="JavaScript\JIndex.js" />
     <Content Include="Style\StyleIndex\SIndex.css" />
+    <Content Include="Style\StyleLugares\SLugares.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -108,6 +110,7 @@
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Locations\RegistroLugares.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
