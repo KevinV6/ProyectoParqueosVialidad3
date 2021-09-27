@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:proyectovialidad/Register%20Complete/background.dart';
+import 'package:proyectoparqueovialidad/Register Complete/background.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Body extends StatelessWidget {
