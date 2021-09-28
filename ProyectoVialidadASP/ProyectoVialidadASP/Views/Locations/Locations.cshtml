@@ -1,0 +1,78 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Añadir Nuevo Parqueo</title>
+    <link rel="stylesheet" href="~/Style/StyleIndex/SLocations.css">
+    <!-- GOOGLE FONTs -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- ANIMATE CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+</head>
+<body>
+
+    <div class="content">
+
+        <i class="fas fa-arrow-circle-left fa-5x"></i>
+
+        <h1 class="logo"><span>Añadir Nuevo Parqueo</span></h1>
+
+        <div class="parking-wrapper animated bounceInUp" id="parking">
+            <div class="parking-form">
+                <form action="">
+                    <p>
+                        <label>Nombre</label>
+                        <input type="text" name="name">
+                    </p>
+                    <p>
+                        <label>Latitud</label>
+                        <input type="email" name="latitude">
+                    </p>
+                    <p>
+                        <label>Nombre de la calle</label>
+                        <input type="text" name="nameStreet">
+                    </p>
+                    <p>
+                        <label>Longitud</label>
+                        <input type="tel" name="lenght">
+                    </p>
+                    <p>
+                        <label>Espacios</label>
+                        <input type="text" name="parkingSpaces">
+                    </p>
+                    <p>
+                        <label>Tarifas</label>
+                        <input type="text" name="price">
+                    </p>
+                    <p>
+                        <label>Imagen</label>
+                        <input type="file" name="image">
+                    </p>
+                    <p class="block">
+                        <label>Descripcion</label>
+                        <textarea name="description" rows="3"></textarea>
+                    </p>
+                    <p class="block">
+                        <button style="color: white;">
+                            Añadir
+                        </button>
+                    </p>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
