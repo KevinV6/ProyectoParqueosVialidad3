@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyectoparqueovialidad/Register Complete/body.dart';
+import 'package:proyectoparqueovialidad/Register%20Complete/body.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onboarding_screen/onboarding_screen.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -41,9 +40,9 @@ class MyHomePage extends StatelessWidget {
       ),
     ),
     _SliderModel(
-      imageAssetPath: Image.asset('../asset/image/OnboardingImg/Primera.png'),
+      imageAssetPath: Image.asset('../asset/image/OnboardingImg/1.png'),
       title: 'Bienvenido a Cardrop',
-      desc: 'Conoce los puntos autorizados de parqueo en la ciudad.',
+      desc: 'Una aplicación pensada para realizar reservas de parqueos, \nen muy pocos pasos todo desde el alcance de tu celular.',
       titleStyle: const TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w800,
@@ -51,14 +50,14 @@ class MyHomePage extends StatelessWidget {
       ),
       descStyle: const TextStyle(
         fontSize: 20,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         color: Colors.black,
       ),
     ),
     _SliderModel(
-      imageAssetPath: Image.asset('../asset/image/OnboardingImg/Segunda.png'),
+      imageAssetPath: Image.asset('../asset/image/OnboardingImg/2.png'),
       title: '',
-      desc: 'Recibe notificaciones de cierre de avenidas para prevenir inconvenientes.',
+      desc: 'Realiza tu reserva online para un punto de parqueo en la ciudad, \npara el día y la hora de tu preferencia.',
       descStyle: const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w400,
@@ -66,9 +65,9 @@ class MyHomePage extends StatelessWidget {
       ),
     ),
     _SliderModel(
-      imageAssetPath: Image.asset('../asset/image/OnboardingImg/Tercero.png'),
+      imageAssetPath: Image.asset('../asset/image/OnboardingImg/3.png'),
       title: '',
-      desc: 'Regístrate en nuestra aplicación para disfrutar de Cardrop y conocer.',
+      desc: 'Recarga crédito para próximos reservas y evita \nremolques pagando horas extras.\nTodo desde Cardrop...',
       descStyle: const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w400,
