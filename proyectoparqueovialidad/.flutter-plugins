@@ -1,0 +1,12 @@
+# This is a generated file; do not edit or check into version control.
+<<<<<<< HEAD
+flutter_plugin_android_lifecycle=C:\\Users\\Windows 10\\flutterstudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-2.0.3\\
+google_maps_flutter=C:\\Users\\Windows 10\\flutterstudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\google_maps_flutter-2.0.9\\
+location=C:\\Users\\Windows 10\\flutterstudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\location-4.3.0\\
+location_web=C:\\Users\\Windows 10\\flutterstudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\location_web-3.1.1\\
+=======
+flutter_plugin_android_lifecycle=C:\\Users\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-2.0.3\\
+google_maps_flutter=C:\\Users\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\google_maps_flutter-2.0.9\\
+location=C:\\Users\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\location-4.3.0\\
+location_web=C:\\Users\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\location_web-3.1.1\\
+>>>>>>> 96ce78da392fd02e26b69c7429ec295164ec2f1b
