@@ -31,6 +31,8 @@ dependencies:
   location: ^4.3.0
   google_maps_flutter: ^2.0.9
   flutter_advanced_drawer: ^1.2.3
+  onboarding_screen: ^0.0.3
+  flutter_svg: ^0.22.0
 
 dev_dependencies:
   flutter_test:
