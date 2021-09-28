@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:proyectoparqueovialidad/main.dart';
+import 'package:proyectoparqueovialidad/Epic5Task1.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
