@@ -7,6 +7,8 @@ import 'package:proyectoparqueovialidad/menu/menu.dart';
 
 import 'menu/menu.dart';
 
+
+
 void main() {
   runApp(MyApp());
 }
@@ -18,15 +20,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Menu principal cliente',
-      home: MenuPrinci(),
+      home:MenuPrinci(),
+
     );
   }
 }
 
 class MenuPrinci extends StatefulWidget {
-  MenuPrinci({
-    Key? key,
-  }) : super(key: key);
+  MenuPrinci({Key? key,}) : super(key: key);
 
   @override
   _MenuPrinciState createState() => _MenuPrinciState();
@@ -36,12 +37,14 @@ class _MenuPrinciState extends State<MenuPrinci> {
   //Completer<GoogleMapController> _controller = Completer();
   GoogleMapController? _controller;
   final Set<Marker> listMarkers = {};
-  Set<Marker> Markers = {};
+  Set<Marker> Markers ={};
   Location location = Location();
   Location currentLocation = Location();
   late LocationData _currentPosition;
   late String _address, _dateTime;
   MapType currentMapType = MapType.normal;
+
+
 
   static final CameraPosition initCameraPosition = CameraPosition(
       bearing: 30,
@@ -49,20 +52,21 @@ class _MenuPrinciState extends State<MenuPrinci> {
       tilt: 45,
       zoom: 13.5);
 
-  void getLocation() async {
+
+  void getLocation() async{
     var location = await currentLocation.getLocation();
-    currentLocation.onLocationChanged.listen((LocationData loc) {
-      _controller
-          ?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
-        target: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
+    currentLocation.onLocationChanged.listen((LocationData loc){
+
+      _controller?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
+        target: LatLng(loc.latitude ?? 0.0,loc.longitude?? 0.0),
         zoom: 12.0,
       )));
       print(loc.latitude);
       print(loc.longitude);
       setState(() {
-        listMarkers.add(Marker(
-            markerId: MarkerId('Home'),
-            position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0)));
+        listMarkers.add(Marker(markerId: MarkerId('Home'),
+            position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0)
+        ));
       });
     });
   }
@@ -73,18 +77,18 @@ class _MenuPrinciState extends State<MenuPrinci> {
   //Center(child: Notificaciones()),
   // ];
 
+
   @override
   Widget build(BuildContext context) {
     listMarkers.add(Marker(
         markerId: MarkerId("1"),
         position: LatLng(-17.4170476, -66.1787081),
-        infoWindow:
-            InfoWindow(title: "Aeropuerto Internacional Jorge Wilstermann"),
+        infoWindow: InfoWindow(title: "Aeropuerto Internacional Jorge Wilstermann"),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
 
     listMarkers.add(Marker(
         markerId: MarkerId("2"),
-        position: LatLng(-17.3967255, -66.1575596),
+        position: LatLng(-17.3967255,-66.1575596),
         infoWindow: InfoWindow(title: "Tigo Bolivia - Sucursal Calama"),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
 
@@ -126,7 +130,7 @@ class _MenuPrinciState extends State<MenuPrinci> {
 
     listMarkers.add(Marker(
         markerId: MarkerId("9"),
-        position: LatLng(-17.372008, -66.1591467),
+        position: LatLng(-17.372008,-66.1591467),
         infoWindow: InfoWindow(title: "Las Islas"),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
 
@@ -150,7 +154,7 @@ class _MenuPrinciState extends State<MenuPrinci> {
 
     listMarkers.add(Marker(
         markerId: MarkerId("13"),
-        position: LatLng(-17.4025654, -66.1576406),
+        position: LatLng(-17.4025654,-66.1576406),
         infoWindow: InfoWindow(title: "Terminal de Buses Cochabamba"),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
 
@@ -171,6 +175,7 @@ class _MenuPrinciState extends State<MenuPrinci> {
         position: LatLng(-17.382381, -66.152295),
         infoWindow: InfoWindow(title: "Plaza Quintanilla"),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
+
 
     listMarkers.add(Marker(
         markerId: MarkerId("17"),
@@ -238,13 +243,15 @@ class _MenuPrinciState extends State<MenuPrinci> {
           GoogleMap(
             mapType: currentMapType,
             onMapCreated: (GoogleMapController controller) {
-              _controller = controller;
+              _controller=controller;
             },
             initialCameraPosition: initCameraPosition,
             compassEnabled: true,
             markers: listMarkers,
             myLocationEnabled: true,
+
           ),
+
           Container(
             padding: EdgeInsets.all(15),
             alignment: Alignment.topRight,
@@ -253,23 +260,22 @@ class _MenuPrinciState extends State<MenuPrinci> {
               onPressed: _onMapTypeChanged,
             ),
           ),
+
           Container(
             padding: EdgeInsets.all(15),
-            alignment: Alignment.centerRight,
+            alignment: Alignment.centerRight ,
             child: FloatingActionButton(
-              child: Icon(
-                Icons.location_searching,
-                color: Colors.white,
-              ),
+              child:  Icon(Icons.location_searching,color: Colors.white,),
               onPressed: getLocation,
             ),
           ),
+
         ],
       ),
     );
   }
 
-  getLoc() async {
+  getLoc() async{
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
 
@@ -288,14 +294,17 @@ class _MenuPrinciState extends State<MenuPrinci> {
         return;
       }
     }
+
   }
+
 
   void _onMapTypeChanged() {
     setState(() {
-      currentMapType =
-          currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
+      currentMapType = currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
     });
   }
+
+
 
   @override
   void initState() {
@@ -304,4 +313,5 @@ class _MenuPrinciState extends State<MenuPrinci> {
       getLocation();
     });
   }
+
 }
