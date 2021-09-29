@@ -8,9 +8,21 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Maps</title>
+    <style>
+        #map {
+            width: 800px;
+            height: 800px;
+        }
+    </style>
 </head>
 <body>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243661.6117952393!2d-66.31469195396852!3d-17.401577949704023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e375daaa9e2617%3A0x1ca207456270d502!2sCercado!5e0!3m2!1ses!2sbo!4v1632752787119!5m2!1ses!2sbo" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243661.6117952393!2d-66.31469195396852!3d-17.401577949704023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e375daaa9e2617%3A0x1ca207456270d502!2sCercado!5e0!3m2!1ses!2sbo!4v1632752787119!5m2!1ses!2sbo" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>*@
+    <div id="map"></div>
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtFqDJ3PeclA4FbDx9-uYvhil8NV1Mu7E&callback=initMap">
+    </script>
+    <script src="~/Js/JMarcador.js"></script>
+
 </body>
 </html>

@@ -93,6 +93,7 @@
     <Content Include="Imagen\ImgHome\close.png" />
     <Content Include="Imagen\ImgHome\menu.png" />
     <Content Include="Js\JIndex.js" />
+    <Content Include="Js\JMarcador.js" />
     <Content Include="Style\StyleIndex\SIndex.css" />
     <Content Include="Style\StyleIndex\SLocationList.css" />
     <Content Include="Style\StyleIndex\SLocations.css" />
