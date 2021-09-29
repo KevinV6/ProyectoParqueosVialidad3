@@ -21,5 +21,9 @@ namespace ProyectoVialidadASP.Controllers
         {
             return View();
         }
+        public ActionResult UpdateLocation()
+        {
+            return View();
+        }
     }
 }

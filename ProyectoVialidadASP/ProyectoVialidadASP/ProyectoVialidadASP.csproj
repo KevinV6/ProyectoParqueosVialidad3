@@ -124,6 +124,7 @@
     <Content Include="Views\Locations\LocationsStreetList.cshtml" />
     <Content Include="Views\Streets\Streets.cshtml" />
     <Content Include="Views\Streets\UpdateStreets.cshtml" />
+    <Content Include="Views\Locations\UpdateLocation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
