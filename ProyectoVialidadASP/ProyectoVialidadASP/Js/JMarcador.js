@@ -18,7 +18,7 @@ function initMap() {
 
         const myLatLng = { lat: ubicacion.latitude, lng: ubicacion.longitude };
 
-        var texto = 'Nombre del lugar';
+        var texto = '<h1> Nombre de la calle </h1>' + '<p> Descripcion</p>';
 
         const options = {
             center: myLatLng,
@@ -35,6 +35,12 @@ function initMap() {
             title: "Mi primer marcador"
         });
 
+        var informacion = new google.maps.InfoWindow({
+            content: texto
+        });
 
+        marcador.addListener('click', function () {
+            informacion.open(mapa, marcador);
+        });
     })
 }
