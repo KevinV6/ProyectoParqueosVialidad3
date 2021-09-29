@@ -98,6 +98,7 @@
     <Content Include="Style\StyleIndex\SLocationList.css" />
     <Content Include="Style\StyleIndex\SLocations.css" />
     <Content Include="Style\StyleIndex\SLogin.css" />
+    <Content Include="Style\StyleIndex\SStreets.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +107,7 @@
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
+    <Compile Include="Controllers\StreetsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -120,6 +122,7 @@
     <Content Include="Views\Locations\Locations.cshtml" />
     <Content Include="Views\Locations\LocationsList.cshtml" />
     <Content Include="Views\Locations\LocationsStreetList.cshtml" />
+    <Content Include="Views\Streets\Streets.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
