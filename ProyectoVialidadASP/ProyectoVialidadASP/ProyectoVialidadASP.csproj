@@ -94,6 +94,7 @@
     <Content Include="Imagen\ImgHome\menu.png" />
     <Content Include="Js\JIndex.js" />
     <Content Include="Style\StyleIndex\SIndex.css" />
+    <Content Include="Style\StyleIndex\SLocationList.css" />
     <Content Include="Style\StyleIndex\SLocations.css" />
     <Content Include="Style\StyleIndex\SLogin.css" />
     <Content Include="Web.config" />
@@ -116,6 +117,8 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Maps\Maps.cshtml" />
     <Content Include="Views\Locations\Locations.cshtml" />
+    <Content Include="Views\Locations\LocationsList.cshtml" />
+    <Content Include="Views\Locations\LocationsStreetList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
