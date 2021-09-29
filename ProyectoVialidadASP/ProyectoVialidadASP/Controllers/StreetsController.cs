@@ -13,5 +13,10 @@ namespace ProyectoVialidadASP.Controllers
         {
             return View();
         }
+
+        public ActionResult UpdateStreets()
+        {
+            return View();
+        }
     }
 }

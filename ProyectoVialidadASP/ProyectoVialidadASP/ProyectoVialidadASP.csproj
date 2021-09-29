@@ -123,6 +123,7 @@
     <Content Include="Views\Locations\LocationsList.cshtml" />
     <Content Include="Views\Locations\LocationsStreetList.cshtml" />
     <Content Include="Views\Streets\Streets.cshtml" />
+    <Content Include="Views\Streets\UpdateStreets.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
