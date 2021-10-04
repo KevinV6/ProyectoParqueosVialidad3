@@ -29,34 +29,34 @@
 
         <div class="parking-wrapper animated bounceInUp" id="parking">
             <div class="parking-form">
-                <form action="">
+                <form action="UpdateLocation" method="post">
                     <p>
                         <label>Nombre</label>
-                        <input type="text" name="name">
+                        <input type="text" name="name" required>
                     </p>
                     <p>
                         <label>Latitud</label>
-                        <input type="email" name="latitude">
+                        <input type="text" name="latitude" required>
                     </p>
                     <p>
                         <label>Nombre de la calle</label>
-                        <input type="text" name="nameStreet">
+                        <input type="text" name="nameStreet" required>
                     </p>
                     <p>
                         <label>Longitud</label>
-                        <input type="tel" name="lenght">
+                        <input type="text" name="lenght" required>
                     </p>
                     <p>
                         <label>Espacios</label>
-                        <input type="text" name="parkingSpaces">
+                        <input type="text" name="parkingSpaces" required>
                     </p>
                     <p>
                         <label>Tarifas</label>
-                        <input type="text" name="price">
+                        <input type="text" name="price" required>
                     </p>
                     <p>
                         <label>Imagen</label>
-                        <input type="file" name="image">
+                        <input type="file" name="image" required>
                     </p>
                     <p class="block">
                         <label>Descripcion</label>
@@ -67,6 +67,8 @@
                             Añadir
                         </button>
                     </p>
+                    
+                    <label style="color:red" name="ERROR" id="error">@ViewBag.Message</label>
                 </form>
             </div>
 

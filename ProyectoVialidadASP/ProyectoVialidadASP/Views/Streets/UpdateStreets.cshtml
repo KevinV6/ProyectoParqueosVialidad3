@@ -13,111 +13,114 @@
 </head>
 <body>
     <section>
-        <div class="container">
-            <h2>Modificar Calle No Disponibles</h2>
-            <div class="row100">
-                <div class="col">
-                    <div class="inputBox">
-                        <input type="text" name="" id="" required>
-                        <span class="text">Nombre del lugar</span>
-                        <span class="line"></span>
+        <form action="UpdateStreets" method="post">
+            <div class="container">
+                <h2>Modificar Calle No Disponibles</h2>
+                <label style="color:red" name="ERROR" id="error">@ViewBag.Message1</label>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="NLugar" id="" required>
+                            <span class="text">Nombre del lugar</span>
+                            <span class="line"></span>
+                        </div>
                     </div>
-                </div>
 
-            </div>
-            <div class="row100">
-                <div class="col">
-                    <div class="inputBox">
-                        <input type="text" name="" id="" required>
-                        <span class="text">Nombres de las calles</span>
-                        <span class="line"></span>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="NCalle" id="" required>
+                            <span class="text">Nombres de las calles</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="Descripcion" id="" required>
+                            <span class="text">Descripcion</span>
+                            <span class="line"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="inputBox">
-                        <input type="text" name="" id="" required>
-                        <span class="text">Descripcion</span>
-                        <span class="line"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row100">
-                <div class="col">
-                    <div class="inputBox">
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
 
-                        <span class="text">Fecha de Programacion</span>
+                            <span class="text">Fecha de Programacion</span>
+                        </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="inputBox">
-                        <input type="date" name="" id="" required>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="date" name="" id="" required>
 
-                        <span class="line"></span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="" id="" required>
+                            <span class="text">Tiempo Inicio</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="" id="" required>
+                            <span class="text">Tiempo Final</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <h3>Punto de Inicio</h3>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="Latitud1" id="" required>
+                            <span class="text">Latitud</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="Longitud1" id="" required>
+                            <span class="text">Longitud</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <h3>Punto de Cierre</h3>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="Latitud2" id="" required>
+                            <span class="text">Latitud</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="Longitud2" id="" required>
+                            <span class="text">Longitud</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <input type="submit" value="Publicar ahora">
+                    </div>
+                    <div class="col">
+                        <input type="submit" value="Programar">
+                    </div>
+                    <div class="col">
+                        <input type="submit" value="Cancelar">
                     </div>
                 </div>
             </div>
-            <div class="row100">
-                <div class="col">
-                    <div class="inputBox">
-                        <input type="text" name="" id="" required>
-                        <span class="text">Tiempo Inicio</span>
-                        <span class="line"></span>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="inputBox">
-                        <input type="text" name="" id="" required>
-                        <span class="text">Tiempo Final</span>
-                        <span class="line"></span>
-                    </div>
-                </div>
-            </div>
-            <h3>Punto de Inicio</h3>
-            <div class="row100">
-                <div class="col">
-                    <div class="inputBox">
-                        <input type="text" name="" id="" required>
-                        <span class="text">Latitud</span>
-                        <span class="line"></span>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="inputBox">
-                        <input type="text" name="" id="" required>
-                        <span class="text">Longitud</span>
-                        <span class="line"></span>
-                    </div>
-                </div>
-            </div>
-            <h3>Punto de Cierre</h3>
-            <div class="row100">
-                <div class="col">
-                    <div class="inputBox">
-                        <input type="text" name="" id="" required>
-                        <span class="text">Latitud</span>
-                        <span class="line"></span>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="inputBox">
-                        <input type="text" name="" id="" required>
-                        <span class="text">Longitud</span>
-                        <span class="line"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row100">
-                <div class="col">
-                    <input type="submit" value="Publicar ahora">
-                </div>
-                <div class="col">
-                    <input type="submit" value="Programar">
-                </div>
-                <div class="col">
-                    <input type="submit" value="Cancelar">
-                </div>
-            </div>
-        </div>
+        </form>
     </section>
 </body>
 </html>

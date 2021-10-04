@@ -1,6 +1,7 @@
 ﻿
 @{
-	Layout = null;
+    Layout = null;
+    ViewBag.Tiltle = "Login";
 }
 
 <!DOCTYPE html>
@@ -12,24 +13,27 @@
 	<link rel="stylesheet" type="text/css" href="~/Style/StyleIndex/SLogin.css">
 </head>
 <body>
-	<div class="form">
-		<h2>Inicio de Sesion</h2>
-		<div class="input">
-			<div class="inputBox">
-				<label>Nombre de Usuario</label>
-				<input type="text" name="" placeholder="ingrese su usuario">
-			</div>
-			<div class="inputBox">
-				<label>Constraseña</label>
-				<input type="password" name="" placeholder="ingrese su constraseña">
-			</div>
-			<div class="inputBox1">
-				<input type="submit" name="" value="Iniciar Sesion">
-			</div>
-			<br>
-			<label>No existen usuarios habilitados</label>
-		</div>
-
-	</div>
+    <form action="Validar" method="post">
+        <div class="form">
+            <h2>Inicio de Sesion</h2>
+            <div class="input">
+                <div class="inputBox">
+                    <label>Nombre de Usuario</label>
+                    <label style="color:red" name="ERROR" id="error">@ViewBag.MessageUser</label>
+                    <input type="text" name="userText" id="userText" placeholder="ingrese su usuario" required>
+                </div>
+                <div class="inputBox">
+                    <label>Contraseña</label>
+                    <label style="color:red" name="ERROR" id="error">@ViewBag.MessagePass</label>
+                    <input type="password" name="passText" id="passText" placeholder="ingrese su constraseña" required>
+                </div>
+                <div class="inputBox1">
+                    <input type="submit" name="" value="Iniciar Sesion">
+                </div>
+                <br>
+                <label>No existen usuarios habilitados</label>
+            </div>
+        </div>
+    </form>
 </body>
 </html>

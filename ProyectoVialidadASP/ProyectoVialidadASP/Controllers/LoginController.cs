@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ProyectoVialidadASP.Controllers
 {
@@ -12,6 +13,31 @@ namespace ProyectoVialidadASP.Controllers
         public ActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Validar(FormCollection datos)
+        {
+            Regex r = new Regex("^[a-zA-Z0-9]+$");
+            if (r.IsMatch(datos["userText"]) && r.IsMatch(datos["passText"]))
+            {
+                return View("../Maps/Maps");
+            }
+            else
+            {
+                if (r.IsMatch(datos["userText"]))
+                {
+                    ViewBag.MessagePass = "No usar Caracteres especiales en el user ,";
+                    return View("Login");
+                }
+                else
+                {
+                    ViewBag.MessageUser = "No usar Caracteres especiales en la contraseña ,";
+                    return View("Login");
+                }
+                
+            }
+            
         }
     }
 }

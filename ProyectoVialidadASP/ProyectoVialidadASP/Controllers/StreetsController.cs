@@ -3,20 +3,141 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ProyectoVialidadASP.Controllers
 {
     public class StreetsController : Controller
     {
         // GET: Streets
-        public ActionResult Streets()
+        
+
+        public ActionResult Streets(FormCollection datos)
         {
-            return View();
+            
+            if (datos["NLugar"] != null)
+            {
+                Regex numAndLetters = new Regex("^[a-zA-Z0-9]+$");
+                Regex nums = new Regex("^[0-9]+$");
+                bool res = true;
+                string message = "";
+                if (numAndLetters.IsMatch(datos["NLugar"]) != true)
+                {
+                    message = message + "No usar Caracteres especiales1 en el nombre del lugar ,";
+                    res = false;
+                }
+                if (numAndLetters.IsMatch(datos["NCalle"]) != true)
+                {
+                    message = message + "No usar Caracteres especiales1 en el nombre de la calle ,";
+                    res = false;
+                }
+                if (numAndLetters.IsMatch(datos["Descripcion"]) != true)
+                {
+                    message = message + "No usar Caracteres especiales en la Descripcion ,";
+                    res = false;
+                }
+                if (nums.IsMatch(datos["Latitud1"]) != true)
+                {
+                    message = message + "Solo es permitido numeros en la latitud ,";
+                    res = false;
+                }
+                if (nums.IsMatch(datos["Latitud2"]) != true)
+                {
+                    message = message + "Solo es permitido numeros en la latitud ,";
+                    res = false;
+                }
+                if (nums.IsMatch(datos["Longitud1"]) != true)
+                {
+                    message = message + "Solo es permitido numeros en la Longitud ,";
+                    res = false;
+                }
+                if (nums.IsMatch(datos["Longitud2"]) != true)
+                {
+                    message = message + "Solo es permitido numeros en la Longitud ,";
+                    res = false;
+                }
+                if (res)
+                {
+                    return View("../Maps/Maps");
+                }
+                else
+                {
+                    @ViewBag.Message1 = message;
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
+            }
+
+
+
+            
+
+
         }
 
-        public ActionResult UpdateStreets()
+
+        public ActionResult UpdateStreets(FormCollection datos)
         {
-            return View();
+            if (datos["NLugar"] != null) //el boton se prime apenas ingresar a la pagina revisar
+            {
+                Regex numAndLetters = new Regex("^[a-zA-Z0-9]+$");
+                Regex nums = new Regex("^[0-9]+$");
+                bool res = true;
+                string message = "";
+                if (numAndLetters.IsMatch(datos["NLugar"]) != true)
+                {
+                    message = message + "No usar Caracteres especiales1 ,";
+                    res = false;
+                }
+                if (numAndLetters.IsMatch(datos["NCalle"]) != true)
+                {
+                    message = message + "No usar Caracteres especiales1 ,";
+                    res = false;
+                }
+                if (numAndLetters.IsMatch(datos["Descripcion"]) != true)
+                {
+                    message = message + "No usar Caracteres especiales ,";
+                    res = false;
+                }
+                if (nums.IsMatch(datos["Latitud1"]) != true)
+                {
+                    message = message + "Solo es permitido numeros ,";
+                    res = false;
+                }
+                if (nums.IsMatch(datos["Latitud2"]) != true)
+                {
+                    message = message + "Solo es permitido numeros ,";
+                    res = false;
+                }
+                if (nums.IsMatch(datos["Longitud1"]) != true)
+                {
+                    message = message + "Solo es permitido numeros ,";
+                    res = false;
+                }
+                if (nums.IsMatch(datos["Longitud2"]) != true)
+                {
+                    message = message + "Solo es permitido numeros ,";
+                    res = false;
+                }
+                if (res)
+                {
+                    return View("../Maps/Maps");
+                }
+                else
+                {
+                    @ViewBag.Message1 = message;
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
+            }
+        
+     
         }
     }
 }
