@@ -2,29 +2,35 @@ import 'package:flutter/material.dart';
 class MenuLateral extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Drawer(child: Container(
+    return Drawer(
       child: ListTileTheme(
-
-        textColor: Colors.amber,
-        iconColor: Colors.amber,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
+        textColor: Colors.black,
+        iconColor: Colors.black,
+        child: ListView(
+          padding: EdgeInsets.zero,
           children: [
-            Container(
-              width: 128.0,
-              height: 128.0,
-              margin: const EdgeInsets.only(
-                top: 24.0,
-                bottom: 64.0,
-              ),
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                color: Colors.black26,
-                shape: BoxShape.circle,
-              ),
-              child: Image.asset(
-                'assets/image/cardropMenu.png', width: 10, height: 10,
-              ),
+            DrawerHeader(
+                margin: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image:  AssetImage('assets/image/Menu/header.jpg'))),
+                child: Column(
+                  children: [
+                    Expanded(child:Image.asset('assets/image/Menu/logo.png'),
+                    ),
+                    Positioned(
+                      bottom: 12.0,
+                      left: 16.0,
+                      child: Text("Card Drop",
+                        style: TextStyle (
+                            color: Colors.black,
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    )
+                  ],
+                )
             ),
             ListTile(
               onTap: () {},
@@ -52,7 +58,7 @@ class MenuLateral extends StatelessWidget{
           ],
         ),
       ),
-    ),);
+    );
 
 
   }
