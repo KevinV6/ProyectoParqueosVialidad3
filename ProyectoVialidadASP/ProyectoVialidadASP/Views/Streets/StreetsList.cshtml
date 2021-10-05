@@ -4,12 +4,10 @@
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Lista Parqueos</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <title>Lista Calles No Disponibles</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-    <link href="~/Style/StyleIndex/SLocationList.css" rel="stylesheet" />
+    <link href="~/Style/StyleIndex/SLocationList2.css" rel="stylesheet" />
 </head>
 <body>
     <div>
@@ -25,7 +23,6 @@
         @RenderPage("~/Views/Home/Header.cshtml")
         <!-- Fin Header -->
     </div>
-
     <div>
         <section>
             <div class="container-xl">
@@ -34,7 +31,7 @@
                         <div class="table-title">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h2>Lista <b>Parqueos</b></h2>
+                                    <h2>Lista <b>Calle No disponibles</b></h2>
                                 </div>
                                 <div class="col-sm-6">
                                     <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i>Add</a>
@@ -45,16 +42,16 @@
                             <thead>
                                 <tr>
                                     <th>Imagen</th>
-                                    <th> Nombre de el Lugar</th>
-                                    <th>Espacio</th>
-                                    <th>Acciones</th>
+                                    <th>Nombre de la Calle</th>
+                                    <th>Fecha - Hora</th>
+                                    <th>Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td><img class="img" src="~/Imagen/ImgHome/car.jpg" /></td>
-                                    <td> <h4> Hospital America</h4></td>
-                                    <td><h4>Espacio 25</h4></td>
+                                    <td>Nombre de la Calle</td>
+                                    <td>17/08/21 18:45</td>
                                     <td>
                                         <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                         <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -62,17 +59,8 @@
                                 </tr>
                                 <tr>
                                     <td><img class="img" src="~/Imagen/ImgHome/car.jpg" /></td>
-                                    <td>Plaza Principal</td>
-                                    <td>Espacio 21</td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><img class="img" src="~/Imagen/ImgHome/car.jpg" /></td>
-                                    <td>Cristo de la concordia</td>
-                                    <td>Espacio 12</td>
+                                    <td>Nombre de la Calle</td>
+                                    <td>17/08/21 18:45</td>
                                     <td>
                                         <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                         <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -83,8 +71,8 @@
                     </div>
                 </div>
             </div>
-
         </section>
     </div>
+    
 </body>
 </html>

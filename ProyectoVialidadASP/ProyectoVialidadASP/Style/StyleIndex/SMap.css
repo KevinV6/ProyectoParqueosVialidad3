@@ -1,0 +1,32 @@
+﻿#map {
+    min-height: 88.4vh;
+    margin-top: 11.6vh;
+}
+
+@media(max-height: 670px) {
+    #map {
+        min-height: 86vh;
+        margin-top: 14vh;
+    }
+}
+
+@media(max-height: 570px) {
+    #map {
+        min-height: 84vh;
+        margin-top: 16vh;
+    }
+}
+
+@media(max-height: 480px) {
+    #map {
+        min-height: 82vh;
+        margin-top: 18vh;
+    }
+}
+
+@media(max-height: 420px) {
+    #map {
+        min-height: 79vh;
+        margin-top: 21vh;
+    }
+}

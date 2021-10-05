@@ -71,13 +71,11 @@ namespace ProyectoVialidadASP.Controllers
                 return View();
             }
 
-
-
-            
-
-
         }
-
+        public ActionResult StreestList()
+        {
+            return View();
+        }
 
         public ActionResult UpdateStreets(FormCollection datos)
         {

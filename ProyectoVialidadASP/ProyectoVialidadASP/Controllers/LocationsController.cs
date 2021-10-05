@@ -74,11 +74,6 @@ namespace ProyectoVialidadASP.Controllers
         {
             return View();
         }
-        public ActionResult LocationsStreetList()
-        {
-            return View();
-        }
-        
         public ActionResult UpdateLocation(FormCollection datos)
         {
             if (datos["name"] != null)
