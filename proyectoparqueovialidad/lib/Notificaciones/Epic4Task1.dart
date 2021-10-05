@@ -2,41 +2,35 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proyectoparqueovialidad/menu/menu.dart';
+import 'package:proyectoparqueovialidad/buscador_datos/buscadordatos.dart';
 
-void main() {
-  runApp(MyApp());
-}
 
-class MyApp extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class Notificaciones extends StatefulWidget {
+  static String id = "notificaciones_page";
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _NotificacionesState createState() => _NotificacionesState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _NotificacionesState extends State<Notificaciones> {
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MenuLateral(),
+      appBar: AppBar(title: Text(""),
+        actions: [
+          IconButton(    //Boton de buscador
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: BuscadorWP());
+            },
+          )
+        ],
+      ),
+
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -62,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox (height: 10, ),
+                      SizedBox(height: 10,),
                       buildCard1(),
                       SizedBox(height: 30,),
                       buildCard2(),
@@ -80,13 +74,11 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  buildCard1()  {
+  buildCard1() {
     return Card(
       child: Column(
         children: <Widget>[
-
           ListTile(
-
             contentPadding: EdgeInsets.fromLTRB(15, 10, 25, 0),
             title: Text('Direccion'),
             subtitle: Text(
@@ -134,5 +126,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       color: Color(0xfff4b405),);
   }
-
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:proyectoparqueovialidad/RegisterComplete/registercomplete.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Registration extends StatefulWidget {
+  static String id = "registrarce_page";
 
   @override
   _RegistrationState createState() => _RegistrationState();
@@ -354,7 +356,9 @@ class _RegistrationState extends State<Registration> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, RegisterComplete.id);
+        },
         padding: EdgeInsets.all(15),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15)

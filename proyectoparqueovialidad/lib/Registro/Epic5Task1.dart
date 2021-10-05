@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:proyectoparqueovialidad/Registro/registration.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Login extends StatefulWidget {
+  static String id = "iniciarsesion_page";
 
   @override
   _LoginState createState() => _LoginState();
@@ -152,7 +154,9 @@ class _LoginState extends State<Login> {
       alignment: Alignment.center,
 
       child: FlatButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, Registration.id);
+        },
         padding: EdgeInsets.only(right: 0),
         child: Text(
           'Regístrate',

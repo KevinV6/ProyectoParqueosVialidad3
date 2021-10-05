@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:onboarding_screen/onboarding_screen.dart';
+import 'package:proyectoparqueovialidad/Notificaciones/Epic4Task1.dart';
+import 'package:proyectoparqueovialidad/main.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -13,16 +16,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: Onboarding(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class Onboarding extends StatelessWidget {
   final List<_SliderModel> mySlides = [
     _SliderModel(
       imageAssetPath: Image.asset(
-        '../asset/image/Logo.png',
+        'assets/image/Menu/logo.png',
         scale: 1,
       ),
       title: 'CARDROP',
@@ -40,7 +43,7 @@ class MyHomePage extends StatelessWidget {
       ),
     ),
     _SliderModel(
-      imageAssetPath: Image.asset('../asset/image/OnboardingImg/1.png'),
+      imageAssetPath: Image.asset('assets/image/Onboarding/uno.png'),
       title: 'Bienvenido a Cardrop',
       desc: 'Una aplicación pensada para realizar reservas de parqueos, \nen muy pocos pasos todo desde el alcance de tu celular.',
       titleStyle: const TextStyle(
@@ -55,7 +58,7 @@ class MyHomePage extends StatelessWidget {
       ),
     ),
     _SliderModel(
-      imageAssetPath: Image.asset('../asset/image/OnboardingImg/2.png'),
+      imageAssetPath: Image.asset('assets/image/Onboarding/dos.png'),
       title: '',
       desc: 'Realiza tu reserva online para un punto de parqueo en la ciudad, \npara el día y la hora de tu preferencia.',
       descStyle: const TextStyle(
@@ -65,7 +68,7 @@ class MyHomePage extends StatelessWidget {
       ),
     ),
     _SliderModel(
-      imageAssetPath: Image.asset('../asset/image/OnboardingImg/3.png'),
+      imageAssetPath: Image.asset('assets/image/Onboarding/tres.png'),
       title: '',
       desc: 'Recarga crédito para próximos reservas y evita \nremolques pagando horas extras.\nTodo desde Cardrop...',
       descStyle: const TextStyle(
@@ -75,6 +78,8 @@ class MyHomePage extends StatelessWidget {
       ),
     ),
   ];
+
+
   final PageController _controller = PageController();
 
   @override
@@ -83,15 +88,16 @@ class MyHomePage extends StatelessWidget {
       label: const Text('Get Started'),
 
       /// This function works when you will complete `OnBoarding`
+      ///
       function: () {
-        print('Navigation');
+        // print('Navigation');
+        Navigator.pushNamed(context, MyHomePage.id);
       },
 
       /// This [mySlides] must not be more than 5.
       mySlides: mySlides,
       controller: _controller,
       slideIndex: 0,
-      statusBarColor: Colors.lightGreenAccent,
       startGradientColor: Colors.white,
       endGradientColor: Colors.white,
       skipStyle: TextStyle(color: Colors.indigo),
@@ -103,8 +109,10 @@ class MyHomePage extends StatelessWidget {
         Colors.indigo
       ],
     );
+
   }
 }
+
 
 class _SliderModel {
   const _SliderModel({

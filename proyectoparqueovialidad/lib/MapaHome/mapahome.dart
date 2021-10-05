@@ -175,7 +175,7 @@ class _MenuPrinciState extends State<MenuPrinci> {
 
     return Scaffold(
       drawer: MenuLateral(),
-      appBar: AppBar(title: Text("Menu principal cliente "),
+      appBar: AppBar(title: Text(""),
         actions: [
           IconButton(    //Boton de buscador
             icon: Icon(Icons.search),

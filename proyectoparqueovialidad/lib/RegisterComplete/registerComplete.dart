@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyectoparqueovialidad/Register%20Complete/body.dart';
+import 'package:proyectoparqueovialidad/RegisterComplete/body.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,6 +23,8 @@ class MyApp extends StatelessWidget {
 
 class RegisterComplete extends StatelessWidget {
   const RegisterComplete({Key? key}) : super(key: key);
+
+  static String id = "registrocompleto_page";
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:proyectoparqueovialidad/Register Complete/background.dart';
+import 'package:proyectoparqueovialidad/RegisterComplete/background.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:proyectoparqueovialidad/Registro/Epic5task1.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -21,8 +22,8 @@ class Body extends StatelessWidget {
             ),
           ),
           SvgPicture.asset(
-              "../assets/image/registerComplete/RegisterComplete.svg",
-              height: size.height * 0.45,
+            "assets/image/RegisterComplete/RegisterComplete.svg",
+            height: size.height * 0.45,
           ),
           Container(
             width: size.width * 0.5,
@@ -31,7 +32,9 @@ class Body extends StatelessWidget {
               child: FlatButton(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                 color: Color.fromRGBO(33, 40, 113, 1),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, Login.id);
+                },
                 child: Text("TERMINAR",
                   style: TextStyle(color: Colors.white),),
               ),

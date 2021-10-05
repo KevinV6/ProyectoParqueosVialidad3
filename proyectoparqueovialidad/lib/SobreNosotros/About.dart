@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
 /// This is the stateful widget that the main application instantiates.
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key}) : super(key: key);
+  static String id = "sobrenosotros_page";
 
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
@@ -51,14 +52,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     padding: EdgeInsets.only(
                         top: 0, left: 20, right: 400, bottom: 0),
                     child: Text("Esta Aplicacion esta hecha con la finalidad de saber"
-                                 " que calles y parqueos estan disponibles, ya que la "
-                                 " aplicacion cuenta con varias opciones que le permitira "
-                                 " usar un mapa que le mostrara toda la ciudad y podra "
-                                 " ver mas facil mente que parqueos estan disponibles "
-                                 " o que calles estan bloqueadas, esta aplicacion "
-                                 " tambien cuenta con un sistema de notificaciones que"
-                                 " avisa que parqueos ya no estan disponibles y si quiere"
-                                 " tener mas opciones puede registrarse en la aplicacion."),),
+                        " que calles y parqueos estan disponibles, ya que la "
+                        " aplicacion cuenta con varias opciones que le permitira "
+                        " usar un mapa que le mostrara toda la ciudad y podra "
+                        " ver mas facil mente que parqueos estan disponibles "
+                        " o que calles estan bloqueadas, esta aplicacion "
+                        " tambien cuenta con un sistema de notificaciones que"
+                        " avisa que parqueos ya no estan disponibles y si quiere"
+                        " tener mas opciones puede registrarse en la aplicacion."),),
 
                   Spacer( flex: 1,),
                   Container(

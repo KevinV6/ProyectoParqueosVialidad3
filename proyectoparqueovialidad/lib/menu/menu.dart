@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:proyectoparqueovialidad/SobreNosotros/About.dart';
+import 'package:proyectoparqueovialidad/Registro/Epic5task1.dart';
+
+
+
 class MenuLateral extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -33,12 +38,16 @@ class MenuLateral extends StatelessWidget{
                 )
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, MyStatefulWidget.id);
+              },
               leading: Icon(Icons.info_outline),
               title: Text('Sobre Nosotros'),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, Login.id);
+              },
               leading: Icon(Icons.account_circle_rounded),
               title: Text('Iniciar Sesion'),
             ),

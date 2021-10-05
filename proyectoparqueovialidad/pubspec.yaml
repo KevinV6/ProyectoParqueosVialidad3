@@ -53,6 +53,12 @@ flutter:
   assets:
       - assets/image/Menu/logo.png
       - assets/image/Menu/header.jpg
+      - assets/image/RegisterComplete/RegisterComplete.svg
+      - assets/image/RegisterComplete/main_bottom.png
+      - assets/image/registerComplete/main_top.png
+      - assets/image/Onboarding/uno.png
+      - assets/image/Onboarding/dos.png
+      - assets/image/Onboarding/tres.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,9 +1,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:proyectoparqueovialidad/buscador_datos/buscadordatos.dart';
+import 'package:proyectoparqueovialidad/BotonNavegacion/boton.dart';
 import 'package:proyectoparqueovialidad/menu/menu.dart';
-
-
+import 'package:proyectoparqueovialidad/MapaHome/mapahome.dart';
+import 'package:proyectoparqueovialidad/SobreNosotros/About.dart';
+import 'package:proyectoparqueovialidad/Registro/Epic5task1.dart';
+import 'package:proyectoparqueovialidad/Registro/registration.dart';
+import 'package:proyectoparqueovialidad/RegisterComplete/registercomplete.dart';
+import 'package:proyectoparqueovialidad/Bienvenida/onboarding.dart';
+import 'package:proyectoparqueovialidad/Notificaciones/Epic4Task1.dart';
 
 
 void main() {
@@ -17,14 +23,30 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Menu principal cliente',
-      home:MyHomePage(),
+
+      routes: {
+        //Sobre Nosotros
+        MyStatefulWidget.id: (context) => MyStatefulWidget(),
+        //Registro-Epic5task1
+        Login.id: (context) => Login(),
+        //Registro-registration
+        Registration.id: (context) => Registration(),
+        //RegisterComplete
+        RegisterComplete.id: (context) => RegisterComplete(),
+
+        Notificaciones.id: (context) => Notificaciones(),
+
+        MyHomePage.id: (context) => MyHomePage(),
+      },
+
+      home: new Onboarding(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key,}) : super(key: key);
-
+  static String id = "incio_page";
 
 
   @override
@@ -37,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MenuLateral(),
-      appBar: AppBar(title: Text(""),
+      appBar: AppBar(title: Text("Menu principal cliente "),
         actions: [
           IconButton( //Boton de buscador
             icon: Icon(Icons.search),
@@ -48,8 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
 
+      //Navigation Bar
+      bottomNavigationBar: Boton(),
+
     );
   }
 }
-
 
