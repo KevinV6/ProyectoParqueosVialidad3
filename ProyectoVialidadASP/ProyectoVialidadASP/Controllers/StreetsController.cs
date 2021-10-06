@@ -72,7 +72,7 @@ namespace ProyectoVialidadASP.Controllers
             }
 
         }
-        public ActionResult StreestList()
+        public ActionResult StreetsList()
         {
             return View();
         }

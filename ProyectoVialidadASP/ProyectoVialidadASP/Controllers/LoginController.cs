@@ -35,6 +35,7 @@ namespace ProyectoVialidadASP.Controllers
         {
             bool verificado = false;
             Regex r = new Regex("^[a-zA-Z0-9]+$");
+<<<<<<< HEAD
             if (r.IsMatch(datos["userText"]) && r.IsMatch(datos["passText"]))
             {
                 client = new FireSharp.FirebaseClient(config);
@@ -74,18 +75,36 @@ namespace ProyectoVialidadASP.Controllers
             else
             {
                 if (r.IsMatch(datos["userText"]))
+=======
+            
+
+
+                if (r.IsMatch(datos["userText"]) && r.IsMatch(datos["passText"]))
+>>>>>>> 6561bab1069cb973c5d42a49455f2b9cab82de14
                 {
-                    ViewBag.MessagePass = "No usar Caracteres especiales en el user ,";
-                    return View("Login");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    ViewBag.MessageUser = "No usar Caracteres especiales en la contraseña ,";
-                    return View("Login");
+                    if (r.IsMatch(datos["userText"]))
+                    {
+                        ViewBag.MessagePass = "No usar Caracteres especiales en el user ,";
+                        return View("Login");
+                    }
+                    else
+                    {
+                        ViewBag.MessageUser = "No usar Caracteres especiales en la contraseña ,";
+                        return View("Login");
+                    }
+
                 }
+<<<<<<< HEAD
 
             }
 
+=======
+            
+>>>>>>> 6561bab1069cb973c5d42a49455f2b9cab82de14
         }
     }
 }
