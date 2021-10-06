@@ -19,24 +19,27 @@ namespace ProyectoVialidadASP.Controllers
         public ActionResult Validar(FormCollection datos)
         {
             Regex r = new Regex("^[a-zA-Z0-9]+$");
-            if (r.IsMatch(datos["userText"]) && r.IsMatch(datos["passText"]))
-            {
-                return View("../Maps/Maps");
-            }
-            else
-            {
-                if (r.IsMatch(datos["userText"]))
+            
+
+
+                if (r.IsMatch(datos["userText"]) && r.IsMatch(datos["passText"]))
                 {
-                    ViewBag.MessagePass = "No usar Caracteres especiales en el user ,";
-                    return View("Login");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    ViewBag.MessageUser = "No usar Caracteres especiales en la contraseña ,";
-                    return View("Login");
+                    if (r.IsMatch(datos["userText"]))
+                    {
+                        ViewBag.MessagePass = "No usar Caracteres especiales en el user ,";
+                        return View("Login");
+                    }
+                    else
+                    {
+                        ViewBag.MessageUser = "No usar Caracteres especiales en la contraseña ,";
+                        return View("Login");
+                    }
+
                 }
-                
-            }
             
         }
     }
