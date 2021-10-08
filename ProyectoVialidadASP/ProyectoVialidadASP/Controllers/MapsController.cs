@@ -11,7 +11,15 @@ namespace ProyectoVialidadASP.Controllers
         // GET: Maps
         public ActionResult Maps()
         {
-            return View();
+            if (Session["user"] == null && Session["psw"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                return View();
+            }
+            
         }
     }
 }

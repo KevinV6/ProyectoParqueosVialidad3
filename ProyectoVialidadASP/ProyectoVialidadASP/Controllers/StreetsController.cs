@@ -63,18 +63,40 @@ namespace ProyectoVialidadASP.Controllers
                 else
                 {
                     @ViewBag.Message1 = message;
-                    return View();
+
+                    if (Session["user"] == null && Session["psw"] == null)
+                    {
+                        return RedirectToAction("Login", "Login");
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
             }
             else
             {
-                return View();
+                if (Session["user"] == null && Session["psw"] == null)
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                else
+                {
+                    return View();
+                }
             }
 
         }
         public ActionResult StreetsList()
         {
-            return View();
+            if (Session["user"] == null && Session["psw"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public ActionResult UpdateStreets(FormCollection datos)
@@ -127,11 +149,27 @@ namespace ProyectoVialidadASP.Controllers
                 else
                 {
                     @ViewBag.Message1 = message;
-                    return View();
+
+                    if (Session["user"] == null && Session["psw"] == null)
+                    {
+                        return RedirectToAction("Login", "Login");
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
             }
             else
             {
+                if (Session["user"] == null && Session["psw"] == null)
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                else
+                {
+                    return View();
+                }
                 return View();
             }
         

@@ -57,22 +57,51 @@ namespace ProyectoVialidadASP.Controllers
 
                 if (res)
                 {
-                    return View("../Maps/Maps");
+                    if (Session["user"] == null && Session["psw"] == null)
+                    {
+                        return RedirectToAction("Login", "Login");
+                    }
+                    else
+                    {
+                        return View("../Maps/Maps");
+                    }
+                    
                 }
                 else
                 {
                     @ViewBag.Message = message;
+                    if (Session["user"] == null && Session["psw"] == null)
+                    {
+                        return RedirectToAction("Login", "Login");
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                }
+            }
+            else
+            {
+                if (Session["user"] == null && Session["psw"] == null)
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                else
+                {
                     return View();
                 }
+            }
+        }
+        public ActionResult LocationsList()
+        {
+            if (Session["user"] == null && Session["psw"] == null)
+            {
+                return RedirectToAction("Login", "Login");
             }
             else
             {
                 return View();
             }
-        }
-        public ActionResult LocationsList()
-        {
-            return View();
         }
         public ActionResult UpdateLocation(FormCollection datos)
         {
@@ -121,17 +150,39 @@ namespace ProyectoVialidadASP.Controllers
 
                 if (res)
                 {
-                    return View("../Maps/Maps");
+                    
+                    if (Session["user"] == null && Session["psw"] == null)
+                    {
+                        return RedirectToAction("Login", "Login");
+                    }
+                    else
+                    {
+                        return View("../Maps/Maps");
+                    }
                 }
                 else
                 {
                     @ViewBag.Message = message;
-                    return View();
+                    if (Session["user"] == null && Session["psw"] == null)
+                    {
+                        return RedirectToAction("Login", "Login");
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
             }
             else
             {
-                return View();
+                if (Session["user"] == null && Session["psw"] == null)
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                else
+                {
+                    return View();
+                }
             }
 
         }

@@ -15,14 +15,6 @@ namespace ProyectoVialidadASP.Controllers
 {
     public class LoginController : Controller
     {
-        //Conexion a Firebase
-        IFirebaseConfig config = new FirebaseConfig
-        {
-            AuthSecret = "F23JUcUtvSmaKQAZh1ZlzSEPL4WQ4wQirbrl3xpT",
-            BasePath = "https://proyectovialidadasp-default-rtdb.firebaseio.com/"
-        };
-        IFirebaseClient client;
-
 
         // GET: Login
         public ActionResult Login()
@@ -30,81 +22,69 @@ namespace ProyectoVialidadASP.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login", "Login");     
+        }
+
         [HttpPost]
         public ActionResult Validar(FormCollection datos)
         {
-            bool verificado = false;
             Regex r = new Regex("^[a-zA-Z0-9]+$");
-<<<<<<< HEAD
+
             if (r.IsMatch(datos["userText"]) && r.IsMatch(datos["passText"]))
             {
-                client = new FireSharp.FirebaseClient(config);
-                FirebaseResponse response = client.Get("Administrators");
-                dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
-                var list = new List<Administrator>();
-                foreach (var item in data)
-                {
-                    list.Add(JsonConvert.DeserializeObject<Administrator>(((JProperty)item).Value.ToString()));
-                }
 
-                foreach (var item in list)
-                {
-                    string password = string.Empty;
-                    byte[] decryted = Convert.FromBase64String(item.password);
-                    password = System.Text.Encoding.Unicode.GetString(decryted);
-                    if (item.userName.Equals(datos["userText"]) && password.Equals(datos["passText"]))
-                    {
-                        verificado = true;
-                    }
-                }
+                User_Model user_Model = new User_Model();
+                bool verificado = user_Model.Login(new User(datos["userText"], datos["passText"]));
 
                 if (verificado)
                 {
                     Session["user"] = datos["userText"];
                     Session["psw"] = datos["passText"];
-                    return View("../Maps/Maps");
+
+                    if (Session["user"] == null && Session["psw"] == null)
+                    {
+                        return RedirectToAction("Login", "Login");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    
                 }
 
                 else
                 {
                     ViewBag.MessagePass = "Nombre de Usuario o Contraseña incorrectos";
+
                     return View("Login");
+                    
                 }
 
             }
             else
             {
                 if (r.IsMatch(datos["userText"]))
-=======
-            
-
-
-                if (r.IsMatch(datos["userText"]) && r.IsMatch(datos["passText"]))
->>>>>>> 6561bab1069cb973c5d42a49455f2b9cab82de14
                 {
-                    return RedirectToAction("Index", "Home");
+                    ViewBag.MessagePass = "No usar Caracteres especiales en el user ,";
+
+                    return View("Login");
+                    
                 }
                 else
                 {
-                    if (r.IsMatch(datos["userText"]))
-                    {
-                        ViewBag.MessagePass = "No usar Caracteres especiales en el user ,";
-                        return View("Login");
-                    }
-                    else
-                    {
-                        ViewBag.MessageUser = "No usar Caracteres especiales en la contraseña ,";
-                        return View("Login");
-                    }
+                    ViewBag.MessageUser = "No usar Caracteres especiales en la contraseña ,";
 
+                    return View("Login");
+                    
                 }
-<<<<<<< HEAD
 
             }
 
-=======
-            
->>>>>>> 6561bab1069cb973c5d42a49455f2b9cab82de14
+
+         
         }
     }
 }

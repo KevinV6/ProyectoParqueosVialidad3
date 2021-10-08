@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ProyectoVialidadASP.Models
 {
-    public class Administrator
+    public class User
     {
         #region Atributos
         public string userName { get; set; }
@@ -14,11 +14,13 @@ namespace ProyectoVialidadASP.Models
 
 
         #region Constructor
-        public Administrator(string userName, string password)
+        public User(string userName, string password)
         {
             this.userName = userName;
             this.password = password;
         }
         #endregion
+
+        
     }
 }
