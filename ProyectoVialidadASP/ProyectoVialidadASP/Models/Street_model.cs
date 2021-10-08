@@ -19,6 +19,19 @@ namespace ProyectoVialidadASP.Models
         };
         IFirebaseClient client;
 
+        public List<Street> StreetListView()
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("Streets");
+            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+            var list = new List<Street>();
+            foreach (var item in data)
+            {
+                list.Add(JsonConvert.DeserializeObject<Street>(((JProperty)item).Value.ToString()));
+            }
+            return list;
+        }
+
         public void AddStreetTofirebase(Street street)
         {
             client = new FireSharp.FirebaseClient(config);

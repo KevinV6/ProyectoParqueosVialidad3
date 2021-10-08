@@ -106,7 +106,9 @@ namespace ProyectoVialidadASP.Controllers
             }
             else
             {
-                return View();
+                Street_model lp = new Street_model();
+
+                return View(lp.StreetListView());
             }
         }
 

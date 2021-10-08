@@ -106,8 +106,11 @@ namespace ProyectoVialidadASP.Controllers
             }
             else
             {
-                return View();
+                Location_model lp = new Location_model();
+
+                return View(lp.listLocationView());
             }
+            
         }
         public ActionResult UpdateLocation(FormCollection datos)
         {

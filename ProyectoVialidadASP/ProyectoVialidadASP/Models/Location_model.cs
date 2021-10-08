@@ -20,6 +20,19 @@ namespace ProyectoVialidadASP.Models
         };
         IFirebaseClient client;
 
+        public List<Location> listLocationView()
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("Locations");
+            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+            var list = new List<Location>();
+            foreach (var item in data)
+            {
+                list.Add(JsonConvert.DeserializeObject<Location>(((JProperty)item).Value.ToString()));
+            }
+            return list;
+        }
+
         public void AddLocationsTofirebase(Location location)
         {
             client = new FireSharp.FirebaseClient(config);
