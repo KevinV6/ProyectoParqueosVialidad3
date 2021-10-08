@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoVialidadASP.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,7 +15,7 @@ namespace ProyectoVialidadASP.Controllers
         {
             if (datos["name"] != null)
             {
-                Regex numAndLetters = new Regex("^[a-zA-Z0-9]+$");
+                /*Regex numAndLetters = new Regex("^[a-zA-Z0-9]+$");
                 Regex nums = new Regex("^[0-9]+$");
                 bool res = true;
                 string message = "";
@@ -76,20 +77,25 @@ namespace ProyectoVialidadASP.Controllers
                     }
                     else
                     {
-                        return View();
+                        
                     }
-                }
+                }*/
+                Location location = new Location('V', datos["name"], datos["latitude"], datos["nameStreet"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), double.Parse(datos["price"]), datos["image"], datos["description"]);
+                Location_model lp = new Location_model();
+                lp.AddLocationsTofirebase(location);
+                return View();
             }
             else
             {
-                if (Session["user"] == null && Session["psw"] == null)
+               /* if (Session["user"] == null && Session["psw"] == null)
                 {
                     return RedirectToAction("Login", "Login");
                 }
                 else
                 {
-                    return View();
-                }
+                    
+                }*/
+                return View();
             }
         }
         public ActionResult LocationsList()
