@@ -20,8 +20,29 @@ namespace ProyectoVialidadASP.Models
         public string EndLatitude { get; set; }
         public string EndLongitude { get; set; }
 
+        public Street()
+        {
+
+        }
+
         public Street(char statusStreet, string siteStreet, string name, string description, string programmingDate, string startTime, string endTime, string initialLatitude, string initialLongitude, string endLatitude, string endLongitude)
         {
+            StatusStreet = statusStreet;
+            SiteStreet = siteStreet;
+            Name = name;
+            Description = description;
+            ProgrammingDate = programmingDate;
+            StartTime = startTime;
+            EndTime = endTime;
+            InitialLatitude = initialLatitude;
+            InitialLongitude = initialLongitude;
+            EndLatitude = endLatitude;
+            EndLongitude = endLongitude;
+        }
+
+        public Street(string idStreet, char statusStreet, string siteStreet, string name, string description, string programmingDate, string startTime, string endTime, string initialLatitude, string initialLongitude, string endLatitude, string endLongitude)
+        {
+            IdStreet = idStreet;
             StatusStreet = statusStreet;
             SiteStreet = siteStreet;
             Name = name;

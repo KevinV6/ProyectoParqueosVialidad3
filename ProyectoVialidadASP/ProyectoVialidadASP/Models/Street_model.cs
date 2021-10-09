@@ -40,5 +40,21 @@ namespace ProyectoVialidadASP.Models
             data.IdStreet = response.Result.name;
             SetResponse setResponse = client.Set("Streets/" + data.IdStreet, data);
         }
+
+        public Street UpdateStreetFromFirebase(string idStreet)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("Streets/" + idStreet);
+            Street street1 = JsonConvert.DeserializeObject<Street>(response.Body);
+
+            return street1;
+        }
+
+        public void UpdateStreetFromFirebaseRedirect(Street street)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            SetResponse response = client.Set("Streets/" + street.IdStreet, street);            
+
+        }
     }
 }
