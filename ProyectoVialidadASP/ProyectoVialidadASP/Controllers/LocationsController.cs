@@ -99,6 +99,18 @@ namespace ProyectoVialidadASP.Controllers
             }
         }
 
+        public ActionResult inhabilitarParqueo(FormCollection form)
+        {
+            Location_model lm = new Location_model();
+            Location lo = new Location();
+
+            lo = lm.UpdateLocationFromFirebase(form["txtdelete"]);
+            lo.StatusLocation = 'F';
+            lm.DesabilitarParqueo(lo);
+
+            return Redirect("LocationsList");
+        }
+
         public ActionResult LocationsList()
         {
             if (Session["user"] == null && Session["psw"] == null)

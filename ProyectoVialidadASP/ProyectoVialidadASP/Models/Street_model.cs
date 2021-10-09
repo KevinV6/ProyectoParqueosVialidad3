@@ -19,6 +19,12 @@ namespace ProyectoVialidadASP.Models
         };
         IFirebaseClient client;
 
+        public void DesabilitarStreet(Street street)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Set("Streets/" + street.IdStreet, street);
+        }
+
         public List<Street> StreetListView()
         {
             client = new FireSharp.FirebaseClient(config);

@@ -20,6 +20,13 @@ namespace ProyectoVialidadASP.Models
         };
         IFirebaseClient client;
 
+        public void DesabilitarParqueo(Location location)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Set("Locations/" + location.IdLocation, location);
+
+        }
+
         public List<Location> listLocationView()
         {
             client = new FireSharp.FirebaseClient(config);
