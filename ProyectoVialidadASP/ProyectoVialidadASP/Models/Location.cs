@@ -14,11 +14,15 @@ namespace ProyectoVialidadASP.Models
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public byte ParkingSpaces { get; set; }
-        public double Price { get; set; }
-        public string Image { get; set; }
+        public string Price { get; set; }
         public string Description { get; set; }
 
-        public Location(char statusLocation, string name, string nameStreet, string latitude, string longitude, byte parkingSpaces, double price, string image, string description)
+        public Location()
+        {
+
+        }
+
+        public Location(char statusLocation, string name, string nameStreet, string latitude, string longitude, byte parkingSpaces, string price, string description)
         {
             StatusLocation = statusLocation;
             Name = name;
@@ -27,7 +31,19 @@ namespace ProyectoVialidadASP.Models
             Longitude = longitude;
             ParkingSpaces = parkingSpaces;
             Price = price;
-            Image = image;
+            Description = description;
+        }
+
+        public Location(string idLocation, char statusLocation, string name, string nameStreet, string latitude, string longitude, byte parkingSpaces, string price, string description)
+        {
+            IdLocation = idLocation;
+            StatusLocation = statusLocation;
+            Name = name;
+            NameStreet = nameStreet;
+            Latitude = latitude;
+            Longitude = longitude;
+            ParkingSpaces = parkingSpaces;
+            Price = price;
             Description = description;
         }
     }

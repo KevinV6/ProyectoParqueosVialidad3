@@ -181,8 +181,7 @@ namespace ProyectoVialidadASP.Controllers
                 }
                 else
                 {
-                    Street street = new Street();
-                    //street.IdStreet = datos["txtidedit"];                        
+                    Street street = new Street();                      
                     Street_model sm = new Street_model();
 
                     street = sm.UpdateStreetFromFirebase(datos["txtidedit"]);
@@ -203,7 +202,7 @@ namespace ProyectoVialidadASP.Controllers
             Street_model sm = new Street_model();
             sm.UpdateStreetFromFirebaseRedirect(street);
 
-            return RedirectToAction("Streets");
+            return RedirectToAction("StreetsList");
         }
     }
 }

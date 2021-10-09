@@ -57,7 +57,7 @@
                                     <tr>
                                         <td>
                                             <img class="img" src="~/Imagen/ImgHome/car.jpg" />
-                                            @Html.DisplayFor(modelItem => item.Image)
+                                            
                                         </td>
 
                                         <td>
@@ -67,7 +67,7 @@
                                             @Html.DisplayFor(modelItem => item.ParkingSpaces)
                                         </td>
                                         <td>
-                                            <form action="/" method="post">
+                                            <form action="/Locations/UpdateLocation" method="post">
                                                 <input type="text" name="txtidedit" value="@item.IdLocation" hidden />
                                                 <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
 

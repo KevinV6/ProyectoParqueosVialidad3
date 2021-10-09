@@ -42,5 +42,21 @@ namespace ProyectoVialidadASP.Models
             SetResponse setResponse = client.Set("Locations/" + data.IdLocation, data);
 
         }
+
+        public Location UpdateLocationFromFirebase(string idLocation)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("Locations/" + idLocation);
+            Location location1 = JsonConvert.DeserializeObject<Location>(response.Body);
+
+            return location1;
+        }
+
+        public void UpdateLocationFromFirebaseRedirect(Location location)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            SetResponse response = client.Set("Locations/" + location.IdLocation, location);
+
+        }
     }
 }

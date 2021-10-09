@@ -80,7 +80,7 @@ namespace ProyectoVialidadASP.Controllers
                         
                     }
                 }*/
-                Location location = new Location('V', datos["name"], datos["latitude"], datos["nameStreet"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), double.Parse(datos["price"]), datos["image"], datos["description"]);
+                Location location = new Location('V', datos["name"], datos["latitude"], datos["nameStreet"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"]);
                 Location_model lp = new Location_model();
                 lp.AddLocationsTofirebase(location);
                 return View();
@@ -98,6 +98,7 @@ namespace ProyectoVialidadASP.Controllers
                 return View();
             }
         }
+
         public ActionResult LocationsList()
         {
             if (Session["user"] == null && Session["psw"] == null)
@@ -112,11 +113,12 @@ namespace ProyectoVialidadASP.Controllers
             }
             
         }
+
         public ActionResult UpdateLocation(FormCollection datos)
         {
             if (datos["name"] != null)
             {
-                Regex numAndLetters = new Regex("^[a-zA-Z0-9]+$");
+                /*Regex numAndLetters = new Regex("^[a-zA-Z0-9]+$");
                 Regex nums = new Regex("^[0-9]+$");
                 bool res = true;
                 string message ="";
@@ -172,6 +174,7 @@ namespace ProyectoVialidadASP.Controllers
                 else
                 {
                     @ViewBag.Message = message;
+                    */
                     if (Session["user"] == null && Session["psw"] == null)
                     {
                         return RedirectToAction("Login", "Login");
@@ -180,7 +183,7 @@ namespace ProyectoVialidadASP.Controllers
                     {
                         return View();
                     }
-                }
+                //}
             }
             else
             {
@@ -190,12 +193,25 @@ namespace ProyectoVialidadASP.Controllers
                 }
                 else
                 {
-                    return View();
+                    Location location = new Location();
+                    Location_model lm = new Location_model();
+
+                    location = lm.UpdateLocationFromFirebase(datos["txtidedit"]);
+
+                    return View(location);
                 }
             }
 
         }
 
+        public ActionResult UpdateLocationRedirect(FormCollection datos)
+        {
+            Location location = new Location(datos["txtId"], char.Parse(datos["txtStatus"]), datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"]);
+            Location_model lm = new Location_model();
+            lm.UpdateLocationFromFirebaseRedirect(location);
+
+            return RedirectToAction("LocationsList");
+        }
 
     }
 }

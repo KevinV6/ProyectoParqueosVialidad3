@@ -1,4 +1,5 @@
-﻿
+﻿@model ProyectoVialidadASP.Models.Location
+
 @{
     Layout = null;
 }
@@ -29,45 +30,42 @@
 
         <div class="parking-wrapper animated bounceInUp" id="parking">
             <div class="parking-form">
-                <form action="UpdateLocation" method="post">
+                <form action="/Locations/UpdateLocationRedirect" method="post">
                     <p>
                         <label>Nombre</label>
-                        <input type="text" name="name" required>
+                        <input type="text" name="name" value="@Model.Name" required>
                     </p>
                     <p>
                         <label>Latitud</label>
-                        <input type="text" name="latitude" required>
+                        <input type="text" name="latitude" value="@Model.Latitude" required>
                     </p>
                     <p>
                         <label>Nombre de la calle</label>
-                        <input type="text" name="nameStreet" required>
+                        <input type="text" name="nameStreet" value="@Model.NameStreet" required>
                     </p>
                     <p>
                         <label>Longitud</label>
-                        <input type="text" name="lenght" required>
+                        <input type="text" name="lenght" value="@Model.Longitude" required>
                     </p>
                     <p>
                         <label>Espacios</label>
-                        <input type="text" name="parkingSpaces" required>
+                        <input type="text" name="parkingSpaces" value="@Model.ParkingSpaces" required>
                     </p>
                     <p>
                         <label>Tarifas</label>
-                        <input type="text" name="price" required>
-                    </p>
-                    <p>
-                        <label>Imagen</label>
-                        <input type="file" name="image" required>
+                        <input type="text" name="price" value="@Model.Price" required>
                     </p>
                     <p class="block">
                         <label>Descripcion</label>
-                        <textarea name="description" rows="3"></textarea>
+                        <textarea name="description" rows="3">@Model.Description</textarea>
                     </p>
                     <p class="block">
                         <button style="color: white;">
-                            Añadir
+                            Modificar
                         </button>
                     </p>
-                    
+                    <input hidden="hidden"  type="text" name="txtId" value="@Model.IdLocation">
+                    <input hidden="hidden"  type="text" name="txtStatus" value="@Model.StatusLocation">
                     <label style="color:red" name="ERROR" id="error">@ViewBag.Message</label>
                 </form>
             </div>
