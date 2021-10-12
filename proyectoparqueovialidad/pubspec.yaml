@@ -33,6 +33,7 @@ dependencies:
   flutter_advanced_drawer: ^1.2.3
   onboarding_screen: ^0.0.3
   flutter_svg: ^0.22.0
+  url_launcher: ^6.0.10
 
 dev_dependencies:
   flutter_test:
@@ -59,6 +60,11 @@ flutter:
       - assets/image/Onboarding/uno.png
       - assets/image/Onboarding/dos.png
       - assets/image/Onboarding/tres.png
+      - assets/image/SocialButton/pagina.png
+      - assets/image/SocialButton/twitter.png
+      - assets/image/SocialButton/facebook.png
+      - assets/image/SobreNosotros/parqueo.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
