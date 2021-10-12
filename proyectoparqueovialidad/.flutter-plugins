@@ -1,5 +1,19 @@
 # This is a generated file; do not edit or check into version control.
+<<<<<<< HEAD
 flutter_plugin_android_lifecycle=C:\\Users\\bryan\\FlutterStudioProjects\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-2.0.3\\
 google_maps_flutter=C:\\Users\\bryan\\FlutterStudioProjects\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\google_maps_flutter-2.0.9\\
 location=C:\\Users\\bryan\\FlutterStudioProjects\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\location-4.3.0\\
 location_web=C:\\Users\\bryan\\FlutterStudioProjects\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\location_web-3.1.1\\
+=======
+firebase_core=C:\\Users\\PC\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core-1.7.0\\
+firebase_core_web=C:\\Users\\PC\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core_web-1.1.0\\
+firebase_database=C:\\Users\\PC\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_database-8.0.0\\
+firebase_database_web=C:\\Users\\PC\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_database_web-0.1.0\\
+firebase_messaging=C:\\Users\\PC\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_messaging-10.0.8\\
+firebase_messaging_web=C:\\Users\\PC\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_messaging_web-2.0.6\\
+flutter_local_notifications=C:\\Users\\PC\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_local_notifications-5.0.0+4\\
+flutter_plugin_android_lifecycle=C:\\Users\\PC\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-2.0.3\\
+google_maps_flutter=C:\\Users\\PC\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\google_maps_flutter-2.0.9\\
+location=C:\\Users\\PC\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\location-4.3.0\\
+location_web=C:\\Users\\PC\\FlutterStudio\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\location_web-3.1.1\\
+>>>>>>> 6c011cb9d2e39c21880025048f19f6a290b204bd
