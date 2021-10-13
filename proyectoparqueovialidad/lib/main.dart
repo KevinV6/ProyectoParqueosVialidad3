@@ -10,9 +10,12 @@ import 'package:proyectoparqueovialidad/Registro/registration.dart';
 import 'package:proyectoparqueovialidad/RegisterComplete/registercomplete.dart';
 import 'package:proyectoparqueovialidad/Bienvenida/onboarding.dart';
 import 'package:proyectoparqueovialidad/Notificaciones/Epic4Task1.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
