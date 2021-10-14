@@ -13,6 +13,7 @@
     }
 }
 //Maps
+/*
 function initMap() {
     const ubicacion = new Localizacion(() => {
 
@@ -44,3 +45,4 @@ function initMap() {
         });
     })
 }
+*/
