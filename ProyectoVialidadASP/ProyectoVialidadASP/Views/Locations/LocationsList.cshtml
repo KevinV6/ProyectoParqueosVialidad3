@@ -23,7 +23,7 @@
 <body>
     <div>
         <!-- Header -->
-        @RenderPage("~/Views/Home/Header.cshtml")
+        @RenderPage("~/Views/Home/Header.cshtml", new { ProcessInfo = 3 })
         <!-- Fin Header -->
     </div>
 
@@ -49,7 +49,7 @@
                                     <th> Nombre de el Lugar</th>
                                     <th> Estado </th>
                                     <th>Espacio</th>
-                                    
+
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -86,7 +86,7 @@
                                                 </form>
 
                                             </td>
-                                            
+
                                         }
                                         else
                                         {

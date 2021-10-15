@@ -83,7 +83,7 @@ namespace ProyectoVialidadASP.Controllers
                 Location location = new Location('V', datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"]);
                 Location_model lp = new Location_model();
                 lp.AddLocationsTofirebase(location);
-                return View();
+                return Redirect("LocationsList");
             }
             else
             {
