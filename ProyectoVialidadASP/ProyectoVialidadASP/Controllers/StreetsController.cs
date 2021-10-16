@@ -109,6 +109,18 @@ namespace ProyectoVialidadASP.Controllers
 
             return Redirect("StreetsList");
         }
+        public ActionResult EnableStreet(FormCollection form)
+        {
+            Street_model lm = new Street_model();
+            Street lo = new Street();
+
+            lo = lm.UpdateStreetFromFirebase(form["txtdelete"]);
+            lo.StatusStreet = 'V';
+            lm.DesabilitarStreet(lo);
+
+            return Redirect("StreetsList");
+        }
+
         public ActionResult StreetsList()
         {
             if (Session["user"] == null && Session["psw"] == null)

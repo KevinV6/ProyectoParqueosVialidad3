@@ -110,6 +110,17 @@ namespace ProyectoVialidadASP.Controllers
 
             return Redirect("LocationsList");
         }
+        public ActionResult EnableLocation(FormCollection form)
+        {
+            Location_model lm = new Location_model();
+            Location lo = new Location();
+
+            lo = lm.UpdateLocationFromFirebase(form["txtdelete"]);
+            lo.StatusLocation = 'V';
+            lm.DesabilitarParqueo(lo);
+
+            return Redirect("LocationsList");
+        }
 
         public ActionResult LocationsList()
         {

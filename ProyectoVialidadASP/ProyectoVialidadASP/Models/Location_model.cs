@@ -26,6 +26,12 @@ namespace ProyectoVialidadASP.Models
             FirebaseResponse response = client.Set("Locations/" + location.IdLocation, location);
 
         }
+        public void EnableLocation(Location location)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Set("Locations/" + location.IdLocation, location);
+
+        }
 
         public List<Location> listLocationView()
         {
