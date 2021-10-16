@@ -3,12 +3,17 @@ import 'package:onboarding_screen/onboarding_screen.dart';
 import 'package:proyectoparqueovialidad/Notificaciones/Epic4Task1.dart';
 import 'package:proyectoparqueovialidad/main.dart';
 
+import '../preferences.dart';
+
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class OnboardingPage extends StatelessWidget {
+  OnboardingPage({Key? key,}) : super(key: key);
+  static String id = "onboarding_page";
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,7 +50,7 @@ class Onboarding extends StatelessWidget {
     _SliderModel(
       imageAssetPath: Image.asset('assets/image/Onboarding/uno.png'),
       title: 'Bienvenido a Cardrop',
-      desc: 'Una aplicación pensada para realizar reservas de parqueos, \nen muy pocos pasos todo desde el alcance de tu celular.',
+      desc: 'Conoce los puntos autorizados de parqueo en la ciudad.',
       titleStyle: const TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w800,
@@ -53,14 +58,14 @@ class Onboarding extends StatelessWidget {
       ),
       descStyle: const TextStyle(
         fontSize: 20,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w400,
         color: Colors.black,
       ),
     ),
     _SliderModel(
       imageAssetPath: Image.asset('assets/image/Onboarding/dos.png'),
       title: '',
-      desc: 'Realiza tu reserva online para un punto de parqueo en la ciudad, \npara el día y la hora de tu preferencia.',
+      desc: 'Recibe notificaciones de cierre de avenidas.',
       descStyle: const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w400,
@@ -70,7 +75,7 @@ class Onboarding extends StatelessWidget {
     _SliderModel(
       imageAssetPath: Image.asset('assets/image/Onboarding/tres.png'),
       title: '',
-      desc: 'Recarga crédito para próximos reservas y evita \nremolques pagando horas extras.\nTodo desde Cardrop...',
+      desc: 'Regístrate en nuestra aplicación para disfrutar de Cardrop.',
       descStyle: const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w400,
@@ -85,12 +90,14 @@ class Onboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OnBoardingScreen(
-      label: const Text('Get Started'),
+      label: const Text('Comenzar'),
 
       /// This function works when you will complete `OnBoarding`
       ///
       function: () {
         // print('Navigation');
+        final preferences = Preferences();
+        preferences.initialPage = MyHomePage.id;
         Navigator.pushNamed(context, MyHomePage.id);
       },
 

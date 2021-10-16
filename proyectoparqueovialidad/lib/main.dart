@@ -11,11 +11,16 @@ import 'package:proyectoparqueovialidad/RegisterComplete/registercomplete.dart';
 import 'package:proyectoparqueovialidad/Bienvenida/onboarding.dart';
 import 'package:proyectoparqueovialidad/Notificaciones/Epic4Task1.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:proyectoparqueovialidad/preferences.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  final preferences = Preferences();
+  await preferences.initialize();
+
   runApp(MyApp());
 }
 
@@ -23,10 +28,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final preferences = Preferences();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: preferences.initialPage,
       title: 'Menu principal cliente',
-
       routes: {
         //Sobre Nosotros
         MyStatefulWidget.id: (context) => MyStatefulWidget(),
@@ -40,9 +46,10 @@ class MyApp extends StatelessWidget {
         Notificaciones.id: (context) => Notificaciones(),
 
         MyHomePage.id: (context) => MyHomePage(),
+        //Bienvenida
+        OnboardingPage.id: (context) => Onboarding(),
       },
 
-      home: new Onboarding(),
     );
   }
 }
