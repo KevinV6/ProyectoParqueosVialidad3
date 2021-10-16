@@ -42,6 +42,16 @@
 
                 var mapa = new google.maps.Map(map, options);
 
+                const puntoInicio = { lat: -17.392716, lng: -66.197233 };//cambiar el idioma
+
+                const puntoFinal = { lat: -17.392194, lng: -66.209353 };
+
+                // The markers for The Dakota and The Frick Collection
+
+                var marcadorInicio = new google.maps.Marker({ position: dakota, map: mapa });//cambiar el idioma
+
+                var marcadorFinal = new google.maps.Marker({ position: frick, map: mapa });//cambiar el idioma
+                var line = new google.maps.Polyline({ path: [puntoInicio, puntoFinal], map: mapa })
                 //**/
                 var request = new XMLHttpRequest()
                 request.open("GET", "@Url.Action("GetAllLocation","Maps")")
