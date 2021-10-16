@@ -121,6 +121,7 @@
     <Content Include="Style\StyleIndex\SIndex.css" />
     <Content Include="Style\StyleIndex\SLocationList.css" />
     <Content Include="Style\StyleIndex\SLocations.css" />
+    <Content Include="Style\StyleIndex\SLocations2.css" />
     <Content Include="Style\StyleIndex\SLogin.css" />
     <Content Include="Style\StyleIndex\SMap.css" />
     <Content Include="Style\StyleIndex\SStreets.css" />
