@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 </head>
 <body>
-    <form action="/Locations/Locations" method="post">
+    <form action="/Locations/Locations" method="post" enctype="multipart/form-data">
         <section>
             <div class="container">
                 <h2>Añadir Nuevo Parqueo</h2>
@@ -85,8 +85,8 @@
                     </div>
                     <div class="col">
                         <div class="inputBox textarea">
-                            <input type="file">
-                            <span class="text">Descripción</span>
+                            <input type="file" name="file">
+                            <span class="text">Imagen</span>
                             <span class="line"></span>
                         </div>
                     </div>

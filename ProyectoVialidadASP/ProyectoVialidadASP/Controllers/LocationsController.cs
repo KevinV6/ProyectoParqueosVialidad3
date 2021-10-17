@@ -5,13 +5,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Text.RegularExpressions;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace ProyectoVialidadASP.Controllers
 {
     public class LocationsController : Controller
     {
         // GET: Locations
-        public ActionResult Locations(FormCollection datos)
+        public async Task<ActionResult> Locations(FormCollection datos, HttpPostedFileBase file)
         {
             if (datos["name"] != null)
             {
@@ -82,8 +84,18 @@ namespace ProyectoVialidadASP.Controllers
                 }*/
                 Location location = new Location('V', datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"]);
                 Location_model lp = new Location_model();
+                File_model fm = new File_model(); 
+                FileStream stream;
+                if (file.ContentLength > 0)
+                {
+                    string path = Path.Combine(Server.MapPath("~/Imagen/ImgFile/"), file.FileName);
+                    file.SaveAs(path);
+                    stream = new FileStream(Path.Combine(path), FileMode.Open);
+                    await Task.Run(() =>fm.Upload(stream, file.FileName));
+                }
                 lp.AddLocationsTofirebase(location);
                 return Redirect("LocationsList");
+
             }
             else
             {
