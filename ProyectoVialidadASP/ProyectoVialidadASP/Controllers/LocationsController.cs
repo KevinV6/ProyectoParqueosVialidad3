@@ -82,31 +82,33 @@ namespace ProyectoVialidadASP.Controllers
                         
                     }
                 }*/
-                Location location = new Location('V', datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"]);
+                Location location=new Location();
                 Location_model lp = new Location_model();
-                File_model fm = new File_model(); 
+                File_model fm = new File_model();
                 FileStream stream;
                 if (file.ContentLength > 0)
                 {
                     string path = Path.Combine(Server.MapPath("~/Imagen/ImgFile/"), file.FileName);
                     file.SaveAs(path);
                     stream = new FileStream(Path.Combine(path), FileMode.Open);
-                    await Task.Run(() =>fm.Upload(stream, file.FileName));
+                    Task<string> linkImage = null;
+                    await Task.Run(() => linkImage = fm.Upload(stream, file.FileName));
+                    string b = linkImage.Result;
+                    location = new Location('V', datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"], linkImage.Result, file.FileName);
                 }
                 lp.AddLocationsTofirebase(location);
                 return Redirect("LocationsList");
-
             }
             else
             {
-               /* if (Session["user"] == null && Session["psw"] == null)
-                {
-                    return RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    
-                }*/
+                /* if (Session["user"] == null && Session["psw"] == null)
+                 {
+                     return RedirectToAction("Login", "Login");
+                 }
+                 else
+                 {
+
+                 }*/
                 return View();
             }
         }
@@ -146,7 +148,7 @@ namespace ProyectoVialidadASP.Controllers
 
                 return View(lp.listLocationView());
             }
-            
+
         }
 
         public ActionResult UpdateLocation(FormCollection datos)
@@ -210,14 +212,14 @@ namespace ProyectoVialidadASP.Controllers
                 {
                     @ViewBag.Message = message;
                     */
-                    if (Session["user"] == null && Session["psw"] == null)
-                    {
-                        return RedirectToAction("Login", "Login");
-                    }
-                    else
-                    {
-                        return View();
-                    }
+                if (Session["user"] == null && Session["psw"] == null)
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                else
+                {
+                    return View();
+                }
                 //}
             }
             else
