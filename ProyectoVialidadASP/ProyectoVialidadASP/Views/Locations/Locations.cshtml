@@ -29,30 +29,36 @@
 
         <div class="parking-wrapper animated bounceInUp" id="parking">
             <div class="parking-form">
-                <form action="Locations" method="post">
+                <form action="Locations" method="post" id="formulario">
                     <p>
                         <label>Nombre</label>
-                        <input type="text" name="name" required>
+                        <label style="color:red" name="ERROR" id="errorname"></label>
+                        <input type="text" name="name" id="name" required>
                     </p>
                     <p>
                         <label>Latitud</label>
-                        <input type="text" name="latitude" required>
+                        <label style="color:red" name="ERROR" id="errorlatitude"></label>
+                        <input type="text" name="latitude" id="latitude" required>
                     </p>
                     <p>
                         <label>Nombre de la calle</label>
-                        <input type="text" name="nameStreet" required>
+                        <label style="color:red" name="ERROR" id="errornameStreet"></label>
+                        <input type="text" name="nameStreet" id="nameStreet" required>
                     </p>
                     <p>
                         <label>Longitud</label>
-                        <input type="text" name="lenght" required>
+                        <label style="color:red" name="ERROR" id="errorlenght"></label>
+                        <input type="text" name="lenght" id="lenght" required>
                     </p>
                     <p>
                         <label>Espacios</label>
-                        <input type="text" name="parkingSpaces" required>
+                        <label style="color:red" name="ERROR" id="errorparkingSpaces"></label>
+                        <input type="text" name="parkingSpaces" id="parkingSpaces" required>
                     </p>
                     <p>
                         <label>Tarifas</label>
-                        <input type="text" name="price" required>
+                        <label style="color:red" name="ERROR" id="errorprice"></label>
+                        <input type="text" name="price" id="price" required>
                     </p>
                     <p>
                         <label>Imagen</label>
@@ -60,20 +66,20 @@
                     </p>
                     <p class="block">
                         <label>Descripcion</label>
-                        <textarea name="description" rows="3" required></textarea>
+                        <label style="color:red" name="ERROR" id="errordescription"></label>
+                        <textarea name="description" id="description" rows="3" required></textarea>
                     </p>
                     <p class="block">
                         <button style="color: white;">
                             Añadir
                         </button>
                     </p>
-                    <label style="color:red" name="ERROR" id="error">@ViewBag.Message</label>
                 </form>
             </div>
 
         </div>
 
     </div>
-
+    <script src="~/Js/ValidacionLocation.js"></script>
 </body>
 </html>

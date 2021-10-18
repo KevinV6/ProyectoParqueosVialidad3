@@ -118,6 +118,9 @@
     <Content Include="Imagen\ImgHome\menu.png" />
     <Content Include="Js\JIndex.js" />
     <Content Include="Js\JMarcador.js" />
+    <Content Include="Js\ValidacionLocation.js" />
+    <Content Include="Js\ValidacionLogin.js" />
+    <Content Include="Js\ValidacionStreet.js" />
     <Content Include="Style\StyleIndex\SIndex.css" />
     <Content Include="Style\StyleIndex\SLocationList.css" />
     <Content Include="Style\StyleIndex\SLocations.css" />

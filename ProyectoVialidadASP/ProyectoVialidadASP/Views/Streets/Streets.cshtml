@@ -10,34 +10,39 @@
     <meta name="viewport" content="width=device-width" />
     <title>Streets</title>
     <link href="~/Style/StyleIndex/SStreets.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
     <section>
-        <form action="Streets" method="post">
+        <form action="Streets" method="post" id="formulario">
             <div class="container">
                 <h2>Agregar Calle No Disponibles</h2>
-                <label style="color:red" name="ERROR" id="error">@ViewBag.Message1</label>
+                <label style="color:red" name="ERROR" id="errorNLugar"></label>
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="NLugar" id="" required>
+                            <label style="color:red" name="ERROR" id="errorNLugar"></label>
+                            <input type="text" name="NLugar" id="NLugar" required>
                             <span class="text">Nombre del lugar</span>
                             <span class="line"></span>
                         </div>
                     </div>
 
                 </div>
+
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="NCalle" id="" required>
+                            <label style="color:red" name="ERROR" id="errorNCalle"></label>
+                            <input type="text" name="NCalle" id="NCalle" required>
                             <span class="text">Nombres de las calles</span>
                             <span class="line"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="Descripcion" id="" required>
+                            <label style="color:red" name="ERROR" id="errorDescripcion"></label>
+                            <input type="text" name="Descripcion" id="Descripcion" required>
                             <span class="text">Descripcion</span>
                             <span class="line"></span>
                         </div>
@@ -52,8 +57,8 @@
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="date" name="FProgramacion" id="" required>
-
+                            <input type="date" name="FProgramacion" id="FProgramacion" required>
+                            <label style="color:red" name="ERROR" id="errorFProgramacion"></label>
                             <span class="line"></span>
                         </div>
                     </div>
@@ -61,14 +66,16 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="time" name="TiempoI" id="" required>
+                            <label style="color:red" name="ERROR" id="errorTiempoI"></label>
+                            <input type="time" name="TiempoI" id="TiempoI" required>
                             <span class="text">Tiempo Inicio</span>
                             <span class="line"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="time" name="TiempoF" id="" required>
+                            <label style="color:red" name="ERROR" id="errorTiempoF"></label>
+                            <input type="time" name="TiempoF" id="TiempoF" required>
                             <span class="text">Tiempo Final</span>
                             <span class="line"></span>
                         </div>
@@ -78,14 +85,16 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="Latitud1" id="" required>
+                            <label style="color:red" name="ERROR" id="errorLatitud1"></label>
+                            <input type="text" name="Latitud1" id="Latitud1" required>
                             <span class="text">Latitud</span>
                             <span class="line"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="Longitud1" id="" required>
+                            <label style="color:red" name="ERROR" id="errorLongitud1"></label>
+                            <input type="text" name="Longitud1" id="Longitud1" required>
                             <span class="text">Longitud</span>
                             <span class="line"></span>
                         </div>
@@ -95,14 +104,16 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="Latitud2" id="" required>
+                            <label style="color:red" name="ERROR" id="errorLatitud2"></label>
+                            <input type="text" name="Latitud2" id="Latitud2" required>
                             <span class="text">Latitud</span>
                             <span class="line"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="Longitud2" id="" required>
+                            <label style="color:red" name="ERROR" id="errorLongitud2"></label>
+                            <input type="text" name="Longitud2" id="Longitud2" required>
                             <span class="text">Longitud</span>
                             <span class="line"></span>
                         </div>
@@ -112,16 +123,11 @@
                     <div class="col">
                         <input type="submit" value="Publicar ahora">
                     </div>
-                    <div class="col">
-                        <input type="submit" value="Programar">
-                    </div>
-                    <div class="col">
-                        <input type="submit" value="Cancelar">
-                    </div>
                 </div>
 
             </div>
         </form>
     </section>
+    <script src="~/Js/ValidacionStreet.js"></script>
 </body>
 </html>

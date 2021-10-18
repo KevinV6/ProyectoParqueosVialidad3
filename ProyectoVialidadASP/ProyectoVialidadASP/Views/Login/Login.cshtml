@@ -11,21 +11,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login </title>
     <link rel="stylesheet" type="text/css" href="~/Style/StyleIndex/SLogin.css">
+    <script>
 
+        //function SoloLetras(e) {
+        //    key = e.keyCode || e.which;
+        //    teclado = String.formCharCode(key).toLowerCase;
+        //    letras = " abcdefghijklmnñopqrstuvwxyz";
+        //    especiales = "8-37-38-46-164";
+
+        //    tecladoEspecial = false;
+
+        //    for (var i in especiales ) {
+        //        if (key == especiales[i]) {
+        //            tecladoEspecial = true; break;
+        //        }
+        //    }
+        //    if (letras.indexOf(teclado) == -1 && !tecladoEspecial) {
+        //        return false;
+        //    }
+        //}
+
+    </script>
 </head>
 <body>
-    <form action="/Login/Validar" method="post">
+    <form action="/Login/Validar" method="post" id="formulario">
         <div class="form">
             <h2>Inicio de Sesion</h2>
             <div class="input">
                 <div class="inputBox">
                     <label>Nombre de Usuario</label>
-                    <label style="color:red" name="ERROR" id="error">@ViewBag.MessageUser</label>
+                    <label style="color:red" name="ERROR" id="error1">@ViewBag.MessageUser</label>
                     <input type="text" name="userText" id="userText" placeholder="ingrese su usuario" required>
                 </div>
                 <div class="inputBox">
                     <label>Contraseña</label>
-                    <label style="color:red" name="ERROR" id="error">@ViewBag.MessagePass</label>
+                    <label style="color:red" name="ERROR" id="error2">@ViewBag.MessagePass</label>
                     <input type="password" name="passText" id="passText" placeholder="ingrese su constraseña" required>
                 </div>
                 <div class="inputBox1">
@@ -36,5 +56,6 @@
             </div>
         </div>
     </form>
+    <script src="~/Js/ValidacionLogin.js"></script>
 </body>
 </html>

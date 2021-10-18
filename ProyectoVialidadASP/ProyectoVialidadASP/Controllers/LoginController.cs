@@ -68,14 +68,14 @@ namespace ProyectoVialidadASP.Controllers
             {
                 if (r.IsMatch(datos["userText"]))
                 {
-                    ViewBag.MessagePass = "No usar Caracteres especiales en el user ,";
+                    ViewBag.MessagePass = "No usar Caracteres especiales en la contraseña ,";
 
                     return View("Login");
                     
                 }
                 else
                 {
-                    ViewBag.MessageUser = "No usar Caracteres especiales en la contraseña ,";
+                    ViewBag.MessageUser = "No usar Caracteres especiales en el user ,";
 
                     return View("Login");
                     
