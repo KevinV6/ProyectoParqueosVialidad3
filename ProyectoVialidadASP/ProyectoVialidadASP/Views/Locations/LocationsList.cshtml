@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<ProyectoVialidadASP.Models.Location>
+
 @{
     Layout = null;
 }
@@ -9,7 +10,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Lista Parqueos</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,7 +23,7 @@
 <body>
     <div>
         <!-- Header -->
-        @RenderPage("~/Views/Home/Header.cshtml")
+        @RenderPage("~/Views/Home/Header.cshtml", new { ProcessInfo = 3 })
         <!-- Fin Header -->
     </div>
 
@@ -46,39 +47,66 @@
                                 <tr>
                                     <th>Imagen</th>
                                     <th> Nombre de el Lugar</th>
+                                    <th> Estado </th>
                                     <th>Espacio</th>
+
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td><img class="img" src="~/Imagen/ImgHome/car.jpg" /></td>
-                                    <td> <h4> Hospital America</h4></td>
-                                    <td><h4>Espacio 25</h4></td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><img class="img" src="~/Imagen/ImgHome/car.jpg" /></td>
-                                    <td>Plaza Principal</td>
-                                    <td>Espacio 21</td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><img class="img" src="~/Imagen/ImgHome/car.jpg" /></td>
-                                    <td>Cristo de la concordia</td>
-                                    <td>Espacio 12</td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img class="img" src="@item.UrlImage" />
+
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StatusLocation)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ParkingSpaces)
+                                        </td>
+                                        @if (item.StatusLocation == 'F')
+                                        {
+                                            <td>
+                                                <form action="/Locations/UpdateLocation" method="post">
+                                                    <input type="text" name="txtidedit" value="@item.IdLocation" hidden />
+                                                    <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
+
+                                                </form>
+                                                <form action="/Locations/EnableLocation" method="post">
+                                                    <input type="text" name="txtdelete" value="@item.IdLocation" hidden />
+                                                    <button type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE876;</i> </button>
+
+                                                </form>
+
+                                            </td>
+
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <form action="/Locations/UpdateLocation" method="post">
+                                                    <input type="text" name="txtidedit" value="@item.IdLocation" hidden />
+                                                    <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
+
+                                                </form>
+                                                <form action="/Locations/inhabilitarParqueo" method="post">
+                                                    <input type="text" name="txtdelete" value="@item.IdLocation" hidden />
+                                                    <button type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i> </button>
+
+                                                </form>
+
+                                            </td>
+                                        }
+                                    </tr>
+                                </tbody>
+                            }
                         </table>
                     </div>
                 </div>

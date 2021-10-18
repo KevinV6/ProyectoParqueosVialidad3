@@ -1,4 +1,5 @@
-﻿
+﻿@model ProyectoVialidadASP.Models.Location
+
 @{
     Layout = null;
 }
@@ -21,60 +22,93 @@
 </head>
 <body>
 
-    <div class="content">
+    <form action="/Locations/UpdateLocationRedirect" method="post">
+        <section>
+            <div class="container">
+                <h2>Modificar Parqueo</h2>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="name" value="@Model.Name" required>
+                            <span class="text">Nombre del Parqueo</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="nameStreet" value="@Model.NameStreet" required>
+                            <span class="text">Nombres de las calles</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
 
-        <i class="fas fa-arrow-circle-left fa-5x"></i>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="number" name="latitude" value="@Model.Latitude" step="0.000001" required>
+                            <span class="text">Latitud</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="number" name="lenght" value="@Model.Longitude" step="0.000001" required>
+                            <span class="text">Longitud</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
 
-        <h1 class="logo"><span>Modificar Parqueo</span></h1>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="number" name="price" value="@Model.Price" step="0.01" required>
+                            <span class="text">Tarifas</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="number" name="parkingSpaces" value="@Model.ParkingSpaces" required>
+                            <span class="text">Espacios</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
 
-        <div class="parking-wrapper animated bounceInUp" id="parking">
-            <div class="parking-form">
-                <form action="UpdateLocation" method="post">
-                    <p>
-                        <label>Nombre</label>
-                        <input type="text" name="name" required>
-                    </p>
-                    <p>
-                        <label>Latitud</label>
-                        <input type="text" name="latitude" required>
-                    </p>
-                    <p>
-                        <label>Nombre de la calle</label>
-                        <input type="text" name="nameStreet" required>
-                    </p>
-                    <p>
-                        <label>Longitud</label>
-                        <input type="text" name="lenght" required>
-                    </p>
-                    <p>
-                        <label>Espacios</label>
-                        <input type="text" name="parkingSpaces" required>
-                    </p>
-                    <p>
-                        <label>Tarifas</label>
-                        <input type="text" name="price" required>
-                    </p>
-                    <p>
-                        <label>Imagen</label>
-                        <input type="file" name="image" required>
-                    </p>
-                    <p class="block">
-                        <label>Descripcion</label>
-                        <textarea name="description" rows="3"></textarea>
-                    </p>
-                    <p class="block">
-                        <button style="color: white;">
-                            Añadir
-                        </button>
-                    </p>
-                    
-                    <label style="color:red" name="ERROR" id="error">@ViewBag.Message</label>
-                </form>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox textarea">
+                            <textarea required="" name="description" >@Model.Description</textarea>
+                            <span class="text">Descripción</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox textarea">
+                            <input hidden="hidden" type="text" name="txtId" value="@Model.IdLocation">
+                            <input hidden="hidden" type="text" name="txtStatus" value="@Model.StatusLocation">
+                            <input type="file">
+                            <span class="text">Descripción</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="col ">
+                        <div class="colb">
+                            <input type="submit" value="Modificar">
+                            <a class="btnC" href="/Locations/LocationsList">Cancelar</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-
-        </div>
-
-    </div>
+        </section>
+    </form>
 
 </body>
 </html>

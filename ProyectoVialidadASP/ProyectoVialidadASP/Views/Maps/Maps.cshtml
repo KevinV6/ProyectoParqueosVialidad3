@@ -15,15 +15,122 @@
 <body>
     <div>
         <!-- Header -->
-        @RenderPage("~/Views/Home/Header.cshtml")
+        @RenderPage("~/Views/Home/Header.cshtml", new { ProcessInfo = 2 })
         <!-- Fin Header -->
     </div>
     @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243661.6117952393!2d-66.31469195396852!3d-17.401577949704023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e375daaa9e2617%3A0x1ca207456270d502!2sCercado!5e0!3m2!1ses!2sbo!4v1632752787119!5m2!1ses!2sbo" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>*@
+    
     <div id="map"></div>
+    <div id="lol"></div>
     <script async
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtFqDJ3PeclA4FbDx9-uYvhil8NV1Mu7E&callback=initMap">
     </script>
     <script src="~/Js/JMarcador.js"></script>
+    <script>
 
+        /////////
+        function initMap() {
+            var ubicacion = new Localizacion(() => {
+
+                var myLatLng = { lat: ubicacion.latitude, lng: ubicacion.longitude };
+
+
+                var options = {
+                    center: myLatLng,
+                    zoom: 14
+
+                }
+                var map = document.getElementById('map');
+
+                var mapa = new google.maps.Map(map, options);
+
+                //**/
+                var request = new XMLHttpRequest()
+                request.open("GET", "@Url.Action("GetAllLocation","Maps")")
+                request.onload = function () {
+                    var json = request.responseText
+                    var ContenidoJson = JSON.parse(json);
+                    var fila = ContenidoJson[0];
+                    var campos = Object.keys(fila);
+                    var NumeroRegistros = ContenidoJson.length;
+
+
+
+                    let marcadorM = [];
+                    var informacionM = [];
+                    for (var a = 0; a < NumeroRegistros; a++) {
+                        fila = ContenidoJson[a];
+
+                        var Coordenadas = { lat: Number(fila[campos[4]]), lng: Number(fila[campos[5]]) };
+                        //
+                        var Contenido = '<h4>'+ fila[campos[2]] + '</h4>' + '<p>' + fila[campos[8]]+'</p>';
+                        marcadorM[fila[campos[8]]] = new google.maps.Marker({
+                            position: Coordenadas,
+                            map: mapa,
+                            title: fila[campos[2]]
+                        });
+                        console.log(fila[campos[8]])
+
+                        informacionM[fila[campos[8]]] = new google.maps.InfoWindow({
+                            content: Contenido
+                        });
+                        informacionM[fila[campos[8]]].open(map, marcadorM[fila[campos[8]]]);
+                        //
+                    }
+
+                }
+                //
+                request.send()
+
+                var request2 = new XMLHttpRequest()
+                request2.open("GET", "@Url.Action("GetAllStreet", "Maps")")
+                request2.onload = function () {
+                    var json = request2.responseText
+                    console.log(json);
+                    //
+                    var ContenidoJson = JSON.parse(json);
+                    var fila = ContenidoJson[0];
+                    var campos = Object.keys(fila);
+                    var NumeroRegistros = ContenidoJson.length;
+
+                    let marcadorM = [];
+                    let marcadorM2 = [];
+                    var informacionM = [];
+                    for (var a = 0; a < NumeroRegistros; a++) {
+                        fila = ContenidoJson[a];
+
+                        var MarcadorInicial = { lat: Number(fila[campos[8]]), lng: Number(fila[campos[9]]) };
+                        var MarcadorFinal = { lat: Number(fila[campos[10]]), lng: Number(fila[campos[11]]) };
+                        console.log(MarcadorInicial);
+                        //
+                        var Contenido = '<h4>' + fila[campos[3]] + '</h4>' + '<p>' + fila[campos[4]] + '</p>';
+                        marcadorM[fila[campos[2]]] = new google.maps.Marker({
+                            position: MarcadorInicial,
+                            map: mapa,
+                            title: fila[campos[3]]
+                        });
+                        marcadorM[fila[campos[2]]].setIcon('/Imagen/icoBloqueado.png');
+                        marcadorM2[fila[campos[8]]] = new google.maps.Marker({
+                            position: MarcadorFinal,
+                            map: mapa,
+                            title: fila[campos[3]]
+                        });
+                        marcadorM2[fila[campos[8]]].setIcon('/Imagen/icoBloqueado.png');
+                        var line = new google.maps.Polyline({ path: [MarcadorInicial, MarcadorFinal], map: mapa })
+
+                        console.log(fila[campos[8]])
+
+                        informacionM[fila[campos[4]]] = new google.maps.InfoWindow({
+                            content: Contenido
+                        });
+                        informacionM[fila[campos[4]]].open(map, marcadorM2[fila[campos[8]]]);
+                        //
+                    }
+                    //
+                }
+                request2.send()
+            })
+        }
+    </script>
 </body>
 </html>

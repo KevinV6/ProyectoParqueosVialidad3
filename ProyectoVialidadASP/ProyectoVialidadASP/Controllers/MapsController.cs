@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoVialidadASP.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,6 +21,19 @@ namespace ProyectoVialidadASP.Controllers
                 return View();
             }
             
+        }
+        public JsonResult GetAllLocation()
+        {
+            Location_model lp = new Location_model();
+            List<Location> list = lp.listLocationView();
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetAllStreet()
+        {
+            Street_model lp = new Street_model();
+            List<Street> list = lp.StreetListView();
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
     }
 }

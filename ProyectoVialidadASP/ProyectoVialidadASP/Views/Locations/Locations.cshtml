@@ -20,66 +20,91 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 </head>
 <body>
+    <form action="/Locations/Locations" method="post" enctype="multipart/form-data">
+        <section>
+            <div class="container">
+                <h2>Añadir Nuevo Parqueo</h2>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="name" id="" required>
+                            <span class="text">Nombre del Parqueo</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="nameStreet" id="" required>
+                            <span class="text">Nombres de las calles</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
 
-    <div class="content">
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="number" name="latitude" id="" step="0.000001" required>
+                            <span class="text">Latitud</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="number" name="lenght" id="" step="0.000001" required>
+                            <span class="text">Longitud</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
 
-        <i class="fas fa-arrow-circle-left fa-5x"></i>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="number" name="price" id="" step="0.01" required>
+                            <span class="text">Tarifas</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="number" name="parkingSpaces" id="" required>
+                            <span class="text">Espacios</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
 
-        <h1 class="logo"><span>Añadir Nuevo Parqueo</span></h1>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox textarea">
+                            <textarea required="" name="description"></textarea>
+                            <span class="text">Descripción</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox textarea">
+                            <input type="file" name="file">
+                            <span class="text">Imagen</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="col ">
+                        <div class="colb">
+                            <input type="submit" value="Añadir">
+                            <a class="btnC" href="/Locations/LocationsList">Cancelar</a>
+                        </div>
 
-        <div class="parking-wrapper animated bounceInUp" id="parking">
-            <div class="parking-form">
-                <form action="Locations" method="post" id="formulario">
-                    <p>
-                        <label>Nombre</label>
-                        <label style="color:red" name="ERROR" id="errorname"></label>
-                        <input type="text" name="name" id="name" required>
-                    </p>
-                    <p>
-                        <label>Latitud</label>
-                        <label style="color:red" name="ERROR" id="errorlatitude"></label>
-                        <input type="text" name="latitude" id="latitude" required>
-                    </p>
-                    <p>
-                        <label>Nombre de la calle</label>
-                        <label style="color:red" name="ERROR" id="errornameStreet"></label>
-                        <input type="text" name="nameStreet" id="nameStreet" required>
-                    </p>
-                    <p>
-                        <label>Longitud</label>
-                        <label style="color:red" name="ERROR" id="errorlenght"></label>
-                        <input type="text" name="lenght" id="lenght" required>
-                    </p>
-                    <p>
-                        <label>Espacios</label>
-                        <label style="color:red" name="ERROR" id="errorparkingSpaces"></label>
-                        <input type="text" name="parkingSpaces" id="parkingSpaces" required>
-                    </p>
-                    <p>
-                        <label>Tarifas</label>
-                        <label style="color:red" name="ERROR" id="errorprice"></label>
-                        <input type="text" name="price" id="price" required>
-                    </p>
-                    <p>
-                        <label>Imagen</label>
-                        <input type="file" name="image" required>
-                    </p>
-                    <p class="block">
-                        <label>Descripcion</label>
-                        <label style="color:red" name="ERROR" id="errordescription"></label>
-                        <textarea name="description" id="description" rows="3" required></textarea>
-                    </p>
-                    <p class="block">
-                        <button style="color: white;">
-                            Añadir
-                        </button>
-                    </p>
-                </form>
+                    </div>
+
+                </div>
+
             </div>
+        </section>
+    </form>
 
-        </div>
-
-    </div>
-    <script src="~/Js/ValidacionLocation.js"></script>
 </body>
 </html>

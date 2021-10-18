@@ -1,11 +1,14 @@
-﻿
+﻿@model IEnumerable<ProyectoVialidadASP.Models.Street>
+
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
+
 <html>
 <head>
+    <meta name="viewport" content="width=device-width" />
     <title>Lista Calles No Disponibles</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -20,9 +23,10 @@
 <body>
     <div>
         <!-- Header -->
-        @RenderPage("~/Views/Home/Header.cshtml")
+        @RenderPage("~/Views/Home/Header.cshtml", new { ProcessInfo = 4 })
         <!-- Fin Header -->
     </div>
+
     <div>
         <section>
             <div class="container-xl">
@@ -44,35 +48,63 @@
                                     <th>Imagen</th>
                                     <th>Nombre de la Calle</th>
                                     <th>Fecha - Hora</th>
+                                    <th> Estado </th>
                                     <th>Accion</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td><img class="img" src="~/Imagen/ImgHome/car.jpg" /></td>
-                                    <td>Nombre de la Calle</td>
-                                    <td>17/08/21 18:45</td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><img class="img" src="~/Imagen/ImgHome/car.jpg" /></td>
-                                    <td>Nombre de la Calle</td>
-                                    <td>17/08/21 18:45</td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td><img class="img" src="~/Imagen/ImgHome/car.jpg" /></td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartTime)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StatusStreet)
+                                        </td>
+                                        @if (item.StatusStreet == 'F')
+                                        {
+                                            <td>
+                                                <form action="/Streets/UpdateStreets" method="post">
+                                                    <input type="text" name="txtidedit" value="@item.IdStreet" hidden />
+                                                    <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
+
+                                                </form>
+                                                <form action="/Streets/EnableStreet" method="post">
+                                                    <input type="text" name="txtdelete" value="@item.IdStreet" hidden />
+                                                    <button type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE876;</i> </button>
+
+                                                </form>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <form action="/Streets/UpdateLocation" method="post">
+                                                    <input type="text" name="txtidedit" value="@item.IdStreet" hidden />
+                                                    <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
+
+                                                </form>
+                                                <form action="/Streets/inhabilitarCalle" method="post">
+                                                    <input type="text" name="txtdelete" value="@item.IdStreet" hidden />
+                                                    <button type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i> </button>
+
+                                                </form>
+
+                                            </td>
+                                        }
+                                    </tr>
+                                </tbody>
+                            }
                         </table>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-    
 </body>
 </html>
