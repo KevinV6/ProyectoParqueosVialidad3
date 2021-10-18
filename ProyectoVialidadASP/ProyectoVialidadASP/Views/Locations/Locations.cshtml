@@ -27,14 +27,14 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="name" id="" required>
+                            <input type="text" name="name" id="name" required>
                             <span class="text">Nombre del Parqueo</span>
                             <span class="line"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="nameStreet" id="" required>
+                            <input type="text" name="nameStreet" id="nameStreet" required>
                             <span class="text">Nombres de las calles</span>
                             <span class="line"></span>
                         </div>
@@ -44,14 +44,14 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="number" name="latitude" id="" step="0.000001" required>
+                            <input type="number" name="latitude" minlength="9" maxlength="10" id="latitude" step="0.000001" required>
                             <span class="text">Latitud</span>
                             <span class="line"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="number" name="lenght" id="" step="0.000001" required>
+                            <input type="number" name="lenght" minlength="9" maxlength="10" id="lenght" step="0.000001" required>
                             <span class="text">Longitud</span>
                             <span class="line"></span>
                         </div>
@@ -61,14 +61,14 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="number" name="price" id="" step="0.01" required>
+                            <input type="number" name="price" minlength="4" maxlength="5" id="price" step="0.01" required>
                             <span class="text">Tarifas</span>
                             <span class="line"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="number" name="parkingSpaces" id="" required>
+                            <input type="number" name="parkingSpaces" minlength="2" maxlength="3" id="parkingSpaces" required>
                             <span class="text">Espacios</span>
                             <span class="line"></span>
                         </div>
@@ -78,14 +78,14 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox textarea">
-                            <textarea required="" name="description"></textarea>
+                            <textarea required="" id="description" name="description"></textarea>
                             <span class="text">Descripción</span>
                             <span class="line"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox textarea">
-                            <input type="file" name="file">
+                            <input type="file" accept="image/png,image/jpeg,image/jpg" name="file">
                             <span class="text">Imagen</span>
                             <span class="line"></span>
                         </div>

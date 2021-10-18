@@ -25,66 +25,38 @@ namespace ProyectoVialidadASP.Controllers
         public ActionResult Logout()
         {
             Session.Abandon();
-            return RedirectToAction("Login", "Login");     
+            return RedirectToAction("Login", "Login");
         }
 
         [HttpPost]
         public ActionResult Validar(FormCollection datos)
         {
-            Regex r = new Regex("^[a-zA-Z0-9]+$");
+            User_Model user_Model = new User_Model();
+            bool verificado = user_Model.Login(new User(datos["userText"], datos["passText"]));
 
-            if (r.IsMatch(datos["userText"]) && r.IsMatch(datos["passText"]))
+            if (verificado)
             {
+                Session["user"] = datos["userText"];
+                Session["psw"] = datos["passText"];
 
-                User_Model user_Model = new User_Model();
-                bool verificado = user_Model.Login(new User(datos["userText"], datos["passText"]));
-
-                if (verificado)
+                if (Session["user"] == null && Session["psw"] == null)
                 {
-                    Session["user"] = datos["userText"];
-                    Session["psw"] = datos["passText"];
-
-                    if (Session["user"] == null && Session["psw"] == null)
-                    {
-                        return RedirectToAction("Login", "Login");
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                    
+                    return RedirectToAction("Login", "Login");
                 }
-
                 else
                 {
-                    ViewBag.MessagePass = "Nombre de Usuario o Contraseña incorrectos";
-
-                    return View("Login");
-                    
+                    return RedirectToAction("Index", "Home");
                 }
 
             }
+
             else
             {
-                if (r.IsMatch(datos["userText"]))
-                {
-                    ViewBag.MessagePass = "No usar Caracteres especiales en la contraseña ,";
+                ViewBag.MessagePass = "Nombre de Usuario o Contraseña incorrectos";
 
-                    return View("Login");
-                    
-                }
-                else
-                {
-                    ViewBag.MessageUser = "No usar Caracteres especiales en el user ,";
-
-                    return View("Login");
-                    
-                }
+                return View("Login");
 
             }
-
-
-         
         }
     }
 }

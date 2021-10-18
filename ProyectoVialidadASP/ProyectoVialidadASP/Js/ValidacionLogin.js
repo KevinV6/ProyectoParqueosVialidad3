@@ -3,7 +3,7 @@ const pass = document.getElementById("passText");
 const errorUser = document.getElementById("error1");
 const errorPass = document.getElementById("error2");
 
-const LN = /^[a-zA-Z0-9_.-]*$;
+const LN = /^[a-zA-Z0-9_.-]*$/;
 
 
 formulario.addEventListener('submit', (e) => {
@@ -14,15 +14,9 @@ formulario.addEventListener('submit', (e) => {
         if (user.value.length > 8) {
             errorUser.textContent = "No mas de 8 caracteres";
         }
-        if (pass.value.length > 8) {
-            errorPass.textContent = "No mas de 8 caracteres";
-        }
     } else {
         if (!LN.test(user.value)) {
             errorUser.textContent = "Solo Letras y numeros";
-        }
-        if (!LN.test(pass.value)) {
-            errorPass.textContent = "Solo Letras y numeros";
         }
     }
     

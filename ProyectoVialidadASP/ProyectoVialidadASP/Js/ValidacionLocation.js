@@ -15,12 +15,19 @@ const errorparkingSpaces = document.getElementById("errorparkingSpaces");
 const errorprice = document.getElementById("errorprice");
 const errordescription = document.getElementById("errordescription");
 
-const LN = /^[a-zA-Z0-9_.-]*$;
+const LN = /^[a-zA-Z0-9_.-]*$/;
 const N = /^-?\d*\.{0,1}\d+$/;
 const ND = /^[0-9]+([,][0-9]+)?$/;
 
 formulario.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (latitude.value.length > 10) {
+        errorlatitude.textContent = "No mas de 10 caracteres";
+    }
+    if (lenght.value.length > 10) {
+        errorlenght.textContent = "No mas de 10 caracteres";
+    }
+
 
     if (!LN.test(name.value)) {
         errorname.textContent = "Solo Letras y numeros";

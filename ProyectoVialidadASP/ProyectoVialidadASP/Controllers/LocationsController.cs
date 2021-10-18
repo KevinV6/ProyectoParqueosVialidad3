@@ -17,71 +17,7 @@ namespace ProyectoVialidadASP.Controllers
         {
             if (datos["name"] != null)
             {
-                /*Regex numAndLetters = new Regex("^[a-zA-Z0-9]+$");
-                Regex nums = new Regex("^[0-9]+$");
-                bool res = true;
-                string message = "";
-                if (numAndLetters.IsMatch(datos["name"]) != true)
-                {
-                    message = message + "No usar Caracteres especiales en el nombre ,";
-                    res = false;
-                }
-
-                if (nums.IsMatch(datos["latitude"]) != true)
-                {
-                    message = message + "Solo es permitido numeros en la latitud ,";
-                    res = false;
-                }
-                if (numAndLetters.IsMatch(datos["nameStreet"]) != true)
-                {
-                    message = message + "No usar Caracteres especiales en el nombre de la calle ,";
-                    res = false;
-                }
-                if (nums.IsMatch(datos["lenght"]) != true)
-                {
-                    message = message + "Solo es permitido numeros en la logitud ,";
-                    res = false;
-                }
-                if (nums.IsMatch(datos["parkingSpaces"]) != true)
-                {
-                    message = message + "Solo es permitido numeros en el numero de estacionamientos ,";
-                    res = false;
-                }
-                if (nums.IsMatch(datos["price"]) != true)
-                {
-                    message = message + "Solo es permitido numeros en el precio ,";
-                    res = false;
-                }
-                if (numAndLetters.IsMatch(datos["description"]) != true)
-                {
-                    message = message + "No usar Caracteres especiales en la descripcion ,";
-                    res = false;
-                }
-
-                if (res)
-                {
-                    if (Session["user"] == null && Session["psw"] == null)
-                    {
-                        return RedirectToAction("Login", "Login");
-                    }
-                    else
-                    {
-                        return View("../Maps/Maps");
-                    }
-                    
-                }
-                else
-                {
-                    @ViewBag.Message = message;
-                    if (Session["user"] == null && Session["psw"] == null)
-                    {
-                        return RedirectToAction("Login", "Login");
-                    }
-                    else
-                    {
-                        
-                    }
-                }*/
+                
                 Location location=new Location();
                 Location_model lp = new Location_model();
                 File_model fm = new File_model();
@@ -101,14 +37,6 @@ namespace ProyectoVialidadASP.Controllers
             }
             else
             {
-                /* if (Session["user"] == null && Session["psw"] == null)
-                 {
-                     return RedirectToAction("Login", "Login");
-                 }
-                 else
-                 {
-
-                 }*/
                 return View();
             }
         }
@@ -155,63 +83,7 @@ namespace ProyectoVialidadASP.Controllers
         {
             if (datos["name"] != null)
             {
-                /*Regex numAndLetters = new Regex("^[a-zA-Z0-9]+$");
-                Regex nums = new Regex("^[0-9]+$");
-                bool res = true;
-                string message ="";
-                if (numAndLetters.IsMatch(datos["name"])!= true)
-                {
-                    message = message + "No usar Caracteres especiales en el nombre ," ;
-                    res = false;
-                }
-
-                if (nums.IsMatch(datos["latitude"]) != true)
-                {
-                    message = message + "Solo es permitido numeros en la latitud ," ;
-                    res = false;
-                }
-                if (numAndLetters.IsMatch(datos["nameStreet"]) != true)
-                {
-                    message = message + "No usar Caracteres especiales en el nombre de la calle ,";
-                    res = false;
-                }
-                if (nums.IsMatch(datos["lenght"]) != true)
-                {
-                    message = message + "Solo es permitido numeros en la logitud ," ;
-                    res = false;
-                }
-                if (nums.IsMatch(datos["parkingSpaces"]) != true)
-                {
-                    message = message + "Solo es permitido numeros en el numero de estacionamientos ," ;
-                    res = false;
-                }
-                if (nums.IsMatch(datos["price"]) != true)
-                {
-                    message = message + "Solo es permitido numeros en el precio ," ;
-                    res = false;
-                }
-                if (numAndLetters.IsMatch(datos["description"]) != true)
-                {
-                    message = message + "No usar Caracteres especiales en la descripcion ,";
-                    res = false;
-                }
-
-                if (res)
-                {
-                    
-                    if (Session["user"] == null && Session["psw"] == null)
-                    {
-                        return RedirectToAction("Login", "Login");
-                    }
-                    else
-                    {
-                        return View("../Maps/Maps");
-                    }
-                }
-                else
-                {
-                    @ViewBag.Message = message;
-                    */
+                
                 if (Session["user"] == null && Session["psw"] == null)
                 {
                     return RedirectToAction("Login", "Login");
@@ -220,7 +92,6 @@ namespace ProyectoVialidadASP.Controllers
                 {
                     return View();
                 }
-                //}
             }
             else
             {

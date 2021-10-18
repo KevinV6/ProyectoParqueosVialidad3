@@ -13,69 +13,14 @@ namespace ProyectoVialidadASP.Controllers
     public class StreetsController : Controller
     {
         // GET: Streets
-        
+
 
         public ActionResult Streets(FormCollection datos)
         {
-            
+
             if (datos["NLugar"] != null)
             {
-                /* Regex numAndLetters = new Regex("^[a-zA-Z0-9]+$");
-                 Regex nums = new Regex("^[0-9]+$");
-                 bool res = true;
-                 string message = "";
-                 if (numAndLetters.IsMatch(datos["NLugar"]) != true)
-                 {
-                     message = message + "No usar Caracteres especiales1 en el nombre del lugar ,";
-                     res = false;
-                 }
-                 if (numAndLetters.IsMatch(datos["NCalle"]) != true)
-                 {
-                     message = message + "No usar Caracteres especiales1 en el nombre de la calle ,";
-                     res = false;
-                 }
-                 if (numAndLetters.IsMatch(datos["Descripcion"]) != true)
-                 {
-                     message = message + "No usar Caracteres especiales en la Descripcion ,";
-                     res = false;
-                 }
-                 if (nums.IsMatch(datos["Latitud1"]) != true)
-                 {
-                     message = message + "Solo es permitido numeros en la latitud ,";
-                     res = false;
-                 }
-                 if (nums.IsMatch(datos["Latitud2"]) != true)
-                 {
-                     message = message + "Solo es permitido numeros en la latitud ,";
-                     res = false;
-                 }
-                 if (nums.IsMatch(datos["Longitud1"]) != true)
-                 {
-                     message = message + "Solo es permitido numeros en la Longitud ,";
-                     res = false;
-                 }
-                 if (nums.IsMatch(datos["Longitud2"]) != true)
-                 {
-                     message = message + "Solo es permitido numeros en la Longitud ,";
-                     res = false;
-                 }
-                 if (res)
-                 {
-                     return View("../Maps/Maps");
-                 }
-                 else
-                 {
-                     @ViewBag.Message1 = message;
 
-                     if (Session["user"] == null && Session["psw"] == null)
-                     {
-                         return RedirectToAction("Login", "Login");
-                     }
-                     else
-                     {
-                         return View();
-                     }
-                 }*/
                 string cutPrograming = datos["FProgramacion"];
                 string programmingDate = cutPrograming.Substring(0, 10);
 
@@ -86,14 +31,6 @@ namespace ProyectoVialidadASP.Controllers
             }
             else
             {
-                /*if (Session["user"] == null && Session["psw"] == null)
-                {
-                    return RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    return View();
-                }*/
                 return View();
             }
 
@@ -139,62 +76,14 @@ namespace ProyectoVialidadASP.Controllers
         {
             if (datos["NLugar"] != null) //el boton se prime apenas ingresar a la pagina revisar
             {
-                /*Regex numAndLetters = new Regex("^[a-zA-Z0-9]+$");
-                Regex nums = new Regex("^[0-9]+$");
-                bool res = true;
-                string message = "";
-                if (numAndLetters.IsMatch(datos["NLugar"]) != true)
+                if (Session["user"] == null && Session["psw"] == null)
                 {
-                    message = message + "No usar Caracteres especiales1 ,";
-                    res = false;
-                }
-                if (numAndLetters.IsMatch(datos["NCalle"]) != true)
-                {
-                    message = message + "No usar Caracteres especiales1 ,";
-                    res = false;
-                }
-                if (numAndLetters.IsMatch(datos["Descripcion"]) != true)
-                {
-                    message = message + "No usar Caracteres especiales ,";
-                    res = false;
-                }
-                if (nums.IsMatch(datos["Latitud1"]) != true)
-                {
-                    message = message + "Solo es permitido numeros ,";
-                    res = false;
-                }
-                if (nums.IsMatch(datos["Latitud2"]) != true)
-                {
-                    message = message + "Solo es permitido numeros ,";
-                    res = false;
-                }
-                if (nums.IsMatch(datos["Longitud1"]) != true)
-                {
-                    message = message + "Solo es permitido numeros ,";
-                    res = false;
-                }
-                if (nums.IsMatch(datos["Longitud2"]) != true)
-                {
-                    message = message + "Solo es permitido numeros ,";
-                    res = false;
-                }
-                if (res)
-                {
-                    return View("../Maps/Maps");
+                    return RedirectToAction("Login", "Login");
                 }
                 else
                 {
-                    @ViewBag.Message1 = message;
-                    */
-                    if (Session["user"] == null && Session["psw"] == null)
-                    {
-                        return RedirectToAction("Login", "Login");
-                    }
-                    else
-                    {
-                        return View();
-                    }
-                //}
+                    return View();
+                }
             }
             else
             {
@@ -204,17 +93,17 @@ namespace ProyectoVialidadASP.Controllers
                 }
                 else
                 {
-                    Street street = new Street();                      
+                    Street street = new Street();
                     Street_model sm = new Street_model();
 
                     street = sm.UpdateStreetFromFirebase(datos["txtidedit"]);
 
                     return View(street);
                 }
-                
+
             }
-        
-     
+
+
         }
 
         public ActionResult UpdateStreetsRedirect(FormCollection datos)
