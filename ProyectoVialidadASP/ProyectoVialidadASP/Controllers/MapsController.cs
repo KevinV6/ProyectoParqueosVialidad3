@@ -28,5 +28,12 @@ namespace ProyectoVialidadASP.Controllers
             List<Location> list = lp.listLocationView();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetAllStreet()
+        {
+            Street_model lp = new Street_model();
+            List<Street> list = lp.StreetListView();
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
     }
 }

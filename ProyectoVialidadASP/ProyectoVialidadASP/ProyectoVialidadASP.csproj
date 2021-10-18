@@ -249,6 +249,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Imagen\icoBloqueado.png" />
     <Content Include="Imagen\ImgHome\car.jpg" />
     <Content Include="Imagen\ImgHome\close.png" />
     <Content Include="Imagen\ImgHome\menu.png" />
