@@ -7,129 +7,159 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Streets</title>
-    <link href="~/Style/StyleIndex/SStreets.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Streets</title>
+	<link href="~/Style/StyleIndex/SStreets.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<!-- GOOGLE FONTs -->
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+	<!-- FONT AWESOME -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<!-- ANIMATE CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 </head>
 <body>
-    <section>
-        <form action="Streets" method="post" id="formulario">
-            <div class="container">
-                <h2>Agregar Calle No Disponibles</h2>
-                <label style="color:red" name="ERROR" id="errorNLugar"></label>
-                <div class="row100">
-                    <div class="col">
-                        <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorNLugar"></label>
-                            <input type="text" name="NLugar" id="NLugar" required>
-                            <span class="text">Nombre del lugar</span>
-                            <span class="line"></span>
-                        </div>
-                    </div>
+    
+	<form action="Streets" method="post" id="formulario">
+		<section>
+			<div class="container">
+				<h2>Agregar Calle No Disponibles</h2>
+				<label style="color:red" name="ERROR" id="errorNLugar"></label>
+				<div class="row100">
+					<div class="col">
+						<div class="inputBox">
+							<label style="color:red" name="ERROR" id="errorNLugar"></label>
+							<input type="text" name="NLugar" id="NLugar" required>
+							<span class="text">Nombre del lugar</span>
+							<span class="line"></span>
+						</div>
+					</div>
 
-                </div>
+				</div>
 
-                <div class="row100">
-                    <div class="col">
-                        <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorNCalle"></label>
-                            <input type="text" name="NCalle" id="NCalle" required>
-                            <span class="text">Nombres de las calles</span>
-                            <span class="line"></span>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorDescripcion"></label>
-                            <input type="text" name="Descripcion" id="Descripcion" required>
-                            <span class="text">Descripcion</span>
-                            <span class="line"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row100">
-                    <div class="col">
-                        <div class="inputBox">
+				<div class="row100">
+					<div class="col">
+						<div class="inputBox">
+							<label style="color:red" name="ERROR" id="errorNCalle"></label>
+							<input type="text" name="NCalle" id="NCalle" required>
+							<span class="text">Nombres de las calles</span>
+							<span class="line"></span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="inputBox">
+							<label style="color:red" name="ERROR" id="errorDescripcion"></label>
+							<input type="text" name="Descripcion" id="Descripcion" required>
+							<span class="text">Descripcion</span>
+							<span class="line"></span>
+						</div>
+					</div>
+				</div>
+				<div class="row100">
+					<div class="col">
+						<div class="inputBox">
 
-                            <span class="text">Fecha de Programacion</span>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="inputBox">
-                            <input type="date" name="FProgramacion" id="FProgramacion" required>
-                            <label style="color:red" name="ERROR" id="errorFProgramacion"></label>
-                            <span class="line"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row100">
-                    <div class="col">
-                        <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorTiempoI"></label>
-                            <input type="time" name="TiempoI" id="TiempoI" required>
-                            <span class="text">Tiempo Inicio</span>
-                            <span class="line"></span>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorTiempoF"></label>
-                            <input type="time" name="TiempoF" id="TiempoF" required>
-                            <span class="text">Tiempo Final</span>
-                            <span class="line"></span>
-                        </div>
-                    </div>
-                </div>
-                <h3>Punto de Inicio</h3>
-                <div class="row100">
-                    <div class="col">
-                        <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorLatitud1"></label>
-                            <input type="text" name="Latitud1" id="Latitud1" required>
-                            <span class="text">Latitud</span>
-                            <span class="line"></span>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorLongitud1"></label>
-                            <input type="text" name="Longitud1" id="Longitud1" required>
-                            <span class="text">Longitud</span>
-                            <span class="line"></span>
-                        </div>
-                    </div>
-                </div>
-                <h3>Punto de Cierre</h3>
-                <div class="row100">
-                    <div class="col">
-                        <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorLatitud2"></label>
-                            <input type="text" name="Latitud2" id="Latitud2" required>
-                            <span class="text">Latitud</span>
-                            <span class="line"></span>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorLongitud2"></label>
-                            <input type="text" name="Longitud2" id="Longitud2" required>
-                            <span class="text">Longitud</span>
-                            <span class="line"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row100">
-                    
-                    <div class="col">
-                        <input type="submit" value="Programar">
-                    </div>
-                    
-                </div>
+							<span class="text">Fecha de Programacion</span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="inputBox">
+							<input type="date" name="FProgramacion" id="FProgramacion" required>
+							<label style="color:red" name="ERROR" id="errorFProgramacion"></label>
+							<span class="line"></span>
+						</div>
+					</div>
+				</div>
 
-            </div>
-        </form>
-    </section>
-    <script src="~/Js/ValidacionStreet.js"></script>
+				<div class="row100">
+					<div class="col">
+						<div class="inputBox">
+							
+							<span class="text">Tiempo Inicio</span>
+							 
+						</div>
+					</div>
+					<div class="col">
+						<div class="inputBox">
+							<label style="color:red" name="ERROR" id="errorTiempoI"></label>
+							<input type="time" name="TiempoI" id="TiempoI" required>
+							<span class="line"></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="row100">
+					<div class="col">
+						<div class="inputBox">
+							 
+							<span class="text">Tiempo Inicio</span>
+						 
+						</div>
+					</div>
+					<div class="col">
+						<div class="inputBox">
+							<label style="color:red" name="ERROR" id="errorTiempoF"></label>
+							<input type="time" name="TiempoF" id="TiempoF" required>
+							 
+							<span class="line"></span>
+						</div>
+					</div>
+				</div>
+
+				<h3>Punto de Inicio</h3>
+				<div class="row100">
+					<div class="col">
+						<div class="inputBox">
+							<label style="color:red" name="ERROR" id="errorLatitud1"></label>
+							<input type="text" name="Latitud1" id="Latitud1" required>
+							<span class="text">Latitud</span>
+							<span class="line"></span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="inputBox">
+							<label style="color:red" name="ERROR" id="errorLongitud1"></label>
+							<input type="text" name="Longitud1" id="Longitud1" required>
+							<span class="text">Longitud</span>
+							<span class="line"></span>
+						</div>
+					</div>
+				</div>
+				<h3>Punto de Cierre</h3>
+				<div class="row100">
+					<div class="col">
+						<div class="inputBox">
+							<label style="color:red" name="ERROR" id="errorLatitud2"></label>
+							<input type="text" name="Latitud2" id="Latitud2" required>
+							<span class="text">Latitud</span>
+							<span class="line"></span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="inputBox">
+							<label style="color:red" name="ERROR" id="errorLongitud2"></label>
+							<input type="text" name="Longitud2" id="Longitud2" required>
+							<span class="text">Longitud</span>
+							<span class="line"></span>
+						</div>
+					</div>
+				</div>
+				<div class="row100">
+
+					<div class="col">
+						<div class="colb">
+							<input type="submit" value="Programar">
+							<a href="/Streets/StreetsList" class="btnC">Cancelar</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+	</form>
+   
+    @*<script src="~/Js/ValidacionStreet.js"></script>*@
 </body>
 </html>
