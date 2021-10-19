@@ -3,8 +3,10 @@ using Newtonsoft.Json.Linq;
 using ProyectoVialidadASP.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -15,7 +17,7 @@ namespace ProyectoVialidadASP.Controllers
         // GET: Streets
 
 
-        public ActionResult Streets(FormCollection datos)
+        public async Task<ActionResult> Streets(FormCollection datos, HttpPostedFileBase file)
         {
 
             if (datos["NLugar"] != null)
@@ -24,10 +26,22 @@ namespace ProyectoVialidadASP.Controllers
                 string cutPrograming = datos["FProgramacion"];
                 string programmingDate = cutPrograming.Substring(0, 10);
 
-                Street street = new Street('V', datos["NLugar"], datos["NCalle"], datos["Descripcion"], programmingDate, datos["TiempoI"], datos["TiempoF"], datos["Latitud1"], datos["Longitud1"], datos["Latitud2"], datos["Longitud2"]);
+                Street street = new Street();
                 Street_model sm = new Street_model();
+                File_model fm = new File_model();
+                FileStream stream;
+                if (file.ContentLength > 0)
+                {
+                    string path = Path.Combine(Server.MapPath("~/Imagen/ImgFile/"), file.FileName);
+                    file.SaveAs(path);
+                    stream = new FileStream(Path.Combine(path), FileMode.Open);
+                    Task<string> linkImage = null;
+                    await Task.Run(() => linkImage = fm.Upload(stream, file.FileName));
+                    string b = linkImage.Result;
+                    street = new Street('V', datos["NLugar"], datos["NCalle"], datos["Descripcion"], programmingDate, datos["TiempoI"], datos["TiempoF"], datos["Latitud1"], datos["Longitud1"], datos["Latitud2"], datos["Longitud2"], linkImage.Result, file.FileName);
+                }
                 sm.AddStreetTofirebase(street);
-                return View();
+                return Redirect("StreetsList");
             }
             else
             {

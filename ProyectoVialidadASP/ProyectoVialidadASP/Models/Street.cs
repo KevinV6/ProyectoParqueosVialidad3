@@ -19,13 +19,30 @@ namespace ProyectoVialidadASP.Models
         public string InitialLongitude { get; set; }
         public string EndLatitude { get; set; }
         public string EndLongitude { get; set; }
+        public string UrlImage { get; set; }
+        public string NameImage { get; set; }
 
         public Street()
         {
 
         }
-
-        public Street(char statusStreet, string siteStreet, string name, string description, string programmingDate, string startTime, string endTime, string initialLatitude, string initialLongitude, string endLatitude, string endLongitude)
+        /// <summary>
+        /// Insert
+        /// </summary>
+        /// <param name="statusStreet"></param>
+        /// <param name="siteStreet"></param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="programmingDate"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <param name="initialLatitude"></param>
+        /// <param name="initialLongitude"></param>
+        /// <param name="endLatitude"></param>
+        /// <param name="endLongitude"></param>
+        /// <param name="urlImage"></param>
+        /// <param name="nameImage"></param>
+        public Street(char statusStreet, string siteStreet, string name, string description, string programmingDate, string startTime, string endTime, string initialLatitude, string initialLongitude, string endLatitude, string endLongitude, string urlImage, string nameImage)
         {
             StatusStreet = statusStreet;
             SiteStreet = siteStreet;
@@ -38,8 +55,24 @@ namespace ProyectoVialidadASP.Models
             InitialLongitude = initialLongitude;
             EndLatitude = endLatitude;
             EndLongitude = endLongitude;
+            UrlImage = urlImage;
+            NameImage = nameImage;
         }
-
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="idStreet"></param>
+        /// <param name="statusStreet"></param>
+        /// <param name="siteStreet"></param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="programmingDate"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <param name="initialLatitude"></param>
+        /// <param name="initialLongitude"></param>
+        /// <param name="endLatitude"></param>
+        /// <param name="endLongitude"></param>
         public Street(string idStreet, char statusStreet, string siteStreet, string name, string description, string programmingDate, string startTime, string endTime, string initialLatitude, string initialLongitude, string endLatitude, string endLongitude)
         {
             IdStreet = idStreet;
