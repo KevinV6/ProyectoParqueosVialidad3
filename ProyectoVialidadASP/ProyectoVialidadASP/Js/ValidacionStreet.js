@@ -29,6 +29,14 @@ errorNLugar.textContent = date.getHours() + ":" + date.getMinutes();
 formulario.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    horaI = document.querySelector('#TiempoI').value;
+    horaF = document.querySelector('#TiempoF').value;
+    horaMinutoI = horaI.split(":");
+    horaMinutoF = horaF.split(":");
+
+    if (horaMinutoF[0] < horaMinutoI[0]) {
+        errorNLugar.textContent = "La hora final no puede ser menor a la hora de inicio";
+    }
 
     if (Latitud1.value.length > 10) {
         errorLatitud1.textContent = "No mas de 10 caracteres";
