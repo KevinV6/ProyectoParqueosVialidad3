@@ -49,6 +49,7 @@ namespace ProyectoVialidadASP.Models
             UrlImage = urlImage;
             NameImage = nameImage;
         }
+        
         /// <summary>
         /// Update
         /// </summary>
@@ -61,7 +62,9 @@ namespace ProyectoVialidadASP.Models
         /// <param name="parkingSpaces"></param>
         /// <param name="price"></param>
         /// <param name="description"></param>
-        public Location(string idLocation, char statusLocation, string name, string nameStreet, string latitude, string longitude, byte parkingSpaces, string price, string description)
+        /// <param name="urlImage"></param>
+        /// <param name="nameImage"></param>
+        public Location(string idLocation, char statusLocation, string name, string nameStreet, string latitude, string longitude, byte parkingSpaces, string price, string description, string urlImage, string nameImage)
         {
             IdLocation = idLocation;
             StatusLocation = statusLocation;
@@ -72,6 +75,8 @@ namespace ProyectoVialidadASP.Models
             ParkingSpaces = parkingSpaces;
             Price = price;
             Description = description;
+            UrlImage = urlImage;
+            NameImage = nameImage;
         }
     }
 }

@@ -112,9 +112,28 @@ namespace ProyectoVialidadASP.Controllers
 
         }
 
-        public ActionResult UpdateLocationRedirect(FormCollection datos)
+        public async Task<ActionResult> UpdateLocationRedirect(FormCollection datos, HttpPostedFileBase file)
         {
-            Location location = new Location(datos["txtId"], char.Parse(datos["txtStatus"]), datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"]);
+            Location location = new Location();
+            File_model fm = new File_model();
+            FileStream stream;
+            if (file != null)
+            {
+                string path = Path.Combine(Server.MapPath("~/Imagen/ImgFile/"), file.FileName);
+                file.SaveAs(path);
+                stream = new FileStream(Path.Combine(path), FileMode.Open);
+                Task<string> linkImage = null;
+                await Task.Run(() => linkImage = fm.Upload(stream, file.FileName));
+                location = new Location(datos["txtId"], char.Parse(datos["txtStatus"]), datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"], linkImage.Result, file.FileName);
+            }
+            else
+            {
+                string UrlImage = datos["txtUrlImg"];
+                string nameImage = datos["txtNameImg"];
+                location = new Location(datos["txtId"], char.Parse(datos["txtStatus"]), datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"], UrlImage, nameImage);
+
+            }
+
             Location_model lm = new Location_model();
             lm.UpdateLocationFromFirebaseRedirect(location);
 

@@ -22,7 +22,7 @@
 </head>
 <body>
 
-    <form action="/Locations/UpdateLocationRedirect" method="post">
+    <form action="/Locations/UpdateLocationRedirect" method="post" enctype="multipart/form-data">
         <section>
             <div class="container">
                 <h2>Modificar Parqueo</h2>
@@ -89,7 +89,9 @@
                         <div class="inputBox textarea">
                             <input hidden="hidden" type="text" name="txtId" value="@Model.IdLocation">
                             <input hidden="hidden" type="text" name="txtStatus" value="@Model.StatusLocation">
-                            <input type="file">
+                            <input hidden="hidden" type="text" name="txtUrlImg" value="@Model.UrlImage">
+                            <input hidden="hidden" type="text" name="txtNameImg" value="@Model.NameImage">
+                            <input type="file" name="file" value="@Model.NameImage">
                             <span class="text">Descripción</span>
                             <span class="line"></span>
                         </div>
