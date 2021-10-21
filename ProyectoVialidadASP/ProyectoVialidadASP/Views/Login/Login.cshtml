@@ -10,51 +10,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login </title>
-    <link rel="stylesheet" type="text/css" href="~/Style/StyleIndex/SLogin.css">
-    <script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Style/StyleIndex/SLogin2.css">
 
-        //function SoloLetras(e) {
-        //    key = e.keyCode || e.which;
-        //    teclado = String.formCharCode(key).toLowerCase;
-        //    letras = " abcdefghijklmnñopqrstuvwxyz";
-        //    especiales = "8-37-38-46-164";
-
-        //    tecladoEspecial = false;
-
-        //    for (var i in especiales ) {
-        //        if (key == especiales[i]) {
-        //            tecladoEspecial = true; break;
-        //        }
-        //    }
-        //    if (letras.indexOf(teclado) == -1 && !tecladoEspecial) {
-        //        return false;
-        //    }
-        //}
-
-    </script>
 </head>
 <body>
-    <form action="/Login/Validar" method="post" id="formulario">
-        <div class="form">
-            <h2>Inicio de Sesion</h2>
-            <div class="input">
-                <div class="inputBox">
-                    <label>Nombre de Usuario</label>
-                    <label style="color:red" name="ERROR" id="error1">@ViewBag.MessageUser</label>
-                    <input type="text" name="userText" id="userText" placeholder="ingrese su usuario" required>
-                </div>
-                <div class="inputBox">
-                    <label>Contraseña</label>
-                    <label style="color:red" name="ERROR" id="error2">@ViewBag.MessagePass</label>
-                    <input type="password" name="passText" id="passText" placeholder="ingrese su constraseña" required>
-                </div>
-                <div class="inputBox1">
-                    <input type="submit" name="" value="Iniciar Sesion">
-                </div>
-                <br>
-                <label>No existen usuarios habilitados</label>
-            </div>
+
+    <img class="wave" src="~/Imagen/ImgHome/wave.png">
+    <div class="container">
+        <div class="img">
+            <img src="~/Imagen/ImgHome/img.png">
         </div>
-    </form>
+        <div class="login-content">
+            <form action="/Login/Validar" method="post" id="formulario">
+                <img src="~/Imagen/ImgHome/user.png">
+                <h2 class="title">Bienvenido</h2>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Nombre de Usuario</h5>
+                        <label style="color:red" name="ERROR" id="error1">@ViewBag.MessageUser</label>
+                        <input type="text" name="userText" class="input">
+                    </div>
+                </div>
+                <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Contraseña</h5>
+
+                        <input type="password" name="passText" class="input">
+                    </div>
+                </div>
+                <label style="color:red" name="ERROR" id="error2">@ViewBag.MessagePass</label>
+                <input type="submit" class="btn" value="Iniciar Sesión">
+            </form>
+        </div>
+    </div>
+    <script src="~/Js/JLogin.js"></script>
+
 </body>
 </html>
