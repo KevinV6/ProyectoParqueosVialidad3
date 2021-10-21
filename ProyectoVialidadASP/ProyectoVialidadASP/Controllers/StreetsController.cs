@@ -120,11 +120,30 @@ namespace ProyectoVialidadASP.Controllers
 
         }
 
-        public ActionResult UpdateStreetsRedirect(FormCollection datos)
+        public async Task<ActionResult> UpdateStreetsRedirect(FormCollection datos, HttpPostedFileBase file)
         {
             string cutPrograming = datos["FProgramacion"];
             string programmingDate = cutPrograming.Substring(0, 10);
-            Street street = new Street(datos["txtId"], char.Parse(datos["txtStatus"]), datos["NCalle"], datos["NLugar"], datos["Descripcion"], programmingDate, datos["TiempoI"], datos["TiempoF"], datos["Latitud1"], datos["Longitud1"], datos["Latitud2"], datos["Longitud2"]);
+
+            File_model fm = new File_model();
+            FileStream stream;
+            Street street = new Street();
+            if (file != null)
+            {
+                string path = Path.Combine(Server.MapPath("~/Imagen/ImgFile/"), file.FileName);
+                file.SaveAs(path);
+                stream = new FileStream(Path.Combine(path), FileMode.Open);
+                Task<string> linkImage = null;
+                await Task.Run(() => linkImage = fm.Upload(stream, file.FileName));
+                street = new Street(datos["txtId"], char.Parse(datos["txtStatus"]), datos["NCalle"], datos["NLugar"], datos["Descripcion"], programmingDate, datos["TiempoI"], datos["TiempoF"], datos["Latitud1"], datos["Longitud1"], datos["Latitud2"], datos["Longitud2"], linkImage.Result, file.FileName);
+            }
+            else
+            {
+                string UrlImage = datos["txtUrlImg"];
+                string nameImage = datos["txtNameImg"];
+                street = new Street(datos["txtId"], char.Parse(datos["txtStatus"]), datos["NCalle"], datos["NLugar"], datos["Descripcion"], programmingDate, datos["TiempoI"], datos["TiempoF"], datos["Latitud1"], datos["Longitud1"], datos["Latitud2"], datos["Longitud2"], UrlImage, nameImage);
+            }
+            
             Street_model sm = new Street_model();
             sm.UpdateStreetFromFirebaseRedirect(street);
 

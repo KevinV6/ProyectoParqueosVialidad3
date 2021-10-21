@@ -22,118 +22,126 @@
 </head>
 <body>
     
-	<form action="/Streets/UpdateStreetsRedirect" method="post">
+	<form action="/Streets/UpdateStreetsRedirect" method="post" enctype="multipart/form-data">
 		<section>
-			<div class="container">
-				<h2>Modificar Calle No Disponibles</h2>
-				<label style="color:red" name="ERROR" id="error"></label>
+            <div class="container">
+                <h2>Modificar Calle No Disponibles</h2>
+                <label style="color:red" name="ERROR" id="error"></label>
 
-				<div class="row100">
-					<div class="col">
-						<div class="inputBox">
-							<input type="text" name="NLugar" id="" value="@Model.Name" required>
-							<span class="text">Nombre del lugar</span>
-							<span class="line"></span>
-						</div>
-					</div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="NLugar" id="" value="@Model.Name" required>
+                            <span class="text">Nombre del lugar</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
 
-				</div>
-				<div class="row100">
-					<div class="col">
-						<div class="inputBox">
-							<input type="text" name="NCalle" value="@Model.SiteStreet" id="" required>
-							<span class="text">Nombres de las calles</span>
-							<span class="line"></span>
-						</div>
-					</div>
-					<div class="col">
-						<div class="inputBox">
-							<input type="text" name="Descripcion" value="@Model.Description" id="" required>
-							<span class="text">Descripcion</span>
-							<span class="line"></span>
-						</div>
-					</div>
-				</div>
-				<div class="row100">
-					<div class="col">
-						<div class="inputBox">
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="NCalle" value="@Model.SiteStreet" id="" required>
+                            <span class="text">Nombres de las calles</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
 
-							<span class="text">Fecha de Programacion</span>
-						</div>
-					</div>
-					<div class="col">
-						<div class="inputBox">
-							<input type="date" name="FProgramacion" value="@Model.ProgrammingDate" id="" required>
+                            <span class="text">Fecha de Programacion</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="date" name="FProgramacion" value="@Model.ProgrammingDate" id="" required>
 
-							<span class="line"></span>
-						</div>
-					</div>
-				</div>
-				<div class="row100">
-					<div class="col">
-						<div class="inputBox">
-							<input type="text" name="TiempoI" id="" value="@Model.StartTime" required>
-							<span class="text">Tiempo Inicio</span>
-							<span class="line"></span>
-						</div>
-					</div>
-					<div class="col">
-						<div class="inputBox">
-							<input type="text" name="TiempoF" value="@Model.EndTime" id="" required>
-							<span class="text">Tiempo Final</span>
-							<span class="line"></span>
-						</div>
-					</div>
-				</div>
-				<h3>Punto de Inicio</h3>
-				<div class="row100">
-					<div class="col">
-						<div class="inputBox">
-							<input type="text" name="Latitud1" value="@Model.InitialLatitude" id="" required>
-							<span class="text">Latitud</span>
-							<span class="line"></span>
-						</div>
-					</div>
-					<div class="col">
-						<div class="inputBox">
-							<input type="text" name="Longitud1" value="@Model.InitialLongitude" id="" required>
-							<span class="text">Longitud</span>
-							<span class="line"></span>
-						</div>
-					</div>
-				</div>
-				<h3>Punto de Cierre</h3>
-				<div class="row100">
-					<div class="col">
-						<div class="inputBox">
-							<input type="text" name="Latitud2" value="@Model.EndLatitude" id="" required>
-							<span class="text">Latitud</span>
-							<span class="line"></span>
-						</div>
-					</div>
-					<div class="col">
-						<div class="inputBox">
-							<input type="text" name="Longitud2" value="@Model.EndLongitude" id="" required>
-							<span class="text">Longitud</span>
-							<span class="line"></span>
-						</div>
-					</div>
-				</div>
-				<input hidden="hidden" type="text" name="txtId" value="@Model.IdStreet">
-				<input hidden="hidden" type="text" name="txtStatus" value="@Model.StatusStreet">
-				<div class="row100">
-					 
-					<div class="col">
-						<input type="submit" value="Programar">
-					</div>
-					<div class="col">
-						<div class="colb">
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="TiempoI" id="" value="@Model.StartTime" required>
+                            <span class="text">Tiempo Inicio</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="TiempoF" value="@Model.EndTime" id="" required>
+                            <span class="text">Tiempo Final</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <h3>Punto de Inicio</h3>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="Latitud1" value="@Model.InitialLatitude" id="" required>
+                            <span class="text">Latitud</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="Longitud1" value="@Model.InitialLongitude" id="" required>
+                            <span class="text">Longitud</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <h3>Punto de Cierre</h3>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="Latitud2" value="@Model.EndLatitude" id="" required>
+                            <span class="text">Latitud</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="Longitud2" value="@Model.EndLongitude" id="" required>
+                            <span class="text">Longitud</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox textarea">
+                            <textarea required id="description" name="Descripcion">@Model.Description</textarea>
+                            <span class="text">Descripción</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox textarea">
+                            <input hidden="hidden" type="text" name="txtId" value="@Model.IdStreet">
+                            <input hidden="hidden" type="text" name="txtStatus" value="@Model.StatusStreet">
+                            <input hidden="hidden" type="text" name="txtUrlImg" value="@Model.UrlImage">
+                            <input hidden="hidden" type="text" name="txtNameImg" value="@Model.NameImage">
+                            <input type="file" accept="image/png,image/jpeg,image/jpg" value="@Model.NameImage" name="file">
+                            <span class="text">Imagen</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row100">
 
-							<a href="/Streets/StreetsList" class="btnC">Cancelar</a>
-						</div>
-					</div>
-				</div>
-			</div>
+                    <div class="col">
+                        <div class="colb">
+                            <input type="submit" value="Programar">
+                            <a href="/Streets/StreetsList" class="btnC">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 		</section>
 	</form>
     
