@@ -263,6 +263,7 @@
     <Content Include="Js\ValidacionStreet.js" />
     <Content Include="Style\StyleIndex\SIndex.css" />
     <Content Include="Style\StyleIndex\SLocationList.css" />
+    <Content Include="Style\StyleIndex\SLocationList2.css" />
     <Content Include="Style\StyleIndex\SLocations.css" />
     <Content Include="Style\StyleIndex\SLogin2.css" />
     <Content Include="Style\StyleIndex\SMap.css" />

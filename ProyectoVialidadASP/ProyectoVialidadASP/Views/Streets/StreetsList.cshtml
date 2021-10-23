@@ -2,6 +2,10 @@
 
 @{
     Layout = null;
+    DateTime fechaDato = default(DateTime);
+    TimeSpan HoraFinal = default(TimeSpan);
+    DateTime FechAc = DateTime.Now.Date;
+    DateTime timeNow = DateTime.Now;
 }
 
 <!DOCTYPE html>
@@ -18,7 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-    <link href="~/Style/StyleIndex/SLocationList.css" rel="stylesheet" />
+    <link href="~/Style/StyleIndex/SLocationList2.css" rel="stylesheet" />
 </head>
 <body>
     <div>
@@ -54,51 +58,62 @@
                             </thead>
                             @foreach (var item in Model)
                             {
-                                <tbody>
-                                    <tr>
-                                        <td><img class="img" src="@item.UrlImage" /></td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.StartTime)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.StatusStreet)
-                                        </td>
-                                        @if (item.StatusStreet == 'F')
-                                        {
+                                fechaDato = Convert.ToDateTime(item.ProgrammingDate).Date;
+
+                                HoraFinal = TimeSpan.Parse(item.EndTime);
+                                fechaDato = fechaDato + HoraFinal;
+                                if (fechaDato >= FechAc)//&& (fechaDato.Hour >= timeNow.Hour && fechaDato.Minute >= timeNow.Minute)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            <td><img class="img" src="@item.UrlImage" /></td>
                                             <td>
-                                                <form action="/Streets/UpdateStreets" method="post">
-                                                    <input type="text" name="txtidedit" value="@item.IdStreet" hidden />
-                                                    <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
-
-                                                </form>
-                                                <form action="/Streets/EnableStreet" method="post">
-                                                    <input type="text" name="txtdelete" value="@item.IdStreet" hidden />
-                                                    <button type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE876;</i> </button>
-
-                                                </form>
+                                                @Html.DisplayFor(modelItem => item.Name)
                                             </td>
-                                        }
-                                        else
-                                        {
                                             <td>
-                                                <form action="/Streets/UpdateStreets" method="post">
-                                                    <input type="text" name="txtidedit" value="@item.IdStreet" hidden />
-                                                    <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
-
-                                                </form>
-                                                <form action="/Streets/inhabilitarCalle" method="post">
-                                                    <input type="text" name="txtdelete" value="@item.IdStreet" hidden />
-                                                    <button type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i> </button>
-
-                                                </form>
-
+                                                @fechaDato.ToString("dddd dd MMMM")
+                                                <br />
+                                                @item.StartTime - @item.EndTime
                                             </td>
-                                        }
-                                    </tr>
-                                </tbody>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.StatusStreet)
+                                            </td>
+                                            @if (item.StatusStreet == 'F')
+                                            {
+                                                <td>
+                                                    <form action="/Streets/UpdateStreets" method="post">
+                                                        <input type="text" name="txtidedit" value="@item.IdStreet" hidden />
+                                                        <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
+
+                                                    </form>
+                                                    <form action="/Streets/EnableStreet" method="post">
+                                                        <input type="text" name="txtdelete" value="@item.IdStreet" hidden />
+                                                        <button type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE876;</i> </button>
+
+                                                    </form>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <form action="/Streets/UpdateStreets" method="post">
+                                                        <input type="text" name="txtidedit" value="@item.IdStreet" hidden />
+                                                        <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
+
+                                                    </form>
+                                                    <form action="/Streets/inhabilitarCalle" method="post">
+                                                        <input type="text" name="txtdelete" value="@item.IdStreet" hidden />
+                                                        <button type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i> </button>
+
+                                                    </form>
+
+                                                </td>
+                                            }
+                                        </tr>
+                                    </tbody>
+                                }
+
+
                             }
                         </table>
                     </div>
