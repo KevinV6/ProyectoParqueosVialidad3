@@ -86,7 +86,9 @@ table.table td:last-child i {
     font-size: 22px;
     margin: 0 5px;
 }
-
+table.table td .btn{
+    margin:5px 0;
+}
 table.table td a {
     font-weight: bold;
     color: #566787;

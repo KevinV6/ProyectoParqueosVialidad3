@@ -42,7 +42,7 @@
                                     <h2>Lista <b>Calle No disponibles</b></h2>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="/Streets/Streets" class="btn btn-success"><i class="material-icons">&#xE147;</i>Add</a>
+                                    <a href="/Streets/Streets" class="btn btn-primary"><i class="material-icons">&#xE147;</i>Añadir</a>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
 
                                 HoraFinal = TimeSpan.Parse(item.EndTime);
                                 fechaDato = fechaDato + HoraFinal;
-                                if (fechaDato >= FechAc)//&& (fechaDato.Hour >= timeNow.Hour && fechaDato.Minute >= timeNow.Minute)
+                                if (fechaDato >= FechAc && (item.StatusStreet == 'V'))//&& (fechaDato.Hour >= timeNow.Hour && fechaDato.Minute >= timeNow.Minute)
                                 {
                                     <tbody>
                                         <tr>
@@ -76,7 +76,15 @@
                                                 @item.StartTime - @item.EndTime
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.StatusStreet)
+
+                                                @if (item.StatusStreet == 'V')
+                                                {
+                                                    <p>Activo</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>Inactivo</p>
+                                                }
                                             </td>
                                             @if (item.StatusStreet == 'F')
                                             {
@@ -98,12 +106,16 @@
                                                 <td>
                                                     <form action="/Streets/UpdateStreets" method="post">
                                                         <input type="text" name="txtidedit" value="@item.IdStreet" hidden />
-                                                        <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
+                                                        <button type="submit" class="edit btn btn-warning">
+                                                            <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                                                        </button>
 
                                                     </form>
                                                     <form action="/Streets/inhabilitarCalle" method="post">
                                                         <input type="text" name="txtdelete" value="@item.IdStreet" hidden />
-                                                        <button type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i> </button>
+                                                        <button type="submit" class="delete btn btn-danger">
+                                                            <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                                        </button>
 
                                                     </form>
 

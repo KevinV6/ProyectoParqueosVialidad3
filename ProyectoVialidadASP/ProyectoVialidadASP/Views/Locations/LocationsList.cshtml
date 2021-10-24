@@ -38,7 +38,7 @@
                                     <h2>Lista <b>Parqueos</b></h2>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="/Locations/Locations" class="btn btn-success"><i class="material-icons">&#xE147;</i>Add</a>
+                                    <a href="/Locations/Locations" class="btn btn-primary"><i class="material-icons">&#xE147;</i>Añadir</a>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,14 @@
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.StatusLocation)
+                                            @if (item.StatusLocation == 'V')
+                                            {
+                                                <p>Activo</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Inactivo</p>
+                                            }
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.ParkingSpaces)
@@ -76,12 +83,16 @@
                                             <td>
                                                 <form action="/Locations/UpdateLocation" method="post">
                                                     <input type="text" name="txtidedit" value="@item.IdLocation" hidden />
-                                                    <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
+                                                    <button type="submit" class="edit btn btn-warning">
+                                                        <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                                                    </button>
 
                                                 </form>
                                                 <form action="/Locations/EnableLocation" method="post">
                                                     <input type="text" name="txtdelete" value="@item.IdLocation" hidden />
-                                                    <button type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE876;</i> </button>
+                                                    <button type="submit" class="delete btn btn-success">
+                                                        <i class="material-icons" data-toggle="tooltip" title="Activar">&#xE876;</i>
+                                                    </button>
 
                                                 </form>
 
@@ -93,12 +104,16 @@
                                             <td>
                                                 <form action="/Locations/UpdateLocation" method="post">
                                                     <input type="text" name="txtidedit" value="@item.IdLocation" hidden />
-                                                    <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
+                                                    <button type="submit" class="edit btn btn-warning">
+                                                        <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                                                    </button>
 
                                                 </form>
                                                 <form action="/Locations/inhabilitarParqueo" method="post">
                                                     <input type="text" name="txtdelete" value="@item.IdLocation" hidden />
-                                                    <button type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i> </button>
+                                                    <button type="submit" class="delete btn btn-danger">
+                                                        <i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i>
+                                                    </button>
 
                                                 </form>
 
