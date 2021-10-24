@@ -31,7 +31,7 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="NLugar" id="" value="@Model.Name" required>
+                            <input type="text" name="nameSite" id="" value="@Model.Name" required>
                             <span class="text">Nombre del lugar</span>
                             <span class="line"></span>
                         </div>
@@ -41,7 +41,7 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="NCalle" value="@Model.SiteStreet" id="" required>
+                            <input type="text" name="nameStreet" value="@Model.SiteStreet" id="" required>
                             <span class="text">Nombres de las calles</span>
                             <span class="line"></span>
                         </div>
@@ -49,14 +49,14 @@
                 </div>
                 <div class="row100">
                     <div class="col">
-                        <div class="inputBox">
+                        <div class="inputBox">code
 
                             <span class="text">Fecha de Programacion</span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="date" name="FProgramacion" value="@Model.ProgrammingDate" id="" required>
+                            <input type="date" name="programmingDate" value="@Model.ProgrammingDate" id="" required>
 
                             <span class="line"></span>
                         </div>
@@ -65,14 +65,14 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="TiempoI" id="" value="@Model.StartTime" required>
+                            <input type="text" name="initialTime" id="" value="@Model.StartTime" required>
                             <span class="text">Tiempo Inicio</span>
                             <span class="line"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="TiempoF" value="@Model.EndTime" id="" required>
+                            <input type="text" name="endTime" value="@Model.EndTime" id="" required>
                             <span class="text">Tiempo Final</span>
                             <span class="line"></span>
                         </div>
@@ -82,14 +82,14 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="Latitud1" value="@Model.InitialLatitude" id="" required>
+                            <input type="text" name="latitudeOne" value="@Model.InitialLatitude" id="" required>
                             <span class="text">Latitud</span>
                             <span class="line"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="Longitud1" value="@Model.InitialLongitude" id="" required>
+                            <input type="text" name="lenghtOne" value="@Model.InitialLongitude" id="" required>
                             <span class="text">Longitud</span>
                             <span class="line"></span>
                         </div>
@@ -99,14 +99,14 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="Latitud2" value="@Model.EndLatitude" id="" required>
+                            <input type="text" name="latitudeTwo" value="@Model.EndLatitude" id="" required>
                             <span class="text">Latitud</span>
                             <span class="line"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="Longitud2" value="@Model.EndLongitude" id="" required>
+                            <input type="text" name="lenghtTwo" value="@Model.EndLongitude" id="" required>
                             <span class="text">Longitud</span>
                             <span class="line"></span>
                         </div>
@@ -115,7 +115,7 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox textarea">
-                            <textarea required id="description" name="Descripcion">@Model.Description</textarea>
+                            <textarea required id="description" name="description">@Model.Description</textarea>
                             <span class="text">Descripción</span>
                             <span class="line"></span>
                         </div>

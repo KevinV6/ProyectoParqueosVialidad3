@@ -252,7 +252,9 @@
     <Content Include="Imagen\icoBloqueado.png" />
     <Content Include="Imagen\ImgHome\car.jpg" />
     <Content Include="Imagen\ImgHome\close.png" />
+    <Content Include="Imagen\ImgHome\curve.png" />
     <Content Include="Imagen\ImgHome\img.png" />
+    <Content Include="Imagen\ImgHome\loginR.png" />
     <Content Include="Imagen\ImgHome\menu.png" />
     <Content Include="Imagen\ImgHome\user.png" />
     <Content Include="Imagen\ImgHome\wave.png" />

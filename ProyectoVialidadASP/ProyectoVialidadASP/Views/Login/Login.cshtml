@@ -17,13 +17,13 @@
 </head>
 <body>
 
-    <img class="wave" src="~/Imagen/ImgHome/wave.png">
+    <img class="wave" src="~/Imagen/ImgHome/curve.png">
     <div class="container">
         <div class="img">
-            <img src="~/Imagen/ImgHome/img.png">
+            <img src="~/Imagen/ImgHome/loginR.png">
         </div>
         <div class="login-content">
-            <form action="/Login/Validar" method="post" id="formulario">
+            <form action="/Login/Validate" method="post" id="formulario">
                 <img src="~/Imagen/ImgHome/user.png">
                 <h2 class="title">Bienvenido</h2>
                 <div class="input-div one">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="div">
                         <h5>Nombre de Usuario</h5>
-                        <label style="color:red" name="ERROR" id="error1">@ViewBag.MessageUser</label>
+                        <label style="color:red">@ViewBag.MessageUser</label>
                         <input type="text" name="userText" class="input">
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                         <input type="password" name="passText" class="input">
                     </div>
                 </div>
-                <label style="color:red" name="ERROR" id="error2">@ViewBag.MessagePass</label>
+                <label style="color:red">@ViewBag.MessagePass</label>
                 <input type="submit" class="btn" value="Iniciar Sesión">
             </form>
         </div>

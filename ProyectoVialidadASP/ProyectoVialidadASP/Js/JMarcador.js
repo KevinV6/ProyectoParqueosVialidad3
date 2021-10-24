@@ -12,7 +12,7 @@
         }
     }
 }
-//Maps
+//Maps estatico
 /*
 function initMap() {
     const ubicacion = new Localizacion(() => {

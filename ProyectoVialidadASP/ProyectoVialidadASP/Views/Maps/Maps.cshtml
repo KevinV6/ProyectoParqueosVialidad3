@@ -10,148 +10,126 @@
     <meta charset="utf-8">
     <title>Maps</title>
     <link href="~/Style/StyleIndex/SMap.css" rel="stylesheet" />
-    
+
 </head>
 <body>
     <div>
         <!-- Header -->
         @RenderPage("~/Views/Home/Header.cshtml", new { ProcessInfo = 2 })
-        <!-- Fin Header -->
+        <!-- Header end-->
     </div>
-    @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243661.6117952393!2d-66.31469195396852!3d-17.401577949704023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e375daaa9e2617%3A0x1ca207456270d502!2sCercado!5e0!3m2!1ses!2sbo!4v1632752787119!5m2!1ses!2sbo" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>*@
-    
+    <!-- Map  -->
     <div id="map"></div>
-    <div id="lol"></div>
+    <!-- Map end -->
     <script async
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtFqDJ3PeclA4FbDx9-uYvhil8NV1Mu7E&callback=initMap">
     </script>
     <script src="~/Js/JMarcador.js"></script>
     <script>
 
-        /////////
+        //Funtion use the google maps
         function initMap() {
             var ubicacion = new Localizacion(() => {
 
                 var myLatLng = { lat: ubicacion.latitude, lng: ubicacion.longitude };
 
-
                 var options = {
                     center: myLatLng,
                     zoom: 14
-
                 }
-                var map = document.getElementById('map');
+                var mapHtml = document.getElementById('map');
+                var map = new google.maps.Map(mapHtml, options);
 
-                var mapa = new google.maps.Map(map, options);
+                //#region Parking Data
+                var requestLocation = new XMLHttpRequest()
+                requestLocation.open("GET", "@Url.Action("GetAllLocation","Maps")")
+                requestLocation.onload = function () {
+                    var json = requestLocation.responseText
+                    var contentJson = JSON.parse(json);
+                    var row = contentJson[0];
+                    var rowPosition = Object.keys(row);
+                    var numRegisters  = contentJson.length;
 
-                //**/
-                var request = new XMLHttpRequest()
-                request.open("GET", "@Url.Action("GetAllLocation","Maps")")
-                request.onload = function () {
-                    var json = request.responseText
-                    var ContenidoJson = JSON.parse(json);
-                    var fila = ContenidoJson[0];
-                    var campos = Object.keys(fila);
-                    var NumeroRegistros = ContenidoJson.length;
+                    let pointMarker = [];
+                    var informationMarker = [];
+                    for (var a = 0; a < numRegisters ; a++) {
+                        row = contentJson[a];
 
-
-
-                    let marcadorM = [];
-                    var informacionM = [];
-                    for (var a = 0; a < NumeroRegistros; a++) {
-                        fila = ContenidoJson[a];
-
-                        var Coordenadas = { lat: Number(fila[campos[4]]), lng: Number(fila[campos[5]]) };
-                        //
-                        var Contenido = '<h4>' + fila[campos[2]] + '</h4>' + '<p>' + fila[campos[8]] + '</p>';
-                        marcadorM[fila[campos[8]]] = new google.maps.Marker({
-                            position: Coordenadas,
-                            map: mapa,
-                            title: fila[campos[2]]
+                        var Coordinates = { lat: Number(row[rowPosition[4]]), lng: Number(row[rowPosition[5]]) };
+                        //#region marker with your data
+                        var contentMarker = '<h4>' + row[rowPosition[2]] + '</h4>' + '<p>' + row[rowPosition[8]] + '</p>';
+                        pointMarker[row[rowPosition[8]]] = new google.maps.Marker({
+                            position: Coordinates,
+                            map: map,
+                            title: row[rowPosition[2]]
                         });
-                        console.log(fila[campos[8]])
-
-                        informacionM[fila[campos[8]]] = new google.maps.InfoWindow({
-                            content: Contenido
-                        });
-                        informacionM[fila[campos[8]]].open(map, marcadorM[fila[campos[8]]]);
-                        //
-                    }
-
-                }
-                //
-                request.send()
-
-                var request2 = new XMLHttpRequest()
-                request2.open("GET", "@Url.Action("GetAllStreet", "Maps")")
-                request2.onload = function () {
-                    var json = request2.responseText
-                    //console.log(json);
-
-                    //
-                    var ContenidoJson = JSON.parse(json);
-                    var fila = ContenidoJson[0];
-                    var campos = Object.keys(fila);
-                    var NumeroRegistros = ContenidoJson.length;
-
-                    /*
-                    var contenido = "<h1><h1/>";
-                    var campos = Object.keys(fila);
-                    var nCampos = campos.length;
-                    for (var i = 0; i < nCampos; i++) {
-                        contenido += "<p>";
-                        contenido += campos[i];
-                        contenido += "<p/>";
-
-                    }
-                    document.getElementById("lol").innerHTML = contenido;
-                    */
-                    let marcadorM = [];
-                    let marcadorM2 = [];
-                    var informacionM = [];
-                    for (var a = 0; a < NumeroRegistros; a++) {
-                        fila = ContenidoJson[a];
-
-                        var MarcadorInicial = { lat: Number(fila[campos[8]]), lng: Number(fila[campos[9]]) };
-                        var MarcadorFinal = { lat: Number(fila[campos[10]]), lng: Number(fila[campos[11]]) };
-                        //console.log(MarcadorInicial);
-
-                        var fechaFirebase = fila[campos[5]];
-                        var FechaData = new Date(fechaFirebase.substr(0, 4), fechaFirebase.substr(5, 2)-1, fechaFirebase.substr(8, 2));
-                        var fechaAc = new Date;
-                        //console.log(FechaData + "lol" + fila[campos[5]]+fechaAc);
-
-                        if (FechaData > fechaAc) {
-                            //marcado inicio
-                            var Contenido = '<h4>' + fila[campos[3]] + '</h4>' + '<p>' + fila[campos[4]] + '</p>';
-                            marcadorM[fila[campos[2]]] = new google.maps.Marker({
-                                position: MarcadorInicial,
-                                map: mapa,
-                                title: fila[campos[3]]
-                            });
-                            marcadorM[fila[campos[2]]].setIcon('/Imagen/icoBloqueado.png');
-                            marcadorM2[fila[campos[8]]] = new google.maps.Marker({
-                                position: MarcadorFinal,
-                                map: mapa,
-                                title: fila[campos[3]]
-                            });
-                            marcadorM2[fila[campos[8]]].setIcon('/Imagen/icoBloqueado.png');
-                            var line = new google.maps.Polyline({ path: [MarcadorInicial, MarcadorFinal], map: mapa })
-
-                            console.log(fila[campos[8]])
-
-                            informacionM[fila[campos[4]]] = new google.maps.InfoWindow({
-                                content: Contenido
-                            });
-                            informacionM[fila[campos[4]]].open(map, marcadorM2[fila[campos[8]]]);
-                        //marcado fin
-                        }
                         
-
+                        informationMarker[row[rowPosition[8]]] = new google.maps.InfoWindow({
+                            content: contentMarker
+                        });
+                        informationMarker[row[rowPosition[8]]].open(mapHtml, pointMarker[row[rowPosition[8]]]);
+                        //#endregion
                     }
-                    //
                 }
-                request2.send()
+                requestLocation.send()
+                //#endregion
+
+                
+                //#region Data Streets not available
+                var requestStreet = new XMLHttpRequest()
+                requestStreet.open("GET", "@Url.Action("GetAllStreet", "Maps")")
+                requestStreet.onload = function () {
+                    var json = requestStreet.responseText
+                    
+                    var contentJson = JSON.parse(json);
+                    var row = contentJson[0];
+                    var rowPosition = Object.keys(row);
+                    var numRegisters = contentJson.length;
+
+                    let pointMarker = [];
+                    let markerTwo = [];
+                    var informationMarker = [];
+                    for (var a = 0; a < numRegisters; a++) {
+                        row = contentJson[a];
+
+                        var initialMarker = { lat: Number(row[rowPosition[8]]), lng: Number(row[rowPosition[9]]) };
+                        var finalMarker = { lat: Number(row[rowPosition[10]]), lng: Number(row[rowPosition[11]]) };
+
+
+                        var dateFirebase = row[rowPosition[5]];
+                        var dateData = new Date(dateFirebase.substr(0, 4), dateFirebase.substr(5, 2) - 1, dateFirebase.substr(8, 2));
+                        var currentDate = new Date;
+
+                        if (dateData > currentDate) {
+
+                            //#region marker Streets not available
+                            var contentMarkerTwo = '<h4>' + row[rowPosition[3]] + '</h4>' + '<p>' + row[rowPosition[4]] + '</p>';
+                            pointMarker[row[rowPosition[2]]] = new google.maps.Marker({
+                                position: initialMarker,
+                                map: map,
+                                title: row[rowPosition[3]]
+                            });
+                            pointMarker[row[rowPosition[2]]].setIcon('/Imagen/icoBloqueado.png');
+                            markerTwo[row[rowPosition[8]]] = new google.maps.Marker({
+                                position: finalMarker,
+                                map: map,
+                                title: row[rowPosition[3]]
+                            });
+                            markerTwo[row[rowPosition[8]]].setIcon('/Imagen/icoBloqueado.png');
+                            var line = new google.maps.Polyline({ path: [initialMarker, finalMarker], map: map })
+
+                            console.log(row[rowPosition[8]])
+
+                            informationMarker[row[rowPosition[4]]] = new google.maps.InfoWindow({
+                                content: contentMarkerTwo
+                            });
+                            informationMarker[row[rowPosition[4]]].open(mapHtml, markerTwo[row[rowPosition[8]]]);
+                            //#endregion completion of marking
+                        }
+                    }
+                }
+                requestStreet.send()
+                //#endregion Data Streets not available
             })
         }
     </script>

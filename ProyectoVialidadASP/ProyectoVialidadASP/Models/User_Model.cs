@@ -10,19 +10,31 @@ using System.Web;
 
 namespace ProyectoVialidadASP.Models
 {
+    /// <summary>
+    /// Nombre de la aplicación: User_Model
+    /// Nombre del desarrollador:  Nicole Milenka Paredes Medrano
+    /// Fecha de creación: 07/10/2021 
+    /// </summary>
+    /// <param name="datos"></param>
+    /// <param name="file"></param>
+    /// <returns></returns>
+    /// 
     public class User_Model
     {
         //Conexion a Firebase
+        #region Conexion
         IFirebaseConfig config = new FirebaseConfig
         {
             AuthSecret = "F23JUcUtvSmaKQAZh1ZlzSEPL4WQ4wQirbrl3xpT",
             BasePath = "https://proyectovialidadasp-default-rtdb.firebaseio.com/"
         };
         IFirebaseClient client;
+        #endregion
 
+        #region Login
         public bool Login(User u)
         {
-            bool verificado = false;
+            bool verified = false;
 
             client = new FireSharp.FirebaseClient(config);
             FirebaseResponse response = client.Get("Administrators");
@@ -40,12 +52,12 @@ namespace ProyectoVialidadASP.Models
                 password = System.Text.Encoding.Unicode.GetString(decryted);
                 if (item.userName.Equals(u.userName) && password.Equals(u.password))
                 {
-                    verificado = true;
+                    verified = true;
                 }
             }
 
-            return verificado;
+            return verified;
         }
-
+        #endregion
     }
 }

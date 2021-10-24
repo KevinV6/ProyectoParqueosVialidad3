@@ -2,9 +2,9 @@
 
 @{
     Layout = null;
-    DateTime fechaDato = default(DateTime);
-    TimeSpan HoraFinal = default(TimeSpan);
-    DateTime FechAc = DateTime.Now.Date;
+    DateTime dateData = default(DateTime);
+    TimeSpan finalHour = default(TimeSpan);
+    DateTime currentDate = DateTime.Now.Date;
     DateTime timeNow = DateTime.Now;
 }
 
@@ -58,11 +58,11 @@
                             </thead>
                             @foreach (var item in Model)
                             {
-                                fechaDato = Convert.ToDateTime(item.ProgrammingDate).Date;
+                                dateData = Convert.ToDateTime(item.ProgrammingDate).Date;
 
-                                HoraFinal = TimeSpan.Parse(item.EndTime);
-                                fechaDato = fechaDato + HoraFinal;
-                                if (fechaDato >= FechAc && (item.StatusStreet == 'V'))//&& (fechaDato.Hour >= timeNow.Hour && fechaDato.Minute >= timeNow.Minute)
+                                finalHour = TimeSpan.Parse(item.EndTime);
+                                dateData = dateData + finalHour;
+                                if (dateData >= currentDate && (item.StatusStreet == 'V'))//&& (dateData.Hour >= timeNow.Hour && dateData.Minute >= timeNow.Minute)
                                 {
                                     <tbody>
                                         <tr>
@@ -71,7 +71,7 @@
                                                 @Html.DisplayFor(modelItem => item.Name)
                                             </td>
                                             <td>
-                                                @fechaDato.ToString("dddd dd MMMM")
+                                                @dateData.ToString("dddd dd MMMM")
                                                 <br />
                                                 @item.StartTime - @item.EndTime
                                             </td>
@@ -90,7 +90,7 @@
                                             {
                                                 <td>
                                                     <form action="/Streets/UpdateStreets" method="post">
-                                                        <input type="text" name="txtidedit" value="@item.IdStreet" hidden />
+                                                        <input type="text" name="txtIdEdit" value="@item.IdStreet" hidden />
                                                         <button type="submit" class="edit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </button>
 
                                                     </form>
@@ -105,13 +105,13 @@
                                             {
                                                 <td>
                                                     <form action="/Streets/UpdateStreets" method="post">
-                                                        <input type="text" name="txtidedit" value="@item.IdStreet" hidden />
+                                                        <input type="text" name="txtIdEdit" value="@item.IdStreet" hidden />
                                                         <button type="submit" class="edit btn btn-warning">
                                                             <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                                         </button>
 
                                                     </form>
-                                                    <form action="/Streets/inhabilitarCalle" method="post">
+                                                    <form action="/Streets/DisableStreet" method="post">
                                                         <input type="text" name="txtdelete" value="@item.IdStreet" hidden />
                                                         <button type="submit" class="delete btn btn-danger">
                                                             <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>

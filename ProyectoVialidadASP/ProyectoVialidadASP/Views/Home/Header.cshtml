@@ -1,20 +1,20 @@
 ﻿
 @{
     Layout = null;
-    string marcado1 = "", marcado2 = "", marcado3 = "", marcado4 = "";
+    string markerOne = "", markerTwo = "", markerThree = "", markerFour = "";
     switch (Page.ProcessInfo)
     {
         case 1:
-            marcado1 = "select";
+            markerOne = "select";
             break;
         case 2:
-            marcado2 = "select";
+            markerTwo = "select";
             break;
         case 3:
-            marcado3 = "select";
+            markerThree = "select";
             break;
         default:
-            marcado4 = "select";
+            markerFour = "select";
             break;
     }
 }
@@ -32,13 +32,13 @@
         <a href="#" class="logo">Card Drop</a>
         <div class="toggle" onclick="toggleMenu();"></div>
         <ul class="menu">
-            <li><a class="@marcado1" href="/Home/Index">Home</a></li>
+            <li><a class="@markerOne" href="/Home/Index">Home</a></li>
 
-            <li><a class="@marcado2" href="/Maps/Maps">Mapa</a></li>
+            <li><a class="@markerTwo" href="/Maps/Maps">Mapa</a></li>
 
-            <li><a class="@marcado3" href="/Locations/LocationsList">Parqueos</a></li>
+            <li><a class="@markerThree" href="/Locations/LocationsList">Parqueos</a></li>
 
-            <li><a class="@marcado4" href="/Streets/StreetsList">Calles no disponibles</a></li>
+            <li><a class="@markerFour" href="/Streets/StreetsList">Calles no disponibles</a></li>
 
             <li><a href="/Login/Logout">Cerrar Sesión</a></li>
         </ul>

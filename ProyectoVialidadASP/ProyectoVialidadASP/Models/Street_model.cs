@@ -10,25 +10,44 @@ using System.Web;
 
 namespace ProyectoVialidadASP.Models
 {
+    /// <summary>
+    /// Nombre de la aplicación: User_Model
+    /// Nombre del desarrollador: Valeria Delgadillo, Juan Jose Encinas
+    /// Fecha de creación: 08/10/2021 
+    /// Fecha de modificación: 15/10/2021 
+    /// </summary>
+    /// <param name="datos"></param>
+    /// <param name="file"></param>
+    /// <returns></returns>
+    /// 
     public class Street_model
     {
+        #region Conexion
         IFirebaseConfig config = new FirebaseConfig
         {
             AuthSecret = "F23JUcUtvSmaKQAZh1ZlzSEPL4WQ4wQirbrl3xpT",
             BasePath = "https://proyectovialidadasp-default-rtdb.firebaseio.com/"
         };
         IFirebaseClient client;
+        #endregion
 
-        public void DesabilitarStreet(Street street)
+        #region Metodo de Deshabilitar
+        public void DisableStreet(Street street)
         {
             client = new FireSharp.FirebaseClient(config);
             FirebaseResponse response = client.Set("Streets/" + street.IdStreet, street);
         }
+        #endregion
+
+        #region Metodo de Habilitar
         public void EnableStreet(Street street)
         {
             client = new FireSharp.FirebaseClient(config);
             FirebaseResponse response = client.Set("Streets/" + street.IdStreet, street);
         }
+        #endregion
+
+        #region Metodo de listar las calles no disponibles
         public List<Street> StreetListView()
         {
             client = new FireSharp.FirebaseClient(config);
@@ -41,7 +60,9 @@ namespace ProyectoVialidadASP.Models
             }
             return list;
         }
+        #endregion
 
+        #region Inserta Datos en FireBase
         public void AddStreetTofirebase(Street street)
         {
             client = new FireSharp.FirebaseClient(config);
@@ -50,21 +71,26 @@ namespace ProyectoVialidadASP.Models
             data.IdStreet = response.Result.name;
             SetResponse setResponse = client.Set("Streets/" + data.IdStreet, data);
         }
+        #endregion
 
+        #region Retorna datos para luego actulizar en firebase
         public Street UpdateStreetFromFirebase(string idStreet)
         {
             client = new FireSharp.FirebaseClient(config);
             FirebaseResponse response = client.Get("Streets/" + idStreet);
-            Street street1 = JsonConvert.DeserializeObject<Street>(response.Body);
+            Street street = JsonConvert.DeserializeObject<Street>(response.Body);
 
-            return street1;
+            return street;
         }
+        #endregion
 
+        #region Actualiza datos en Firebase
         public void UpdateStreetFromFirebaseRedirect(Street street)
         {
             client = new FireSharp.FirebaseClient(config);
             SetResponse response = client.Set("Streets/" + street.IdStreet, street);            
 
         }
+        #endregion
     }
 }

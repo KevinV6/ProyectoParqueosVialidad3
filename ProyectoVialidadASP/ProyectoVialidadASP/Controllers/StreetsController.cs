@@ -12,23 +12,30 @@ using System.Web.Mvc;
 
 namespace ProyectoVialidadASP.Controllers
 {
+    /// <summary>
+    /// Nombre de la aplicación: StreetController
+    /// Nombre del desarrollador:  Daril Alexander Lopez Valverde, Kevin Bautista Coro, Jose Bascope
+    /// Fecha de creación: 29/09/2021 
+    /// Fecha de modficación: 20/10/2021 
+    /// </summary>
+    /// <param name="datos"></param>
+    /// <param name="file"></param>
+    /// <returns>Vista Lugares no disponibles</returns>
+    /// 
     public class StreetsController : Controller
     {
         // GET: Streets
-
-
+        #region Inserta una calle no disponible
         public async Task<ActionResult> Streets(FormCollection datos, HttpPostedFileBase file)
         {
-
-            if (datos["NLugar"] != null)
+            if (datos["nameSite"] != null)
             {
-
-                string cutPrograming = datos["FProgramacion"];
+                string cutPrograming = datos["programmingDate"];
                 string programmingDate = cutPrograming.Substring(0, 10);
 
                 Street street = new Street();
-                Street_model sm = new Street_model();
-                File_model fm = new File_model();
+                Street_model street_Model = new Street_model();
+                File_model file_Model = new File_model();
                 FileStream stream;
                 if (file.ContentLength > 0)
                 {
@@ -36,11 +43,11 @@ namespace ProyectoVialidadASP.Controllers
                     file.SaveAs(path);
                     stream = new FileStream(Path.Combine(path), FileMode.Open);
                     Task<string> linkImage = null;
-                    await Task.Run(() => linkImage = fm.Upload(stream, file.FileName));
+                    await Task.Run(() => linkImage = file_Model.Upload(stream, file.FileName));
                     string b = linkImage.Result;
-                    street = new Street('V', datos["NLugar"], datos["NCalle"], datos["Descripcion"], programmingDate, datos["TiempoI"], datos["TiempoF"], datos["Latitud1"], datos["Longitud1"], datos["Latitud2"], datos["Longitud2"], linkImage.Result, file.FileName);
+                    street = new Street('V', datos["nameSite"], datos["nameStreet"], datos["description"], programmingDate, datos["initialTime"], datos["endTime"], datos["latitudeOne"], datos["lenghtOne"], datos["latitudeTwo"], datos["lenghtTwo"], linkImage.Result, file.FileName);
                 }
-                sm.AddStreetTofirebase(street);
+                street_Model.AddStreetTofirebase(street);
                 return Redirect("StreetsList");
             }
             else
@@ -49,29 +56,37 @@ namespace ProyectoVialidadASP.Controllers
             }
 
         }
-        public ActionResult inhabilitarCalle(FormCollection form)
-        {
-            Street_model lm = new Street_model();
-            Street lo = new Street();
+        #endregion
 
-            lo = lm.UpdateStreetFromFirebase(form["txtdelete"]);
-            lo.StatusStreet = 'F';
-            lm.DesabilitarStreet(lo);
+        #region Metodo de inhabilitar
+        public ActionResult DisableStreet(FormCollection form)
+        {
+            Street_model street_Model = new Street_model();
+            Street street = new Street();
+
+            street = street_Model.UpdateStreetFromFirebase(form["txtdelete"]);
+            street.StatusStreet = 'F';
+            street_Model.DisableStreet(street);
 
             return Redirect("StreetsList");
         }
+        #endregion
+
+        #region Metodo de habilitar
         public ActionResult EnableStreet(FormCollection form)
         {
-            Street_model lm = new Street_model();
-            Street lo = new Street();
+            Street_model street_Model = new Street_model();
+            Street street = new Street();
 
-            lo = lm.UpdateStreetFromFirebase(form["txtdelete"]);
-            lo.StatusStreet = 'V';
-            lm.DesabilitarStreet(lo);
+            street = street_Model.UpdateStreetFromFirebase(form["txtdelete"]);
+            street.StatusStreet = 'V';
+            street_Model.EnableStreet(street);
 
             return Redirect("StreetsList");
         }
+        #endregion
 
+        #region Vista de las calles no disponibles
         public ActionResult StreetsList()
         {
             if (Session["user"] == null && Session["psw"] == null)
@@ -80,52 +95,39 @@ namespace ProyectoVialidadASP.Controllers
             }
             else
             {
-                Street_model lp = new Street_model();
+                Street_model street_Model = new Street_model();
 
-                return View(lp.StreetListView());
+                return View(street_Model.StreetListView());
             }
         }
+        #endregion
 
+        #region Vista de actualizar Calles no disponibles
         public ActionResult UpdateStreets(FormCollection datos)
         {
-            if (datos["NLugar"] != null) //el boton se prime apenas ingresar a la pagina revisar
+            if (Session["user"] == null && Session["psw"] == null)
             {
-                if (Session["user"] == null && Session["psw"] == null)
-                {
-                    return RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    return View();
-                }
+                return RedirectToAction("Login", "Login");
             }
             else
             {
-                if (Session["user"] == null && Session["psw"] == null)
-                {
-                    return RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    Street street = new Street();
-                    Street_model sm = new Street_model();
+                Street street = new Street();
+                Street_model street_Model = new Street_model();
 
-                    street = sm.UpdateStreetFromFirebase(datos["txtidedit"]);
+                street = street_Model.UpdateStreetFromFirebase(datos["txtIdEdit"]);
 
-                    return View(street);
-                }
-
+                return View(street);
             }
-
-
         }
+        #endregion
 
+        #region Metodo de actualizar calle no diponible en Firebase
         public async Task<ActionResult> UpdateStreetsRedirect(FormCollection datos, HttpPostedFileBase file)
         {
-            string cutPrograming = datos["FProgramacion"];
+            string cutPrograming = datos["programmingDate"];
             string programmingDate = cutPrograming.Substring(0, 10);
 
-            File_model fm = new File_model();
+            File_model file_Model = new File_model();
             FileStream stream;
             Street street = new Street();
             if (file != null)
@@ -134,20 +136,20 @@ namespace ProyectoVialidadASP.Controllers
                 file.SaveAs(path);
                 stream = new FileStream(Path.Combine(path), FileMode.Open);
                 Task<string> linkImage = null;
-                await Task.Run(() => linkImage = fm.Upload(stream, file.FileName));
-                street = new Street(datos["txtId"], char.Parse(datos["txtStatus"]), datos["NCalle"], datos["NLugar"], datos["Descripcion"], programmingDate, datos["TiempoI"], datos["TiempoF"], datos["Latitud1"], datos["Longitud1"], datos["Latitud2"], datos["Longitud2"], linkImage.Result, file.FileName);
+                await Task.Run(() => linkImage = file_Model.Upload(stream, file.FileName));
+                street = new Street(datos["txtId"], char.Parse(datos["txtStatus"]), datos["nameStreet"], datos["nameSite"], datos["description"], programmingDate, datos["initialTime"], datos["endTime"], datos["latitudeOne"], datos["lenghtOne"], datos["latitudeTwo"], datos["lenghtTwo"], linkImage.Result, file.FileName);
             }
             else
             {
                 string UrlImage = datos["txtUrlImg"];
                 string nameImage = datos["txtNameImg"];
-                street = new Street(datos["txtId"], char.Parse(datos["txtStatus"]), datos["NCalle"], datos["NLugar"], datos["Descripcion"], programmingDate, datos["TiempoI"], datos["TiempoF"], datos["Latitud1"], datos["Longitud1"], datos["Latitud2"], datos["Longitud2"], UrlImage, nameImage);
+                street = new Street(datos["txtId"], char.Parse(datos["txtStatus"]), datos["nameStreet"], datos["nameSite"], datos["description"], programmingDate, datos["initialTime"], datos["endTime"], datos["latitudeOne"], datos["lenghtOne"], datos["latitudeTwo"], datos["lenghtTwo"], UrlImage, nameImage);
             }
-            
-            Street_model sm = new Street_model();
-            sm.UpdateStreetFromFirebaseRedirect(street);
+            Street_model street_Model = new Street_model();
+            street_Model.UpdateStreetFromFirebaseRedirect(street);
 
             return RedirectToAction("StreetsList");
         }
+        #endregion
     }
 }

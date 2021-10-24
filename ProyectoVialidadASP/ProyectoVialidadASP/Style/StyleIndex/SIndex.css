@@ -103,7 +103,7 @@ header {
             list-style: none;
         }
 
-.headerP ul li a {
+.headerPage ul li a {
     position: relative;
     display: inline-block;
     margin: 0 10px;

@@ -10,29 +10,45 @@ using System.Web;
 
 namespace ProyectoVialidadASP.Models
 {
+    /// <summary>
+    /// Nombre de la aplicación: Location_model
+    /// Nombre del desarrollador: Valeria Delgadillo, Juan Jose Encinas
+    /// Fecha de creación: 08/10/2021 
+    /// Fecha de modificación: 15/10/2021 
+    /// </summary>
+    /// <param name="datos"></param>
+    /// <param name="file"></param>
+    /// <returns></returns>
+    /// 
     public class Location_model
     {
-        //Conexion in firebase
+        #region Conexión  a fireBase
         IFirebaseConfig config = new FirebaseConfig
         {
             AuthSecret = "F23JUcUtvSmaKQAZh1ZlzSEPL4WQ4wQirbrl3xpT",
             BasePath = "https://proyectovialidadasp-default-rtdb.firebaseio.com/"
         };
         IFirebaseClient client;
+        #endregion
 
-        public void DesabilitarParqueo(Location location)
+        #region Desabilitar Parqueos
+        public void DisableParking(Location location)
         {
             client = new FireSharp.FirebaseClient(config);
             FirebaseResponse response = client.Set("Locations/" + location.IdLocation, location);
 
         }
+        #endregion
+
+        #region Habilitar Parqueos
         public void EnableLocation(Location location)
         {
             client = new FireSharp.FirebaseClient(config);
             FirebaseResponse response = client.Set("Locations/" + location.IdLocation, location);
-
         }
+        #endregion
 
+        #region Listado de Parqueos
         public List<Location> listLocationView()
         {
             client = new FireSharp.FirebaseClient(config);
@@ -45,7 +61,9 @@ namespace ProyectoVialidadASP.Models
             }
             return list;
         }
+        #endregion
 
+        #region Añadir un nuevo Parqueo
         public void AddLocationsTofirebase(Location location)
         {
             client = new FireSharp.FirebaseClient(config);
@@ -53,23 +71,26 @@ namespace ProyectoVialidadASP.Models
             PushResponse response = client.Push("Locations/", data);
             data.IdLocation = response.Result.name;
             SetResponse setResponse = client.Set("Locations/" + data.IdLocation, data);
-
         }
+        #endregion
 
+        #region Llamado a firebase para la actualizacion de los datos
         public Location UpdateLocationFromFirebase(string idLocation)
         {
             client = new FireSharp.FirebaseClient(config);
             FirebaseResponse response = client.Get("Locations/" + idLocation);
-            Location location1 = JsonConvert.DeserializeObject<Location>(response.Body);
+            Location location = JsonConvert.DeserializeObject<Location>(response.Body);
 
-            return location1;
+            return location;
         }
+        #endregion
 
+        #region Actualizar un Parqueo
         public void UpdateLocationFromFirebaseRedirect(Location location)
         {
             client = new FireSharp.FirebaseClient(config);
             SetResponse response = client.Set("Locations/" + location.IdLocation, location);
-
         }
+        #endregion
     }
 }
