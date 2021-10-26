@@ -47,7 +47,9 @@ namespace ProyectoVialidadASP.Controllers
                     string b = linkImage.Result;
                     street = new Street('V', datos["nameSite"], datos["nameStreet"], datos["description"], programmingDate, datos["initialTime"], datos["endTime"], datos["latitudeOne"], datos["lenghtOne"], datos["latitudeTwo"], datos["lenghtTwo"], linkImage.Result, file.FileName);
                 }
-                street_Model.AddStreetTofirebase(street);
+                Street streetCloud = street_Model.AddStreetTofirebase(street);
+                StreestCloud_model streestCloud_Model = new StreestCloud_model();
+                streestCloud_Model.AddCloudDataBase(streetCloud);
                 return Redirect("StreetsList");
             }
             else

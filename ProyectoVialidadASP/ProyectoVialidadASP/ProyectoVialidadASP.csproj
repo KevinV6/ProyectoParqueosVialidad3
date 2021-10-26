@@ -358,6 +358,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationCloud_model.cs" />
     <Compile Include="Models\Location_model.cs" />
+    <Compile Include="Models\StreestCloud_model.cs" />
     <Compile Include="Models\Street.cs" />
     <Compile Include="Models\Street_model.cs" />
     <Compile Include="Models\User.cs" />
