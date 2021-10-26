@@ -12,6 +12,7 @@ import 'package:proyectoparqueovialidad/Bienvenida/onboarding.dart';
 import 'package:proyectoparqueovialidad/Notificaciones/Epic4Task1.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:proyectoparqueovialidad/preferences.dart';
+import 'package:proyectoparqueovialidad/services/Service_Notification.dart';
 
 
 void main() async {
@@ -20,6 +21,8 @@ void main() async {
 
   final preferences = Preferences();
   await preferences.initialize();
+  WidgetsFlutterBinding.ensureInitialized();
+  await PushNotificationService.initializedApp();
 
   runApp(MyApp());
 }

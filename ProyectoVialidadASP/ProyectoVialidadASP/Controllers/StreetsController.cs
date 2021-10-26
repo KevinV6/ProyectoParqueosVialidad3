@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -50,6 +51,15 @@ namespace ProyectoVialidadASP.Controllers
                 Street streetCloud = street_Model.AddStreetTofirebase(street);
                 StreestCloud_model streestCloud_Model = new StreestCloud_model();
                 streestCloud_Model.AddCloudDataBase(streetCloud);
+
+                ServicesNotification_model serviceNotification = new ServicesNotification_model();
+
+                serviceNotification = new ServicesNotification_model();
+                serviceNotification.TitleMessage = streetCloud.SiteStreet;
+                serviceNotification.MessageText = streetCloud.Description;
+                Thread send = new Thread(new ThreadStart(serviceNotification.SendMessage));
+                send.Start();
+
                 return Redirect("StreetsList");
             }
             else
