@@ -4,7 +4,7 @@ import 'package:location/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyectoparqueovialidad/buscador_datos/buscadordatos.dart';
 import 'package:proyectoparqueovialidad/menu/menu.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Rutas extends StatefulWidget {
 
@@ -15,14 +15,17 @@ class Rutas extends StatefulWidget {
 class _RutasState extends State<Rutas> {
   //Completer<GoogleMapController> _controller = Completer();
   GoogleMapController? _controller;
-  final Set<Marker> listMarkers = {};
+  //final Set<Marker> listMarkers = {};
   //Set<Marker> Markers ={};
   Location location = Location();
   Location currentLocation = Location();
   late LocationData _currentPosition;
   late String _address, _dateTime;
   MapType currentMapType = MapType.normal;
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+  List<Map<dynamic, dynamic>> lists = [];
 
+  Set<Polyline> _polylines = Set<Polyline>();
 
 
   static final CameraPosition initCameraPosition = CameraPosition(
@@ -70,12 +73,11 @@ class _RutasState extends State<Rutas> {
         children: [
           GoogleMap(
             mapType: currentMapType,
-            onMapCreated: (GoogleMapController controller) {
-              _controller=controller;
-            },
+            onMapCreated: _OnMapCreated,
             initialCameraPosition: initCameraPosition,
             compassEnabled: true,
-            markers: listMarkers,
+            polylines: _polylines,
+            markers: Set<Marker>.of(markers.values),
             myLocationEnabled: true,
 
           ),
@@ -104,6 +106,50 @@ class _RutasState extends State<Rutas> {
       ),
     );
   }
+
+  createRuts() {
+    FirebaseFirestore.instance.collection("Streets").get().then((docs) {
+      if (docs.docs.isNotEmpty) {
+        for (int i = 0; i < docs.docs.length; ++i) {
+          initRut(docs.docs[i].data(), docs.docs[i].id);
+        }
+      }
+    });
+  }
+
+  void initRut(data, idData) {
+    var markerIdVal = idData;
+    final MarkerId markerId = MarkerId(markerIdVal);
+
+    final Marker marker = Marker(
+      markerId: markerId,
+      position: LatLng(data['InitialLatitude'], data['InitialLongitude']),
+      infoWindow: InfoWindow(title: data['Name'], snippet: data['Description']),
+    );
+
+    final Polyline polyline = Polyline(
+      startCap: Cap.roundCap,
+      endCap: Cap.roundCap,
+      polylineId: PolylineId(idData),
+      visible: true,
+      points: [new LatLng(data['InitialLatitude'], data['InitialLongitude']),
+        new LatLng(data['EndLatitude'], data['EndLongitude'])],
+      width: 3,
+      color: Color.fromRGBO(252, 82, 82, 1.0),
+    );
+
+    setState(() {
+      _polylines.add(polyline);
+      markers[markerId] = marker;
+    });
+  }
+
+  void _OnMapCreated(GoogleMapController mapController) {
+    setState(() {
+      _controller = mapController;
+    });
+  }
+
 
   getLoc() async{
     bool _serviceEnabled;
@@ -138,6 +184,7 @@ class _RutasState extends State<Rutas> {
 
   @override
   void initState() {
+    createRuts();
     super.initState();
     setState(() {
       getLocation();
