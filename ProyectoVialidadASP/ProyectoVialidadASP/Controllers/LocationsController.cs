@@ -125,30 +125,40 @@ namespace ProyectoVialidadASP.Controllers
         #region Metodo para actualizar parqueo en Firebase
         public async Task<ActionResult> UpdateLocationRedirect(FormCollection datos, HttpPostedFileBase file)
         {
-            Location location = new Location();
-            File_model file_Model = new File_model();
-            FileStream stream;
-            if (file != null)
+            try
             {
-                string path = Path.Combine(Server.MapPath("~/Imagen/ImgFile/"), file.FileName);
-                file.SaveAs(path);
-                stream = new FileStream(Path.Combine(path), FileMode.Open);
-                Task<string> linkImage = null;
-                await Task.Run(() => linkImage = file_Model.Upload(stream, file.FileName));
-                location = new Location(datos["txtId"], char.Parse(datos["txtStatus"]), datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"], linkImage.Result, file.FileName);
+                Location location = new Location();
+                File_model file_Model = new File_model();
+                FileStream stream;
+                if (file != null)
+                {
+                    string path = Path.Combine(Server.MapPath("~/Imagen/ImgFile/"), file.FileName);
+                    file.SaveAs(path);
+                    stream = new FileStream(Path.Combine(path), FileMode.Open);
+                    Task<string> linkImage = null;
+                    await Task.Run(() => linkImage = file_Model.Upload(stream, file.FileName));
+                    location = new Location(datos["txtId"], char.Parse(datos["txtStatus"]), datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"], linkImage.Result, file.FileName);
+                }
+                else
+                {
+                    string UrlImage = datos["txtUrlImg"];
+                    string nameImage = datos["txtNameImg"];
+                    location = new Location(datos["txtId"], char.Parse(datos["txtStatus"]), datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"], UrlImage, nameImage);
+
+                }
+
+                Location_model location_Model = new Location_model();
+                Location locationCloud = location_Model.UpdateLocationFromFirebaseRedirect(location);
+                LocationCloud_model locationCloud_Model = new LocationCloud_model();
+                await Task.Run(() => locationCloud_Model.UpdateCloudLocation(locationCloud));
+                return RedirectToAction("LocationsList");
             }
-            else
+            catch (Exception ex)
             {
-                string UrlImage = datos["txtUrlImg"];
-                string nameImage = datos["txtNameImg"];
-                location = new Location(datos["txtId"], char.Parse(datos["txtStatus"]), datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"], UrlImage, nameImage);
 
+                throw ex;
             }
-
-            Location_model location_Model = new Location_model();
-            location_Model.UpdateLocationFromFirebaseRedirect(location);
-
-            return RedirectToAction("LocationsList");
+            
         }
         #endregion
     }

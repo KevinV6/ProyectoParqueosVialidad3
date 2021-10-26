@@ -36,5 +36,40 @@ namespace ProyectoVialidadASP.Models
             };
             coll.SetAsync(data);
         }
+
+        public async void UpdateCloudLocation(Location location)
+        {
+            try
+            {
+                Start();
+                DocumentReference docref = database.Collection("Locations").Document(location.IdLocation);
+                Dictionary<string, object> data = new Dictionary<string, object>()
+            {
+                {"IdLocation",location.IdLocation },
+                {"StatusLocation",location.StatusLocation.ToString() },
+                {"Name",location.Name },
+                {"NameStreet",location.NameStreet },
+                {"Latitude",double.Parse(location.Latitude) },
+                {"Longitude",double.Parse(location.Longitude) },
+                {"ParkingSpaces",location.ParkingSpaces.ToString() },
+                {"Price",location.Price },
+                {"Description",location.Description },
+                {"UrlImage",location.UrlImage },
+                {"NameImage",location.NameImage }
+            };
+
+                DocumentSnapshot snap = await docref.GetSnapshotAsync();
+                if (snap.Exists)
+                {
+                    await docref.SetAsync(data);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+           
+        }
     }
 }

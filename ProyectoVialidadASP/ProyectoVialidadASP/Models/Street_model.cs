@@ -86,11 +86,11 @@ namespace ProyectoVialidadASP.Models
         #endregion
 
         #region Actualiza datos en Firebase
-        public void UpdateStreetFromFirebaseRedirect(Street street)
+        public Street UpdateStreetFromFirebaseRedirect(Street street)
         {
             client = new FireSharp.FirebaseClient(config);
-            SetResponse response = client.Set("Streets/" + street.IdStreet, street);            
-
+            SetResponse response = client.Set("Streets/" + street.IdStreet, street);
+            return street;
         }
         #endregion
     }

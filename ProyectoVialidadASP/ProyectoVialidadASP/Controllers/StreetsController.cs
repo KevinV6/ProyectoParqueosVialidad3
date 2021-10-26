@@ -148,8 +148,9 @@ namespace ProyectoVialidadASP.Controllers
                 street = new Street(datos["txtId"], char.Parse(datos["txtStatus"]), datos["nameStreet"], datos["nameSite"], datos["description"], programmingDate, datos["initialTime"], datos["endTime"], datos["latitudeOne"], datos["lenghtOne"], datos["latitudeTwo"], datos["lenghtTwo"], UrlImage, nameImage);
             }
             Street_model street_Model = new Street_model();
-            street_Model.UpdateStreetFromFirebaseRedirect(street);
-
+            Street streetCloud= street_Model.UpdateStreetFromFirebaseRedirect(street);
+            StreestCloud_model streestCloud_Model = new StreestCloud_model();
+            await Task.Run(() => streestCloud_Model.UpdateCloudStreet(streetCloud));
             return RedirectToAction("StreetsList");
         }
         #endregion

@@ -87,10 +87,11 @@ namespace ProyectoVialidadASP.Models
         #endregion
 
         #region Actualizar un Parqueo
-        public void UpdateLocationFromFirebaseRedirect(Location location)
+        public Location UpdateLocationFromFirebaseRedirect(Location location)
         {
             client = new FireSharp.FirebaseClient(config);
             SetResponse response = client.Set("Locations/" + location.IdLocation, location);
+            return location;
         }
         #endregion
     }

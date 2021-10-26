@@ -41,5 +41,43 @@ namespace ProyectoVialidadASP.Models
             };
             coll.SetAsync(data);
         }
+
+        public async void UpdateCloudStreet(Street street)
+        {
+            try
+            {
+                Start();
+                DocumentReference docref = database.Collection("Streets").Document(street.IdStreet);
+                Dictionary<string, object> data = new Dictionary<string, object>()
+            {
+                {"IdStreet",street.IdStreet },
+                {"StatusStreet",street.StatusStreet.ToString() },
+                {"SiteStreet",street.SiteStreet },
+                {"Name",street.Name },
+                {"Description ",street.Description },
+                {"ProgrammingDate ",street.ProgrammingDate },
+                {"StartTime",street.StartTime },
+                {"EndTime",street.EndTime },
+                {"InitialLatitude",double.Parse(street.InitialLatitude) },
+                {"InitialLongitude",double.Parse(street.InitialLongitude) },
+                {"EndLatitude",double.Parse(street.EndLatitude) },
+                {"EndLongitude",double.Parse(street.EndLongitude) },
+                {"UrlImage ",street.UrlImage },
+                {"NameImage ",street.NameImage },
+            };
+
+                DocumentSnapshot snap = await docref.GetSnapshotAsync();
+                if (snap.Exists)
+                {
+                    await docref.SetAsync(data);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
     }
 }
