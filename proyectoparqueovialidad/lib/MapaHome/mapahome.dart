@@ -4,7 +4,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyectoparqueovialidad/buscador_datos/buscadordatos.dart';
 import 'package:proyectoparqueovialidad/main.dart';
 import 'package:proyectoparqueovialidad/menu/menu.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+import 'dart:async';
 
 
 class MenuPrinci extends StatefulWidget {
@@ -21,15 +23,42 @@ class MenuPrinci extends StatefulWidget {
 class _MenuPrinciState extends State<MenuPrinci> {
   //Completer<GoogleMapController> _controller = Completer();
   GoogleMapController? _controller;
-  final Set<Marker> listMarkers = {};
-  //Set<Marker> Markers ={};
   Location location = Location();
   Location currentLocation = Location();
   late LocationData _currentPosition;
   late String _address, _dateTime;
   MapType currentMapType = MapType.normal;
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
 
+
+  crearmarcadores() {
+    FirebaseFirestore.instance.collection("Locations").get().then((docs) {
+      if (docs.docs.isNotEmpty) {
+        for (int i = 0; i < docs.docs.length; ++i) {
+          initMarker(docs.docs[i].data(), docs.docs[i].id);
+        }
+      }
+    });
+  }
+
+  void initMarker(lugar, lugaresid) {
+    var markerIdVal = lugaresid;
+    final MarkerId markerId = MarkerId(markerIdVal);
+
+
+    final Marker marker = Marker(
+      markerId: markerId,
+      position: LatLng(lugar['Latitude'], lugar['Longitude']),
+      infoWindow: InfoWindow(title: lugar['Name']),
+    );
+
+    setState(() {
+      markers[markerId] = marker;
+    });
+  }
+
+  var error;
 
   static final CameraPosition initCameraPosition = CameraPosition(
       bearing: 30,
@@ -37,6 +66,71 @@ class _MenuPrinciState extends State<MenuPrinci> {
       tilt: 45,
       zoom: 13.5);
 
+
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          drawer: MenuLateral(),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(60.0),
+            child: AppBar(
+              backgroundColor: Colors.blue.shade700,
+              title: Text(""),
+              actions: [
+                IconButton( //Boton de buscador
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    showSearch(context: context, delegate: BuscadorWP());
+                  },
+                )
+              ],
+            ),
+          ),
+
+
+          body: Stack(
+            children: [
+              GoogleMap(
+                mapType: currentMapType,
+                onMapCreated: (GoogleMapController controller) {
+                  _controller=controller;
+                },
+                myLocationEnabled: true,
+                markers: Set<Marker>.of(markers.values),
+                initialCameraPosition: initCameraPosition,
+                compassEnabled: true,
+              ),
+
+              Container(
+                padding: EdgeInsets.all(15),
+                alignment: Alignment.topRight,
+                child: FloatingActionButton(
+                  backgroundColor: Colors.teal,
+                  child: Icon(Icons.map, size: 30),
+                  onPressed: _onMapTypeChanged,
+                ),
+              ),
+
+              Container(
+                padding: EdgeInsets.all(15),
+                alignment: Alignment.bottomCenter,
+                child: FloatingActionButton(
+                  backgroundColor: Colors.black12,
+                  child:  Icon(Icons.location_searching,color: Colors.white,),
+                  onPressed: getLocation,
+                ),
+              ),
+
+            ],
+          ),
+        )
+    );
+  }
 
   void getLocation() async{
     var location = await currentLocation.getLocation();
@@ -54,177 +148,6 @@ class _MenuPrinciState extends State<MenuPrinci> {
     });
   }
 
-
-
-  @override
-  Widget build(BuildContext context) {
-    listMarkers.add(Marker(
-        markerId: MarkerId("1"),
-        position: LatLng(-17.4170476, -66.1787081),
-        infoWindow: InfoWindow(title: "Aeropuerto Internacional Jorge Wilstermann"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("2"),
-        position: LatLng(-17.3967255,-66.1575596),
-        infoWindow: InfoWindow(title: "Tigo Bolivia - Sucursal Calama"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("3"),
-        position: LatLng(-17.420121, -66.129354),
-        infoWindow: InfoWindow(title: "Alcaldia de cochabamba"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("4"),
-        position: LatLng(-17.392808, -66.158631),
-        infoWindow: InfoWindow(title: "Agencia Boliviana de Correos Regional"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("5"),
-        position: LatLng(-17.393856, -66.156896),
-        infoWindow: InfoWindow(title: "Plaza de Armas 14 de septiembre"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("6"),
-        position: LatLng(-17.380463, -66.151493),
-        infoWindow: InfoWindow(title: "Cine Center"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("7"),
-        position: LatLng(-17.3788394, -66.1609852),
-        infoWindow: InfoWindow(title: "Estadio Americas"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("8"),
-        position: LatLng(-17.393284, -66.158470),
-        infoWindow: InfoWindow(title: "Entel"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("9"),
-        position: LatLng(-17.372008,-66.1591467),
-        infoWindow: InfoWindow(title: "Las Islas"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("10"),
-        position: LatLng(-17.382303, -66.159749),
-        infoWindow: InfoWindow(title: "Plaza de las Banderas"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("11"),
-        position: LatLng(-17.384525, -66.134984),
-        infoWindow: InfoWindow(title: "Cristo de la Concordia"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("12"),
-        position: LatLng(-17.402165, -66.146209),
-        infoWindow: InfoWindow(title: "Laguna Alalay"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("13"),
-        position: LatLng(-17.4025654,-66.1576406),
-        infoWindow: InfoWindow(title: "Terminal de Buses Cochabamba"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("14"),
-        position: LatLng(-17.368555, -66.163823),
-        infoWindow: InfoWindow(title: "Plazuela Cala Cala"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("15"),
-        position: LatLng(-17.385486, -66.148666),
-        infoWindow: InfoWindow(title: "Hospital Viedma"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("16"),
-        position: LatLng(-17.382381, -66.152295),
-        infoWindow: InfoWindow(title: "Plaza Quintanilla"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("17"),
-        position: LatLng(-17.360316, -66.158151),
-        infoWindow: InfoWindow(title: "Centro de Salud Temporal"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("18"),
-        position: LatLng(-17.3880541, -66.1558856),
-        infoWindow: InfoWindow(title: "Plaza Colón"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    listMarkers.add(Marker(
-        markerId: MarkerId("19"),
-        position: LatLng(-17.364236, -66.162042),
-        infoWindow: InfoWindow(title: "Semapa"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-
-    return Scaffold(
-      drawer: MenuLateral(),
-      appBar: AppBar(title: Text(""),
-        actions: [
-          IconButton(    //Boton de buscador
-            icon: Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: BuscadorWP());
-            },
-          )
-        ],
-      ),
-
-
-      body: Stack(
-        children: [
-          GoogleMap(
-            mapType: currentMapType,
-            onMapCreated: (GoogleMapController controller) {
-              _controller=controller;
-            },
-            initialCameraPosition: initCameraPosition,
-            compassEnabled: true,
-            markers: listMarkers,
-            myLocationEnabled: true,
-
-          ),
-
-          Container(
-            padding: EdgeInsets.all(15),
-            alignment: Alignment.topRight,
-            child: FloatingActionButton(
-              backgroundColor: Colors.teal,
-              child: Icon(Icons.map, size: 30),
-              onPressed: _onMapTypeChanged,
-            ),
-          ),
-
-          Container(
-            padding: EdgeInsets.all(15),
-            alignment: Alignment.bottomCenter,
-            child: FloatingActionButton(
-              backgroundColor: Colors.black12,
-              child:  Icon(Icons.location_searching,color: Colors.white,),
-              onPressed: getLocation,
-            ),
-          ),
-
-        ],
-      ),
-    );
-  }
 
   getLoc() async{
     bool _serviceEnabled;
@@ -259,6 +182,7 @@ class _MenuPrinciState extends State<MenuPrinci> {
 
   @override
   void initState() {
+    crearmarcadores();
     super.initState();
     setState(() {
       getLocation();
@@ -266,6 +190,3 @@ class _MenuPrinciState extends State<MenuPrinci> {
   }
 
 }
-
-
-

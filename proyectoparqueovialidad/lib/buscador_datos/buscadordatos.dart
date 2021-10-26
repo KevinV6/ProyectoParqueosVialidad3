@@ -1,43 +1,35 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+import 'package:proyectoparqueovialidad/InfoParqueo/infoparqueo.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class BuscadorWP extends SearchDelegate{
   BuscadorWP() : super(searchFieldLabel: "Escribe algo...");
 
-  final lugares = [
-    "Tigo",
-    "Plaza Principal",
-    "Alcaldia",
-    "El Correo",
-    "Cine center",
-    "Estadium America",
-    "Entel",
-    "Las isla",
-    "Plaza Banderas",
-    "Cristo Concordia",
-    "Laguna Alalay",
-    "La terminal",
-    "El aeropuerto",
-    "Plazuela CalaCala",
-    "Hospital Vietma",
-    "Plaza Quintanilla",
-    "Centro de salud Temporal",
-    "Semapa",
-    "Plaza Colón"
-  ];
+
+  final TextEditingController _nameController = TextEditingController();
 
 
-  final lugaresRecientes = [
-    "Laguna Alalay",
-    "La terminal",
-    "El aeropuerto",
-    "Plazuela CalaCala",
-
-  ];
+  CollectionReference _locations = FirebaseFirestore.instance.collection('Locations');
 
 
+  Future<void> _createOrUpdate([DocumentSnapshot? documentSnapshot]) async {
+    String action = 'create';
+    if (documentSnapshot != null) {
+      action = 'update';
+      _nameController.text = documentSnapshot['Name'];
+
+
+    }
+  }
+
+
+  // 2) segunda forma de id
+  //var userID = FirebaseFirestore.instance.collection("products").doc().id;
   //acciones para la barra de aplicaciones
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -69,7 +61,7 @@ class BuscadorWP extends SearchDelegate{
   }
 
 
-  //mostrar algunos resultados basados ​​en la selección
+  //mostrar algunos resultados basados en la selección
   @override
   Widget buildResults(BuildContext context) {
     return Container();
@@ -80,27 +72,65 @@ class BuscadorWP extends SearchDelegate{
   @override
   Widget buildSuggestions(BuildContext context) {
 
-    final LugaresSugeridos = query.isEmpty?lugaresRecientes:lugares.where((p) => p.startsWith(query)).toList();
+    //final pro = query.isEmpty?_productss.where((p) => p.startsWith(query));
+    //final LugaresSugeridos = query.isEmpty?Lugares.where((p) => p.startsWith(query)).toList();
+    return Scaffold(
+      body: StreamBuilder (
+        stream: _locations.snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+          if (streamSnapshot.hasData) {
+            return ListView.builder(
+              itemCount: streamSnapshot.data!.docs.length,
+              itemBuilder: (context, index)  {
+                final DocumentSnapshot documentSnapshot =
+                streamSnapshot.data!.docs[index];
+                return Card(
+                  margin: EdgeInsets.all(10),
+                  elevation: 20,
+                  shadowColor: Colors.teal.shade600,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(60)),
+                  child: ListTile(
+                    leading: Icon(Icons.location_city,
+                        color: Colors.blueGrey),
+                    title: TextButton(
+                      child: Text (documentSnapshot['Name']),
+                      style: TextButton.styleFrom(
+                          alignment: Alignment.topLeft,
+                          primary: Colors.black,
+                          textStyle: TextStyle(
+                              fontSize: 20,
+                              fontStyle: FontStyle.normal,
+                              foreground: Paint()
+                          )
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => InfoParqueo(idfon: (documentSnapshot)),
+                          ),
+                        );
+                      },
 
-    return ListView.builder(
-        itemBuilder: (context,index)=>ListTile(
-          leading: Icon(Icons.location_city),
-          title: RichText(
-            text: TextSpan(
-                text: LugaresSugeridos[index].substring(0, query.length),
-                style: TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.bold),
-                children: [
-                  TextSpan(
-                      text: LugaresSugeridos[index].substring(query.length),
-                      style: TextStyle(color: Colors.grey)
-                  )
-                ]),
-          ),
-        ),
-        itemCount:LugaresSugeridos.length
+                    ),
+
+                  ),
+                );
+              },
+            );
+          }
+
+          return Center(
+
+          );
+        },
+      ),
+
     );
+
 
 
   }
 }
+
+

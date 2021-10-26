@@ -43,6 +43,9 @@ dependencies:
   url_launcher: ^6.0.10
   flutter_launcher_icons: ^0.9.2
   shared_preferences: ^2.0.4
+  flip_card: ^0.6.0
+  firebase_auth: ^3.1.4
+  animated_flip_card: ^1.0.2
 
   flutter_polyline_points:
 
