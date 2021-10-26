@@ -64,13 +64,14 @@ namespace ProyectoVialidadASP.Models
         #endregion
 
         #region Añadir un nuevo Parqueo
-        public void AddLocationsTofirebase(Location location)
+        public Location AddLocationsTofirebase(Location location)
         {
             client = new FireSharp.FirebaseClient(config);
             var data = location;
             PushResponse response = client.Push("Locations/", data);
             data.IdLocation = response.Result.name;
             SetResponse setResponse = client.Set("Locations/" + data.IdLocation, data);
+            return location;
         }
         #endregion
 

@@ -43,9 +43,10 @@ namespace ProyectoVialidadASP.Controllers
                     string b = linkImage.Result;
                     location = new Location('V', datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"], linkImage.Result, file.FileName);
                 }
-                lp.AddLocationsTofirebase(location);
+                Location locationCloud = lp.AddLocationsTofirebase(location);
+                LocationCloud_model locationCloud_Model = new LocationCloud_model();
+                locationCloud_Model.AddCloudDataBase(locationCloud);
                 return Redirect("LocationsList");
-
             }
             else
             {
