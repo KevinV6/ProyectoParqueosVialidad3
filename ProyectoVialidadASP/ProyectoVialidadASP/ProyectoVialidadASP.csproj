@@ -378,6 +378,7 @@
     <Content Include="Views\Locations\UpdateLocation.cshtml" />
     <Content Include="Views\Home\Header.cshtml" />
     <Content Include="Views\Streets\StreetsList.cshtml" />
+    <Content Include="proyectovialidadaspKey.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

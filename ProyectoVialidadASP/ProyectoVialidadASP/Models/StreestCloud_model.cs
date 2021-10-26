@@ -12,7 +12,8 @@ namespace ProyectoVialidadASP.Models
         FirestoreDb database;
         public void Start()
         {
-            string path = "C:\\Program Files (x86)\\IIS Express\\Content\\proyectovialidadasp-firebase-adminsdk-54nx2-7d92d97e2f.json";
+            //string path = "C:\\Program Files (x86)\\IIS Express\\Content\\proyectovialidadasp-firebase-adminsdk-54nx2-7d92d97e2f.json";
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"proyectovialidadaspKey.json";
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
 
             database = FirestoreDb.Create("proyectovialidadasp");
