@@ -96,7 +96,7 @@
                                                     </form>
                                                     <form action="/Streets/EnableStreet" method="post">
                                                         <input type="text" name="txtdelete" value="@item.IdStreet" hidden />
-                                                        <button type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE876;</i> </button>
+                                                        <button onclick="return CheckConfirmActive();" type="submit" class="delete"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE876;</i> </button>
 
                                                     </form>
                                                 </td>
@@ -113,7 +113,7 @@
                                                     </form>
                                                     <form action="/Streets/DisableStreet" method="post">
                                                         <input type="text" name="txtdelete" value="@item.IdStreet" hidden />
-                                                        <button type="submit" class="delete btn btn-danger">
+                                                        <button onclick="return CheckConfirmDelet();" type="submit" class="delete btn btn-danger">
                                                             <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                                         </button>
 
@@ -133,5 +133,6 @@
             </div>
         </section>
     </div>
+    <script src="~/Js/JAlertStreet.js"></script>
 </body>
 </html>

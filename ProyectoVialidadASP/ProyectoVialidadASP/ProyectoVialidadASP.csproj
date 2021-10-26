@@ -330,6 +330,8 @@
     <Content Include="Imagen\ImgHome\menu.png" />
     <Content Include="Imagen\ImgHome\user.png" />
     <Content Include="Imagen\ImgHome\wave.png" />
+    <Content Include="Js\JAlertLocation.js" />
+    <Content Include="Js\JAlertStreet.js" />
     <Content Include="Js\JIndex.js" />
     <Content Include="Js\JLogin.js" />
     <Content Include="Js\JMarcador.js" />
