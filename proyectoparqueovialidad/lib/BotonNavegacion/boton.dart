@@ -77,7 +77,7 @@ class _BotonState extends State<Boton> {
             icon: Icon(Icons.map,
               color: _selectIndex ==2 ? Colors.blue: Colors.grey,
             ),
-            title: Text( "Mapa(rutas)",
+            title: Text( "Mapas(rutas)",
               style: TextStyle(
                 color: _selectIndex ==2 ? Colors.blue: Colors.grey,
               ),

@@ -20,8 +20,8 @@ class MenuPrinci extends StatefulWidget {
 }
 
 class _MenuPrinciState extends State<MenuPrinci> {
-  //Completer<GoogleMapController> _controller = Completer();
-  GoogleMapController? _controller;
+  Completer<GoogleMapController> _controller = Completer();
+  //GoogleMapController? _controller;
   Location location = Location();
   Location currentLocation = Location();
   late LocationData _currentPosition;
@@ -49,6 +49,7 @@ class _MenuPrinciState extends State<MenuPrinci> {
       markerId: markerId,
       position: LatLng(lugar['Latitude'], lugar['Longitude']),
       infoWindow: InfoWindow(title: lugar['Name']),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
     );
 
     setState(() {
@@ -91,7 +92,7 @@ class _MenuPrinciState extends State<MenuPrinci> {
               GoogleMap(
                 mapType: currentMapType,
                 onMapCreated: (GoogleMapController controller) {
-                  _controller = controller;
+                  _controller.complete(controller);
                 },
                 myLocationEnabled: true,
                 markers: Set<Marker>.of(markers.values),
@@ -124,24 +125,32 @@ class _MenuPrinciState extends State<MenuPrinci> {
         ));
   }
 
-  void getLocation() async {
-    var location = await currentLocation.getLocation();
-    currentLocation.onLocationChanged.listen((LocationData loc) {
-      _controller
-          ?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
-        target: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
-        zoom: 12.0,
-      )));
-      print(loc.latitude);
-      print(loc.longitude);
-      setState(() {
-        position:
-        LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0);
-      });
-    });
+  void getLocation() async{
+    final GoogleMapController controller = await _controller.future;
+    LocationData currentLocation;
+    var location = new Location();
+    try {
+      currentLocation = await location.getLocation();
+    } on PlatformException catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        error = 'Permission denied';
+      }else if(e.code == "PERMISSION_DENIED_NEVER_ASK"){
+        error = 'Permission denied';
+      }
+      currentLocation = '' as LocationData;
+    }
+
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(
+        bearing: 0,
+        target: LatLng(currentLocation.latitude!, currentLocation.longitude!),
+        zoom: 17.0,
+      ),
+    ));
   }
 
-  getLoc() async {
+
+  getLoc() async{
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
 
@@ -160,21 +169,23 @@ class _MenuPrinciState extends State<MenuPrinci> {
         return;
       }
     }
+
   }
+
 
   void _onMapTypeChanged() {
     setState(() {
-      currentMapType =
-          currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
+      currentMapType = currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
     });
   }
+
+
 
   @override
   void initState() {
     crearmarcadores();
     super.initState();
-    setState(() {
-      getLocation();
-    });
+    getLoc();
   }
+
 }

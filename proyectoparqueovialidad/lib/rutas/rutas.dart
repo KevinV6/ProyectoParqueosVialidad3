@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyectoparqueovialidad/buscador_datos/buscadordatos.dart';
 import 'package:proyectoparqueovialidad/menu/menu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 
 class Rutas extends StatefulWidget {
   @override
@@ -12,8 +13,8 @@ class Rutas extends StatefulWidget {
 }
 
 class _RutasState extends State<Rutas> {
-  //Completer<GoogleMapController> _controller = Completer();
-  GoogleMapController? _controller;
+  Completer<GoogleMapController> _controller = Completer();
+  //GoogleMapController? _controller;
   //final Set<Marker> listMarkers = {};
   //Set<Marker> Markers ={};
   Location location = Location();
@@ -32,22 +33,7 @@ class _RutasState extends State<Rutas> {
       tilt: 45,
       zoom: 13.5);
 
-  void getLocation() async {
-    var location = await currentLocation.getLocation();
-    currentLocation.onLocationChanged.listen((LocationData loc) {
-      _controller
-          ?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
-        target: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
-        zoom: 12.0,
-      )));
-      print(loc.latitude);
-      print(loc.longitude);
-      setState(() {
-        position:
-        LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0);
-      });
-    });
-  }
+  var error;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +56,6 @@ class _RutasState extends State<Rutas> {
               ],
             ),
           ),
-
 
           body: Stack(
         children: [
@@ -130,6 +115,7 @@ class _RutasState extends State<Rutas> {
       markerId: markerId,
       position: LatLng(data['InitialLatitude'], data['InitialLongitude']),
       infoWindow: InfoWindow(title: data['Name'], snippet: data['Description']),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
     );
 
     final Polyline polyline = Polyline(
@@ -153,11 +139,36 @@ class _RutasState extends State<Rutas> {
 
   void _OnMapCreated(GoogleMapController mapController) {
     setState(() {
-      _controller = mapController;
+      _controller.complete(mapController);
     });
   }
 
-  getLoc() async {
+  void getLocation() async{
+    final GoogleMapController controller = await _controller.future;
+    LocationData currentLocation;
+    var location = new Location();
+    try {
+      currentLocation = await location.getLocation();
+    } on PlatformException catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        error = 'Permission denied';
+      }else if(e.code == "PERMISSION_DENIED_NEVER_ASK"){
+        error = 'Permission denied';
+      }
+      currentLocation = '' as LocationData;
+    }
+
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(
+        bearing: 0,
+        target: LatLng(currentLocation.latitude!, currentLocation.longitude!),
+        zoom: 17.0,
+      ),
+    ));
+  }
+
+
+  getLoc() async{
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
 
@@ -176,21 +187,23 @@ class _RutasState extends State<Rutas> {
         return;
       }
     }
+
   }
+
 
   void _onMapTypeChanged() {
     setState(() {
-      currentMapType =
-          currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
+      currentMapType = currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
     });
   }
+
+
+
 
   @override
   void initState() {
     createRuts();
     super.initState();
-    setState(() {
-      getLocation();
-    });
+    getLoc();
   }
 }

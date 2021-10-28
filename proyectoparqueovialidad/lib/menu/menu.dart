@@ -19,7 +19,8 @@ class MenuLateral extends StatelessWidget{
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.fill,
-                        image:  AssetImage('assets/image/Menu/header.jpg'))),
+                        image:  AssetImage('assets/image/Menu/header.jpg'))
+                ),
                 child: Column(
                   children: [
                     Expanded(child:Image.asset('assets/image/Menu/logo.png'),
@@ -36,6 +37,7 @@ class MenuLateral extends StatelessWidget{
                     )
                   ],
                 )
+
             ),
             ListTile(
               onTap: () {
@@ -64,18 +66,7 @@ class MenuLateral extends StatelessWidget{
               title: Text('Iniciar Sesion'),
             ),
             Spacer(),
-            DefaultTextStyle(
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.white54,
-              ),
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: 16.0,
-                ),
-                child: Text('Cardrop 2021'),
-              ),
-            ),
+
           ],
         ),
       ),
