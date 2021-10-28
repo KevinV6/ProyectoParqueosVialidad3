@@ -32,7 +32,9 @@ namespace ProyectoVialidadASP.Models
                 {"Price",location.Price },
                 {"Description",location.Description },
                 {"UrlImage",location.UrlImage },
-                {"NameImage",location.NameImage }
+                {"NameImage",location.NameImage },
+                {"UrlImageDesign",location.UrlImageDesign },
+                {"NameImageDesign",location.NameImageDesign }
             };
             coll.SetAsync(data);
         }
@@ -56,7 +58,9 @@ namespace ProyectoVialidadASP.Models
                 {"Price",location.Price },
                 {"Description",location.Description },
                 {"UrlImage",location.UrlImage },
-                {"NameImage",location.NameImage }
+                {"NameImage",location.NameImage },
+                {"UrlImageDesign",location.UrlImageDesign },
+                {"NameImageDesign",location.NameImageDesign }
             };
 
                 DocumentSnapshot snap = await docref.GetSnapshotAsync();

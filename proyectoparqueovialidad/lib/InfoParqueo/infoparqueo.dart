@@ -17,27 +17,21 @@ class InfoParqueo extends StatefulWidget {
 
   final DocumentSnapshot idfon;
 
-
   InfoParqueo({Key? key, required this.idfon}) : super(key: key);
 
   @override
   _InfoParqueoState createState() => _InfoParqueoState();
 }
 
-
 class _InfoParqueoState extends State<InfoParqueo> {
-
   //late LocationUnid locationUnid;
-
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _descripcionController = TextEditingController();
 
   CollectionReference _products =
-  FirebaseFirestore.instance.collection('Locations');
-
-
+      FirebaseFirestore.instance.collection('Locations');
 
   Future<void> _createOrUpdate([DocumentSnapshot? documentSnapshot]) async {
     String action = 'create';
@@ -49,13 +43,8 @@ class _InfoParqueoState extends State<InfoParqueo> {
     }
   }
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -66,7 +55,8 @@ class _InfoParqueoState extends State<InfoParqueo> {
               backgroundColor: Colors.blue.shade700,
               title: Text(""),
               actions: [
-                IconButton( //Boton de buscador
+                IconButton(
+                  //Boton de buscador
                   icon: Icon(Icons.search),
                   onPressed: () {
                     showSearch(context: context, delegate: BuscadorWP());
@@ -77,7 +67,6 @@ class _InfoParqueoState extends State<InfoParqueo> {
           ),
           body: AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.light,
-
             child: GestureDetector(
               child: Stack(
                 children: <Widget>[
@@ -87,7 +76,7 @@ class _InfoParqueoState extends State<InfoParqueo> {
                     alignment: Alignment.topCenter,
                     child: SingleChildScrollView(
                       padding: EdgeInsets.symmetric(
-                        horizontal:20,
+                        horizontal: 20,
                         vertical: 20,
                       ),
                       child: Column(
@@ -101,19 +90,30 @@ class _InfoParqueoState extends State<InfoParqueo> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           buildDescription(),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           builParkingSpaces(),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           buildStreet(),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           buildCardPhoto(),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           buildPrice(),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           buildSeeLocation(),
-
                         ],
                       ),
                     ),
@@ -121,9 +121,7 @@ class _InfoParqueoState extends State<InfoParqueo> {
                 ],
               ),
             ),
-          )
-
-      ),
+          )),
     );
   }
 
@@ -132,23 +130,21 @@ class _InfoParqueoState extends State<InfoParqueo> {
       shadowColor: Colors.black,
       elevation: 20,
       color: Color(0xffBFD7ED),
-
       child: ClipRRect(
-
         borderRadius: BorderRadius.circular(20),
-
         child: Column(
           children: <Widget>[
             ListTile(
-
-              leading: Icon(Icons.book,color: Color(0xff212871),),
+              leading: Icon(
+                Icons.book,
+                color: Color(0xff212871),
+              ),
               title: Text(
                 'Descripcion',
                 style: TextStyle(
                     color: Color(0xff212871),
                     fontSize: 16,
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
               subtitle: Text(widget.idfon['Description']),
             )
@@ -158,7 +154,7 @@ class _InfoParqueoState extends State<InfoParqueo> {
     );
   }
 
-  builParkingSpaces(){
+  builParkingSpaces() {
     return Card(
       shadowColor: Colors.black,
       elevation: 20,
@@ -168,14 +164,16 @@ class _InfoParqueoState extends State<InfoParqueo> {
         child: Column(
           children: <Widget>[
             ListTile(
-              leading: Icon(Icons.directions_car_filled_outlined,color: Color(0xff212871),),
+              leading: Icon(
+                Icons.directions_car_filled_outlined,
+                color: Color(0xff212871),
+              ),
               title: Text(
                 'Espacios',
                 style: TextStyle(
                     color: Color(0xff212871),
                     fontSize: 16,
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
               subtitle: Text(widget.idfon['ParkingSpaces']),
             )
@@ -184,34 +182,30 @@ class _InfoParqueoState extends State<InfoParqueo> {
       ),
     );
   }
-  buildCardPhoto() {
 
+  buildCardPhoto() {
     return Container(
       alignment: Alignment.center,
       child: ClipRRect(
-
         borderRadius: BorderRadius.circular(20),
-
         child: AnimatedFlipCard(
-
             front: Image.network(
-
               widget.idfon['UrlImage'],
               width: 340,
               height: 200,
               fit: BoxFit.contain,
             ),
-
             back: Image.network(
-              widget.idfon['UrlImage'],
+              widget.idfon['UrlImageDesign'],
               width: 340,
-              height:200,
+              height: 200,
               fit: BoxFit.contain,
             )),
       ),
     );
   }
-  buildStreet(){
+
+  buildStreet() {
     return Card(
       shadowColor: Colors.black,
       elevation: 20,
@@ -221,14 +215,16 @@ class _InfoParqueoState extends State<InfoParqueo> {
         child: Column(
           children: <Widget>[
             ListTile(
-              leading: Icon(Icons.map,color: Color(0xff212871),),
+              leading: Icon(
+                Icons.map,
+                color: Color(0xff212871),
+              ),
               title: Text(
                 'Calles',
                 style: TextStyle(
                     color: Color(0xff212871),
                     fontSize: 16,
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
               subtitle: Text(widget.idfon['NameStreet'].toString()),
             )
@@ -237,47 +233,43 @@ class _InfoParqueoState extends State<InfoParqueo> {
       ),
     );
   }
+
   buildPrice() {
     return Container(
       child: FlipCard(
         //fill: Fill.fillBack, // Fill the back side of the card to make in the same size as the front.
         direction: FlipDirection.HORIZONTAL, // default
         front: Container(
-          child: Text('Tarifa... (Ver Mas.)',
+          child: Text(
+            'Tarifa... (Ver Mas.)',
             style: TextStyle(
                 color: Color(0xff212871),
                 fontSize: 20,
-                fontWeight: FontWeight.bold
-            ),),
+                fontWeight: FontWeight.bold),
+          ),
         ),
         back: Container(
-          child: Text(widget.idfon['Price'],
+          child: Text(
+            widget.idfon['Price'],
             style: TextStyle(
               color: Color(0xff212871),
               fontSize: 20,
-
-            ),),
+            ),
+          ),
         ),
       ),
     );
-
   }
 
-
   buildSeeLocation() {
-
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25),
       width: double.infinity,
       child: RaisedButton(
         elevation: 20,
         padding: EdgeInsets.all(15),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15)
-        ),
-
-        color: Color (0xff60A3D9),
-
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        color: Color(0xff60A3D9),
         onPressed: () {
           Navigator.pushNamed(context, MyHomePage.id);
         },
@@ -286,16 +278,9 @@ class _InfoParqueoState extends State<InfoParqueo> {
           style: TextStyle(
               color: Color(0xFFFFFFFF),
               fontSize: 18,
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
-
       ),
     );
-
   }
-
-
 }
-
-

@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Añadir Nuevo Parqueo</title>
-    <link rel="stylesheet" href="~/Style/StyleIndex/SLocations2.css">
+    <link rel="stylesheet" href="~/Style/StyleIndex/SLocations.css">
     <!-- GOOGLE FONTs -->
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <!-- FONT AWESOME -->
@@ -85,7 +85,7 @@
                             <span class="line"></span>
                         </div>
                     </div>
-                    
+
                 </div>
                 <h3>Imagen del Parqueo</h3>
                 <div class="row100">
@@ -95,10 +95,24 @@
                             <input hidden="hidden" type="text" name="txtStatus" value="@Model.StatusLocation">
                             <input hidden="hidden" type="text" name="txtUrlImg" value="@Model.UrlImage">
                             <input hidden="hidden" type="text" name="txtNameImg" value="@Model.NameImage">
-                            <input type="file" name="file" accept="image/png,image/jpeg,image/jpg" id="file" hidden onchange="vista_preliminar(event)" required>
+                            <input type="file" name="file" accept="image/png,image/jpeg,image/jpg" id="file" hidden onchange="vista_preliminar(event)" >
                             <label for="file" id="selector">@Model.NameImage</label>
                             <br>
                             <img class="imgWhite" src="@Model.UrlImage" alt="" id="imgFoto">
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <h3>Imagen de la calle no disponible</h3>
+                <div class="row100">
+                    <div class="col cadImage">
+                        <div class="inputBox text ">
+                            <input hidden="hidden" type="text" name="txtUrlImgDesign" value="@Model.UrlImageDesign">
+                            <input hidden="hidden" type="text" name="txtNameImgDesign" value="@Model.NameImageDesign">
+                            <input type="file" name="fileDesign" accept="image/png,image/jpeg,image/jpg" id="croquis" hidden onchange="vista_preliminarCroquis(event)" >
+                            <label for="croquis" id="selectorCroquis">@Model.NameImage</label>
+                            <br>
+                            <img class="imgWhite" src="@Model.UrlImageDesign" alt="" id="imgFotoCroquis">
                         </div>
                     </div>
                 </div>
@@ -138,7 +152,29 @@
             }
             leer_img.readAsDataURL(event.target.files[0])
         }
-            //#endregion
+        //#endregion
+        //#region Croquis
+        var loaderC = function (e) {
+            let file = e.target.files;
+            let show = "" + file[0].name;
+            let output = document.getElementById('selectorCroquis');
+            output.innerHTML = show;
+            output.classList.add("active");
+        };
+        let fileInputCroquis = document.getElementById("croquis");
+        fileInputCroquis.addEventListener("change", loaderC);
+        let vista_preliminarCroquis = (event) => {
+            let leer_img = new FileReader();
+            let id_img = document.getElementById('imgFotoCroquis');
+
+            leer_img.onload = () => {
+                if (leer_img.readyState == 2) {
+                    id_img.src = leer_img.result;
+                }
+            }
+            leer_img.readAsDataURL(event.target.files[0])
+        }
+        //#endregion
     </script>
 </body>
 </html>

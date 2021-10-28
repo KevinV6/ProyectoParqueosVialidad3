@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Añadir Nuevo Parqueo</title>
-    <link rel="stylesheet" href="~/Style/StyleIndex/SLocations2.css">
+    <link rel="stylesheet" href="~/Style/StyleIndex/SLocations.css">
     <!-- GOOGLE FONTs -->
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <!-- FONT AWESOME -->
@@ -95,6 +95,17 @@
                         </div>
                     </div>
                 </div>
+                <h3>Imagen de la calle no disponible</h3>
+                <div class="row100">
+                    <div class="col cadImage">
+                        <div class="inputBox text ">
+                            <input type="file" name="fileDesign" accept="image/png,image/jpeg,image/jpg" id="croquis" hidden onchange="vista_preliminarCroquis(event)" required>
+                            <label for="croquis" id="selectorCroquis">Seleccionar Imagen de la calle no disponible</label>
+                            <br>
+                            <img class="imgWhite" src="~/Imagen/ImgHome/Image.png" alt="" id="imgFotoCroquis">
+                        </div>
+                    </div>
+                </div>
                 <div class="row100">
                     <div class="col ">
                         <div class="colb">
@@ -124,6 +135,28 @@
         let vista_preliminar = (event) => {
             let leer_img = new FileReader();
             let id_img = document.getElementById('imgFoto');
+
+            leer_img.onload = () => {
+                if (leer_img.readyState == 2) {
+                    id_img.src = leer_img.result;
+                }
+            }
+            leer_img.readAsDataURL(event.target.files[0])
+        }
+        //#endregion
+        //#region Croquis
+        var loaderC = function (e) {
+            let file = e.target.files;
+            let show = "" + file[0].name;
+            let output = document.getElementById('selectorCroquis');
+            output.innerHTML = show;
+            output.classList.add("active");
+        };
+        let fileInputCroquis = document.getElementById("croquis");
+        fileInputCroquis.addEventListener("change", loaderC);
+        let vista_preliminarCroquis = (event) => {
+            let leer_img = new FileReader();
+            let id_img = document.getElementById('imgFotoCroquis');
 
             leer_img.onload = () => {
                 if (leer_img.readyState == 2) {
