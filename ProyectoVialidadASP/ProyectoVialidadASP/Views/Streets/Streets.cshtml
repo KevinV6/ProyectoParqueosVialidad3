@@ -7,30 +7,30 @@
 
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Streets</title>
-	<link href="~/Style/StyleIndex/SStreets.css" rel="stylesheet" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<!-- GOOGLE FONTs -->
-	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-	<!-- FONT AWESOME -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-	<!-- ANIMATE CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Streets</title>
+    <link href="~/Style/StyleIndex/SStreets2.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- GOOGLE FONTs -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- ANIMATE CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 </head>
 <body>
-    
-	<form action="Streets" method="post" id="formulario" enctype="multipart/form-data">
-		<section>
+
+    <form action="Streets" method="post" id="formulario" enctype="multipart/form-data">
+        <section>
             <div class="container">
                 <h2>Agregar Calle No Disponibles</h2>
-                <label style="color:red" name="ERROR" id="errorNLugar"></label>
+
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorNLugar"></label>
+
                             <input type="text" name="nameSite" id="NLugar" required>
                             <span class="text">Nombre del lugar</span>
                             <span class="line"></span>
@@ -42,13 +42,13 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorNCalle"></label>
+
                             <input type="text" name="nameStreet" id="NCalle" required>
                             <span class="text">Nombres de las calles</span>
                             <span class="line"></span>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="row100">
                     <div class="col">
@@ -60,7 +60,7 @@
                     <div class="col">
                         <div class="inputBox">
                             <input type="date" name="programmingDate" id="FProgramacion" required>
-                            <label style="color:red" name="ERROR" id="errorFProgramacion"></label>
+
                             <span class="line"></span>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorTiempoI"></label>
+
                             <input type="time" name="initialTime" id="TiempoI" required>
                             <span class="line"></span>
                         </div>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorTiempoF"></label>
+
                             <input type="time" name="endTime" id="TiempoF" required>
 
                             <span class="line"></span>
@@ -105,7 +105,7 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorLatitud1"></label>
+
                             <input type="text" name="latitudeOne" id="Latitud1" required>
                             <span class="text">Latitud</span>
                             <span class="line"></span>
@@ -113,7 +113,7 @@
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorLongitud1"></label>
+
                             <input type="text" name="lenghtOne" id="Longitud1" required>
                             <span class="text">Longitud</span>
                             <span class="line"></span>
@@ -124,7 +124,7 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorLatitud2"></label>
+
                             <input type="text" name="latitudeTwo" id="Latitud2" required>
                             <span class="text">Latitud</span>
                             <span class="line"></span>
@@ -132,7 +132,7 @@
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <label style="color:red" name="ERROR" id="errorLongitud2"></label>
+
                             <input type="text" name="lenghtTwo" id="Longitud2" required>
                             <span class="text">Longitud</span>
                             <span class="line"></span>
@@ -147,11 +147,16 @@
                             <span class="line"></span>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="inputBox textarea">
-                            <input type="file" accept="image/png,image/jpeg,image/jpg" name="file" required>
-                            <span class="text">Imagen</span>
-                            <span class="line"></span>
+                    
+                </div>
+                <h3>Imagen de la calle no disponible</h3>
+                <div class="row100">
+                    <div class="col cadImage">
+                        <div class="inputBox text ">
+                            <input type="file" name="file" accept="image/png,image/jpeg,image/jpg" id="file" hidden onchange="vista_preliminar(event)" required>
+                            <label for="file" id="selector">Seleccionar Imagen de la calle no disponible</label>
+                            <br>
+                            <img class="imgWhite" src="~/Imagen/ImgHome/Image.png" alt="" id="imgFoto">
                         </div>
                     </div>
                 </div>
@@ -166,9 +171,33 @@
                 </div>
 
             </div>
-		</section>
-	</form>
-   
+        </section>
+    </form>
+
     @*<script src="~/Js/ValidacionStreet.js"></script>*@
+    <script>
+        //#region parqueo
+        var loader = function (e) {
+            let file = e.target.files;
+            let show = "" + file[0].name;
+            let output = document.getElementById('selector');
+            output.innerHTML = show;
+            output.classList.add("active");
+        };
+        let fileInput = document.getElementById("file");
+        fileInput.addEventListener("change", loader);
+        let vista_preliminar = (event) => {
+            let leer_img = new FileReader();
+            let id_img = document.getElementById('imgFoto');
+
+            leer_img.onload = () => {
+                if (leer_img.readyState == 2) {
+                    id_img.src = leer_img.result;
+                }
+            }
+            leer_img.readAsDataURL(event.target.files[0])
+        }
+                    //#endregion
+    </script>
 </body>
 </html>

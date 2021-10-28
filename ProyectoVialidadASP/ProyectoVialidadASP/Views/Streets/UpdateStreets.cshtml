@@ -12,7 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>UpdateStreets</title>
-	<link href="~/Style/StyleIndex/SStreets.css" rel="stylesheet" />
+	<link href="~/Style/StyleIndex/SStreets2.css" rel="stylesheet" />
 	<!-- GOOGLE FONTs -->
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<!-- FONT AWESOME -->
@@ -26,7 +26,7 @@
 		<section>
             <div class="container">
                 <h2>Modificar Calle No Disponibles</h2>
-                <label style="color:red" name="ERROR" id="error"></label>
+
 
                 <div class="row100">
                     <div class="col">
@@ -49,7 +49,8 @@
                 </div>
                 <div class="row100">
                     <div class="col">
-                        <div class="inputBox">code
+                        <div class="inputBox">
+                            code
 
                             <span class="text">Fecha de Programacion</span>
                         </div>
@@ -120,15 +121,20 @@
                             <span class="line"></span>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="inputBox textarea">
+                    
+                </div>
+                <h3>Imagen del Parqueo</h3>
+                <div class="row100">
+                    <div class="col cadImage">
+                        <div class="inputBox text ">
                             <input hidden="hidden" type="text" name="txtId" value="@Model.IdStreet">
                             <input hidden="hidden" type="text" name="txtStatus" value="@Model.StatusStreet">
                             <input hidden="hidden" type="text" name="txtUrlImg" value="@Model.UrlImage">
                             <input hidden="hidden" type="text" name="txtNameImg" value="@Model.NameImage">
-                            <input type="file" accept="image/png,image/jpeg,image/jpg" value="@Model.NameImage" name="file">
-                            <span class="text">Imagen</span>
-                            <span class="line"></span>
+                            <input type="file" name="file" accept="image/png,image/jpeg,image/jpg" id="file" hidden onchange="vista_preliminar(event)" required>
+                            <label for="file" id="selector">@Model.NameImage</label>
+                            <br>
+                            <img class="imgWhite" src="@Model.UrlImage" alt="" id="imgFoto">
                         </div>
                     </div>
                 </div>
@@ -144,6 +150,29 @@
             </div>
 		</section>
 	</form>
-    
+    <script>
+        //#region parqueo
+        var loader = function (e) {
+            let file = e.target.files;
+            let show = "" + file[0].name;
+            let output = document.getElementById('selector');
+            output.innerHTML = show;
+            output.classList.add("active");
+        };
+        let fileInput = document.getElementById("file");
+        fileInput.addEventListener("change", loader);
+        let vista_preliminar = (event) => {
+            let leer_img = new FileReader();
+            let id_img = document.getElementById('imgFoto');
+
+            leer_img.onload = () => {
+                if (leer_img.readyState == 2) {
+                    id_img.src = leer_img.result;
+                }
+            }
+            leer_img.readAsDataURL(event.target.files[0])
+        }
+                        //#endregion
+    </script>
 </body>
 </html>

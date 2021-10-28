@@ -331,6 +331,7 @@
     <Content Include="Imagen\ImgHome\car.jpg" />
     <Content Include="Imagen\ImgHome\close.png" />
     <Content Include="Imagen\ImgHome\curve.png" />
+    <Content Include="Imagen\ImgHome\Image.png" />
     <Content Include="Imagen\ImgHome\img.png" />
     <Content Include="Imagen\ImgHome\loginR.png" />
     <Content Include="Imagen\ImgHome\menu.png" />
@@ -347,9 +348,10 @@
     <Content Include="Style\StyleIndex\SLocationList.css" />
     <Content Include="Style\StyleIndex\SLocationList2.css" />
     <Content Include="Style\StyleIndex\SLocations.css" />
+    <Content Include="Style\StyleIndex\SLocations2.css" />
     <Content Include="Style\StyleIndex\SLogin2.css" />
     <Content Include="Style\StyleIndex\SMap.css" />
-    <Content Include="Style\StyleIndex\SStreets.css" />
+    <Content Include="Style\StyleIndex\SStreets2.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

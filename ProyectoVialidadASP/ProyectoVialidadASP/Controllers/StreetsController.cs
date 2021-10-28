@@ -161,6 +161,13 @@ namespace ProyectoVialidadASP.Controllers
             Street streetCloud= street_Model.UpdateStreetFromFirebaseRedirect(street);
             StreestCloud_model streestCloud_Model = new StreestCloud_model();
             await Task.Run(() => streestCloud_Model.UpdateCloudStreet(streetCloud));
+            ServicesNotification_model serviceNotification = new ServicesNotification_model();
+
+            serviceNotification = new ServicesNotification_model();
+            serviceNotification.TitleMessage = streetCloud.SiteStreet;
+            serviceNotification.MessageText = streetCloud.Description;
+            Thread send = new Thread(new ThreadStart(serviceNotification.SendMessage));
+            send.Start();
             return RedirectToAction("StreetsList");
         }
         #endregion

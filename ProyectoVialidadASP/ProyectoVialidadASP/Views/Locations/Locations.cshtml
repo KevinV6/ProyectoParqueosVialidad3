@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Añadir Nuevo Parqueo</title>
-    <link rel="stylesheet" href="~/Style/StyleIndex/SLocations.css">
+    <link rel="stylesheet" href="~/Style/StyleIndex/SLocations2.css">
     <!-- GOOGLE FONTs -->
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <!-- FONT AWESOME -->
@@ -83,11 +83,15 @@
                             <span class="line"></span>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="inputBox textarea">
-                            <input type="file" accept="image/png,image/jpeg,image/jpg" name="file" required>
-                            <span class="text">Imagen</span>
-                            <span class="line"></span>
+                </div>
+                <h3>Imagen del Parqueo</h3>
+                <div class="row100">
+                    <div class="col cadImage">
+                        <div class="inputBox text ">
+                            <input type="file" name="file" accept="image/png,image/jpeg,image/jpg" id="file" hidden onchange="vista_preliminar(event)" required>
+                            <label for="file" id="selector">Seleccionar Imagen del Parqueo</label>
+                            <br>
+                            <img class="imgWhite" src="~/Imagen/ImgHome/Image.png" alt="" id="imgFoto">
                         </div>
                     </div>
                 </div>
@@ -106,5 +110,29 @@
         </section>
     </form>
     <script src="~/Js/ValidacionLocation.js"></script>
+    <script>
+        //#region parqueo
+        var loader = function (e) {
+            let file = e.target.files;
+            let show = "" + file[0].name;
+            let output = document.getElementById('selector');
+            output.innerHTML = show;
+            output.classList.add("active");
+        };
+        let fileInput = document.getElementById("file");
+        fileInput.addEventListener("change", loader);
+        let vista_preliminar = (event) => {
+            let leer_img = new FileReader();
+            let id_img = document.getElementById('imgFoto');
+
+            leer_img.onload = () => {
+                if (leer_img.readyState == 2) {
+                    id_img.src = leer_img.result;
+                }
+            }
+            leer_img.readAsDataURL(event.target.files[0])
+        }
+        //#endregion
+    </script>
 </body>
 </html>
