@@ -62,7 +62,7 @@ namespace ProyectoVialidadASP.Controllers
         #endregion
 
         #region Deshabilitar parqueo
-        public ActionResult DisableParking(FormCollection form)
+        public async Task<ActionResult> DisableParking(FormCollection form)
         {
 
             Location_model location_Model = new Location_model();
@@ -71,14 +71,15 @@ namespace ProyectoVialidadASP.Controllers
             location = location_Model.UpdateLocationFromFirebase(form["txtdelete"]);
             location.StatusLocation = 'F';
             location_Model.DisableParking(location);
-
+            LocationCloud_model locationCloud_Model = new LocationCloud_model();
+            await Task.Run(() => locationCloud_Model.UpdateCloudLocation(location));
             return Redirect("LocationsList");
 
         }
         #endregion
 
         #region habilitar parqueo
-        public ActionResult EnableLocation(FormCollection form)
+        public async Task<ActionResult> EnableLocation(FormCollection form)
         {
             Location_model location_Model = new Location_model();
             Location location = new Location();
@@ -86,6 +87,8 @@ namespace ProyectoVialidadASP.Controllers
             location = location_Model.UpdateLocationFromFirebase(form["txtdelete"]);
             location.StatusLocation = 'V';
             location_Model.EnableLocation(location);
+            LocationCloud_model locationCloud_Model = new LocationCloud_model();
+            await Task.Run(() => locationCloud_Model.UpdateCloudLocation(location));
             return Redirect("LocationsList");
         }
         #endregion

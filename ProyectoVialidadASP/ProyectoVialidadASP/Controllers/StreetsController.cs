@@ -55,8 +55,8 @@ namespace ProyectoVialidadASP.Controllers
                 ServicesNotification_model serviceNotification = new ServicesNotification_model();
 
                 serviceNotification = new ServicesNotification_model();
-                serviceNotification.TitleMessage = streetCloud.SiteStreet;
-                serviceNotification.MessageText = streetCloud.Description;
+                serviceNotification.TitleMessage = streetCloud.Name;
+                serviceNotification.MessageText = streetCloud.SiteStreet + " - " + streetCloud.Description;
                 Thread send = new Thread(new ThreadStart(serviceNotification.SendMessage));
                 send.Start();
 
@@ -71,7 +71,7 @@ namespace ProyectoVialidadASP.Controllers
         #endregion
 
         #region Metodo de inhabilitar
-        public ActionResult DisableStreet(FormCollection form)
+        public async Task<ActionResult> DisableStreet(FormCollection form)
         {
             Street_model street_Model = new Street_model();
             Street street = new Street();
@@ -79,13 +79,14 @@ namespace ProyectoVialidadASP.Controllers
             street = street_Model.UpdateStreetFromFirebase(form["txtdelete"]);
             street.StatusStreet = 'F';
             street_Model.DisableStreet(street);
-
+            StreestCloud_model streestCloud_Model = new StreestCloud_model();
+            await Task.Run(() => streestCloud_Model.UpdateCloudStreet(street));
             return Redirect("StreetsList");
         }
         #endregion
 
         #region Metodo de habilitar
-        public ActionResult EnableStreet(FormCollection form)
+        public async Task<ActionResult> EnableStreet(FormCollection form)
         {
             Street_model street_Model = new Street_model();
             Street street = new Street();
@@ -93,7 +94,8 @@ namespace ProyectoVialidadASP.Controllers
             street = street_Model.UpdateStreetFromFirebase(form["txtdelete"]);
             street.StatusStreet = 'V';
             street_Model.EnableStreet(street);
-
+            StreestCloud_model streestCloud_Model = new StreestCloud_model();
+            await Task.Run(() => streestCloud_Model.UpdateCloudStreet(street));
             return Redirect("StreetsList");
         }
         #endregion
@@ -158,14 +160,14 @@ namespace ProyectoVialidadASP.Controllers
                 street = new Street(datos["txtId"], char.Parse(datos["txtStatus"]), datos["nameStreet"], datos["nameSite"], datos["description"], programmingDate, datos["initialTime"], datos["endTime"], datos["latitudeOne"], datos["lenghtOne"], datos["latitudeTwo"], datos["lenghtTwo"], UrlImage, nameImage);
             }
             Street_model street_Model = new Street_model();
-            Street streetCloud= street_Model.UpdateStreetFromFirebaseRedirect(street);
+            Street streetCloud = street_Model.UpdateStreetFromFirebaseRedirect(street);
             StreestCloud_model streestCloud_Model = new StreestCloud_model();
             await Task.Run(() => streestCloud_Model.UpdateCloudStreet(streetCloud));
             ServicesNotification_model serviceNotification = new ServicesNotification_model();
 
             serviceNotification = new ServicesNotification_model();
-            serviceNotification.TitleMessage = streetCloud.SiteStreet;
-            serviceNotification.MessageText = streetCloud.Description;
+            serviceNotification.TitleMessage = streetCloud.Name;
+            serviceNotification.MessageText = streetCloud.SiteStreet +" - "+ streetCloud.Description;
             Thread send = new Thread(new ThreadStart(serviceNotification.SendMessage));
             send.Start();
             return RedirectToAction("StreetsList");

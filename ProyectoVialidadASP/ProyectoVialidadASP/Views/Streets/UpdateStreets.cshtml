@@ -131,7 +131,7 @@
                             <input hidden="hidden" type="text" name="txtStatus" value="@Model.StatusStreet">
                             <input hidden="hidden" type="text" name="txtUrlImg" value="@Model.UrlImage">
                             <input hidden="hidden" type="text" name="txtNameImg" value="@Model.NameImage">
-                            <input type="file" name="file" accept="image/png,image/jpeg,image/jpg" id="file" hidden onchange="vista_preliminar(event)" required>
+                            <input type="file" name="file" accept="image/png,image/jpeg,image/jpg" id="file" hidden onchange="vista_preliminar(event)" >
                             <label for="file" id="selector">@Model.NameImage</label>
                             <br>
                             <img class="imgWhite" src="@Model.UrlImage" alt="" id="imgFoto">
