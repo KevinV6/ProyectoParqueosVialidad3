@@ -71,17 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MenuLateral(),
-      appBar: AppBar(title: Text("Menu principal cliente "),
-        actions: [
-          IconButton( //Boton de buscador
-            icon: Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: BuscadorWP());
-            },
-          )
-        ],
-      ),
 
       //Navigation Bar
       bottomNavigationBar: Boton(),

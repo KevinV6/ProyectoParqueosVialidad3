@@ -51,22 +51,28 @@ class _RutasState extends State<Rutas> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: MenuLateral(), //Boton de menu
-      appBar: AppBar(
-        title: Text(""),
-        actions: [
-          IconButton(
-            //Boton de buscador
-            icon: Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: BuscadorWP());
-            },
-          )
-        ],
-      ),
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          drawer: MenuLateral(),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(60.0),
+            child: AppBar(
+              backgroundColor: Colors.blue.shade700,
+              title: Text(""),
+              actions: [
+                IconButton( //Boton de buscador
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    showSearch(context: context, delegate: BuscadorWP());
+                  },
+                )
+              ],
+            ),
+          ),
 
-      body: Stack(
+
+          body: Stack(
         children: [
           GoogleMap(
             mapType: currentMapType,
@@ -100,6 +106,7 @@ class _RutasState extends State<Rutas> {
           ),
         ],
       ),
+    )
     );
   }
 

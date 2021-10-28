@@ -6,6 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:proyectoparqueovialidad/buscador_datos/buscadordatos.dart';
+import 'package:proyectoparqueovialidad/menu/menu.dart';
 
 void main() {
   runApp(Notificaciones());
@@ -16,6 +18,7 @@ class Notificaciones extends StatelessWidget {
   static String id = "notificaciones_page";
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -39,8 +42,27 @@ class _NotificacionesState extends State<MyHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          drawer: MenuLateral(),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(60.0),
+            child: AppBar(
+              backgroundColor: Colors.blue.shade700,
+              title: Text(""),
+              actions: [
+                IconButton( //Boton de buscador
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    showSearch(context: context, delegate: BuscadorWP());
+                  },
+                )
+              ],
+            ),
+          ),
+
+          body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
           child: Stack(
@@ -77,6 +99,7 @@ class _NotificacionesState extends State<MyHome> {
           ),
         ),
       ),
+    )
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyectoparqueovialidad/MapaHome/mapahome.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:proyectoparqueovialidad/main.dart';
 
@@ -161,7 +162,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             buttonColor: Colors.blueGrey,
             child: RaisedButton(
               onPressed: () {
-                Navigator.pushNamed(context, MyHomePage.id);
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                    builder: (context) => new MenuPrinci(),
+                  ),
+                );
               },
               textColor: Colors.amber,
               child: Text("Volver"),

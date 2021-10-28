@@ -39,14 +39,26 @@ class MenuLateral extends StatelessWidget{
             ),
             ListTile(
               onTap: () {
-                Navigator.pushNamed(context, MyStatefulWidget.id);
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                    builder: (context) => new MyStatefulWidget(),
+                  ),
+                );
+
               },
               leading: Icon(Icons.info_outline),
               title: Text('Sobre Nosotros'),
             ),
             ListTile(
               onTap: () {
-                Navigator.pushNamed(context, Login.id);
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                    builder: (context) => new Login(),
+                  ),
+                );
+
               },
               leading: Icon(Icons.account_circle_rounded),
               title: Text('Iniciar Sesion'),
