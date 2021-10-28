@@ -7,7 +7,6 @@ import 'package:proyectoparqueovialidad/menu/menu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Rutas extends StatefulWidget {
-
   @override
   _RutasState createState() => _RutasState();
 }
@@ -27,39 +26,38 @@ class _RutasState extends State<Rutas> {
 
   Set<Polyline> _polylines = Set<Polyline>();
 
-
   static final CameraPosition initCameraPosition = CameraPosition(
       bearing: 30,
       target: LatLng(-17.3755459, -66.2543883),
       tilt: 45,
       zoom: 13.5);
 
-
-  void getLocation() async{
+  void getLocation() async {
     var location = await currentLocation.getLocation();
-    currentLocation.onLocationChanged.listen((LocationData loc){
-
-      _controller?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
-        target: LatLng(loc.latitude ?? 0.0,loc.longitude?? 0.0),
+    currentLocation.onLocationChanged.listen((LocationData loc) {
+      _controller
+          ?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
+        target: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
         zoom: 12.0,
       )));
       print(loc.latitude);
       print(loc.longitude);
       setState(() {
-        position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0);
+        position:
+        LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0);
       });
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       drawer: MenuLateral(), //Boton de menu
-      appBar: AppBar(title: Text(""),
+      appBar: AppBar(
+        title: Text(""),
         actions: [
-          IconButton(    //Boton de buscador
+          IconButton(
+            //Boton de buscador
             icon: Icon(Icons.search),
             onPressed: () {
               showSearch(context: context, delegate: BuscadorWP());
@@ -67,7 +65,6 @@ class _RutasState extends State<Rutas> {
           )
         ],
       ),
-
 
       body: Stack(
         children: [
@@ -79,9 +76,7 @@ class _RutasState extends State<Rutas> {
             polylines: _polylines,
             markers: Set<Marker>.of(markers.values),
             myLocationEnabled: true,
-
           ),
-
           Container(
             padding: EdgeInsets.all(15),
             alignment: Alignment.topRight,
@@ -91,17 +86,18 @@ class _RutasState extends State<Rutas> {
               onPressed: _onMapTypeChanged,
             ),
           ),
-
           Container(
             padding: EdgeInsets.all(15),
             alignment: Alignment.bottomCenter,
             child: FloatingActionButton(
               backgroundColor: Colors.black12,
-              child:  Icon(Icons.location_searching,color: Colors.white,),
+              child: Icon(
+                Icons.location_searching,
+                color: Colors.white,
+              ),
               onPressed: getLocation,
             ),
           ),
-
         ],
       ),
     );
@@ -111,7 +107,9 @@ class _RutasState extends State<Rutas> {
     FirebaseFirestore.instance.collection("Streets").get().then((docs) {
       if (docs.docs.isNotEmpty) {
         for (int i = 0; i < docs.docs.length; ++i) {
-          initRut(docs.docs[i].data(), docs.docs[i].id);
+          if (docs.docs[i].data()['StatusStreet'] == "V") {
+            initRut(docs.docs[i].data(), docs.docs[i].id);
+          }
         }
       }
     });
@@ -132,8 +130,10 @@ class _RutasState extends State<Rutas> {
       endCap: Cap.roundCap,
       polylineId: PolylineId(idData),
       visible: true,
-      points: [new LatLng(data['InitialLatitude'], data['InitialLongitude']),
-        new LatLng(data['EndLatitude'], data['EndLongitude'])],
+      points: [
+        new LatLng(data['InitialLatitude'], data['InitialLongitude']),
+        new LatLng(data['EndLatitude'], data['EndLongitude'])
+      ],
       width: 3,
       color: Color.fromRGBO(252, 82, 82, 1.0),
     );
@@ -150,8 +150,7 @@ class _RutasState extends State<Rutas> {
     });
   }
 
-
-  getLoc() async{
+  getLoc() async {
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
 
@@ -170,17 +169,14 @@ class _RutasState extends State<Rutas> {
         return;
       }
     }
-
   }
-
 
   void _onMapTypeChanged() {
     setState(() {
-      currentMapType = currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
+      currentMapType =
+          currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
     });
   }
-
-
 
   @override
   void initState() {
@@ -190,5 +186,4 @@ class _RutasState extends State<Rutas> {
       getLocation();
     });
   }
-
 }

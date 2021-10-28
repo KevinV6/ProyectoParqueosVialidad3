@@ -100,140 +100,149 @@ class _NotificacionesState extends State<MyHome> {
                       itemCount: lists.length,
                       itemBuilder: (BuildContext context, int index) {
                         var now = new DateTime.now();
-                        return Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Stack(
-                              children: <Widget>[
-                                Container(
-                                  height: 170,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(_borderRadius),
-                                    gradient: LinearGradient(
-                                        //color del card
-                                        colors: [Color(0xffBFD7ED)],
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color(0xff60A3D9),
-                                        blurRadius: 12,
-                                        offset: Offset(0, 6),
-                                      ),
-                                    ],
+                        if (lists[index]["StatusStreet"] == "V") {
+                          return Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Stack(
+                                children: <Widget>[
+                                  Container(
+                                    height: 170,
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.circular(_borderRadius),
+                                      gradient: LinearGradient(
+                                          //color del card
+                                          colors: [Color(0xffBFD7ED)],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color(0xff60A3D9),
+                                          blurRadius: 12,
+                                          offset: Offset(0, 6),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Positioned(
-                                  right: 0,
-                                  bottom: 0,
-                                  top: 0,
-                                  child: CustomPaint(
-                                    size: Size(100, 150),
-                                    painter: CustonCardShapePain(_borderRadius,
-                                        Color(0xffBFD7ED), Color(0xffBFD7ED)),
+                                  Positioned(
+                                    right: 0,
+                                    bottom: 0,
+                                    top: 0,
+                                    child: CustomPaint(
+                                      size: Size(100, 150),
+                                      painter: CustonCardShapePain(
+                                          _borderRadius,
+                                          Color(0xffBFD7ED),
+                                          Color(0xffBFD7ED)),
+                                    ),
                                   ),
-                                ),
-                                Positioned.fill(
-                                  child: Row(
-                                    children: <Widget>[
-                                      Expanded(
-                                        flex: 6,
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            Text(
-                                              (lists[index]["SiteStreet"]),
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: 'Arial',
-                                                  fontWeight: FontWeight.w800,
-                                                  fontSize: 20),
-                                            ),
-                                            SizedBox(height: 10),
-                                            Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: <Widget>[
-                                                Flexible(
-                                                    child: Icon(
-                                                  Icons.location_on,
-                                                  color: Color(0xff212871),
-                                                )),
-                                                // Icon(Icons.location_on, color: Colors.white),
-                                                SizedBox(width: 5),
-                                                Flexible(
-                                                  child: Text(
-                                                    (lists[index]["Name"]),
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xff212871),
-                                                        fontFamily: 'Arial',
-                                                        fontWeight:
-                                                            FontWeight.w500),
+                                  Positioned.fill(
+                                    child: Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                          flex: 6,
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: <Widget>[
+                                              Text(
+                                                (lists[index]["SiteStreet"]),
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: 'Arial',
+                                                    fontWeight: FontWeight.w800,
+                                                    fontSize: 20),
+                                              ),
+                                              SizedBox(height: 10),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: <Widget>[
+                                                  Flexible(
+                                                      child: Icon(
+                                                    Icons.location_on,
+                                                    color: Color(0xff212871),
+                                                  )),
+                                                  // Icon(Icons.location_on, color: Colors.white),
+                                                  SizedBox(width: 5),
+                                                  Flexible(
+                                                    child: Text(
+                                                      (lists[index]["Name"]),
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xff212871),
+                                                          fontFamily: 'Arial',
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              "Fecha: " +
-                                                  (lists[index]
-                                                      ["ProgrammingDate"]),
-                                              style: TextStyle(
-                                                  color: Color(0xff212871),
-                                                  fontFamily: 'Arial',
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                            SizedBox(height: 10),
-                                            Flexible(
-                                              child: Text(
-                                                "Descripcion: " +
-                                                    lists[index]["Description"],
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "Fecha: " +
+                                                    (lists[index]
+                                                        ["ProgrammingDate"]),
                                                 style: TextStyle(
                                                     color: Color(0xff212871),
                                                     fontFamily: 'Arial',
                                                     fontWeight:
                                                         FontWeight.w500),
                                               ),
-                                            ),
-                                          ],
+                                              SizedBox(height: 10),
+                                              Flexible(
+                                                child: Text(
+                                                  "Descripcion: " +
+                                                      lists[index]
+                                                          ["Description"],
+                                                  style: TextStyle(
+                                                      color: Color(0xff212871),
+                                                      fontFamily: 'Arial',
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            Text(
-                                              'Duracion',
-                                              style: TextStyle(
-                                                  color: Color(0xff212871),
-                                                  fontFamily: 'Arial',
-                                                  fontWeight: FontWeight.w800,
-                                                  fontSize: 15),
-                                            ),
-                                            SizedBox(height: 10),
-                                            Text(
-                                              lists[index]["StartTime"] +
-                                                  " \n\t A\n" +
-                                                  lists[index]["EndTime"],
-                                              style: TextStyle(
-                                                  color: Color(0xff212871),
-                                                  fontFamily: 'Arial',
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ],
+                                        Expanded(
+                                          flex: 2,
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: <Widget>[
+                                              Text(
+                                                'Duracion',
+                                                style: TextStyle(
+                                                    color: Color(0xff212871),
+                                                    fontFamily: 'Arial',
+                                                    fontWeight: FontWeight.w800,
+                                                    fontSize: 15),
+                                              ),
+                                              SizedBox(height: 10),
+                                              Text(
+                                                lists[index]["StartTime"] +
+                                                    " \n\t A\n" +
+                                                    lists[index]["EndTime"],
+                                                style: TextStyle(
+                                                    color: Color(0xff212871),
+                                                    fontFamily: 'Arial',
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        } else {
+                          return Card();
+                        }
                       });
                 }
                 return CircularProgressIndicator();

@@ -8,13 +8,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 
-
 class MenuPrinci extends StatefulWidget {
   static String id = "menu_pages";
 
-  MenuPrinci({Key? key,}) : super(key: key);
-
-
+  MenuPrinci({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _MenuPrinciState createState() => _MenuPrinciState();
@@ -30,13 +29,13 @@ class _MenuPrinciState extends State<MenuPrinci> {
   MapType currentMapType = MapType.normal;
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
-
-
   crearmarcadores() {
     FirebaseFirestore.instance.collection("Locations").get().then((docs) {
       if (docs.docs.isNotEmpty) {
         for (int i = 0; i < docs.docs.length; ++i) {
-          initMarker(docs.docs[i].data(), docs.docs[i].id);
+          if (docs.docs[i].data()['StatusLocation'] == "V") {
+            initMarker(docs.docs[i].data(), docs.docs[i].id);
+          }
         }
       }
     });
@@ -45,7 +44,6 @@ class _MenuPrinciState extends State<MenuPrinci> {
   void initMarker(lugar, lugaresid) {
     var markerIdVal = lugaresid;
     final MarkerId markerId = MarkerId(markerIdVal);
-
 
     final Marker marker = Marker(
       markerId: markerId,
@@ -66,12 +64,8 @@ class _MenuPrinciState extends State<MenuPrinci> {
       tilt: 45,
       zoom: 13.5);
 
-
-
-
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -82,7 +76,8 @@ class _MenuPrinciState extends State<MenuPrinci> {
               backgroundColor: Colors.blue.shade700,
               title: Text(""),
               actions: [
-                IconButton( //Boton de buscador
+                IconButton(
+                  //Boton de buscador
                   icon: Icon(Icons.search),
                   onPressed: () {
                     showSearch(context: context, delegate: BuscadorWP());
@@ -91,21 +86,18 @@ class _MenuPrinciState extends State<MenuPrinci> {
               ],
             ),
           ),
-
-
           body: Stack(
             children: [
               GoogleMap(
                 mapType: currentMapType,
                 onMapCreated: (GoogleMapController controller) {
-                  _controller=controller;
+                  _controller = controller;
                 },
                 myLocationEnabled: true,
                 markers: Set<Marker>.of(markers.values),
                 initialCameraPosition: initCameraPosition,
                 compassEnabled: true,
               ),
-
               Container(
                 padding: EdgeInsets.all(15),
                 alignment: Alignment.topRight,
@@ -115,41 +107,41 @@ class _MenuPrinciState extends State<MenuPrinci> {
                   onPressed: _onMapTypeChanged,
                 ),
               ),
-
               Container(
                 padding: EdgeInsets.all(15),
                 alignment: Alignment.bottomCenter,
                 child: FloatingActionButton(
                   backgroundColor: Colors.black12,
-                  child:  Icon(Icons.location_searching,color: Colors.white,),
+                  child: Icon(
+                    Icons.location_searching,
+                    color: Colors.white,
+                  ),
                   onPressed: getLocation,
                 ),
               ),
-
             ],
           ),
-        )
-    );
+        ));
   }
 
-  void getLocation() async{
+  void getLocation() async {
     var location = await currentLocation.getLocation();
-    currentLocation.onLocationChanged.listen((LocationData loc){
-
-      _controller?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
-        target: LatLng(loc.latitude ?? 0.0,loc.longitude?? 0.0),
+    currentLocation.onLocationChanged.listen((LocationData loc) {
+      _controller
+          ?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
+        target: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
         zoom: 12.0,
       )));
       print(loc.latitude);
       print(loc.longitude);
       setState(() {
-        position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0);
+        position:
+        LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0);
       });
     });
   }
 
-
-  getLoc() async{
+  getLoc() async {
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
 
@@ -168,17 +160,14 @@ class _MenuPrinciState extends State<MenuPrinci> {
         return;
       }
     }
-
   }
-
 
   void _onMapTypeChanged() {
     setState(() {
-      currentMapType = currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
+      currentMapType =
+          currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
     });
   }
-
-
 
   @override
   void initState() {
@@ -188,5 +177,4 @@ class _MenuPrinciState extends State<MenuPrinci> {
       getLocation();
     });
   }
-
 }
