@@ -62,7 +62,7 @@
 
                                 finalHour = TimeSpan.Parse(item.EndTime);
                                 dateData = dateData + finalHour;
-                                if (dateData >= currentDate && (item.StatusStreet == 'V'))//&& (dateData.Hour >= timeNow.Hour && dateData.Minute >= timeNow.Minute)
+                                if (dateData >= timeNow && (item.StatusStreet == 'V'))//&& (dateData.Hour >= timeNow.Hour && dateData.Minute >= timeNow.Minute)
                                 {
                                     <tbody>
                                         <tr>

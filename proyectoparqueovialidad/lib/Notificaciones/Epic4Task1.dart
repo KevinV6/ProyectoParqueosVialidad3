@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:proyectoparqueovialidad/buscador_datos/buscadordatos.dart';
 import 'package:proyectoparqueovialidad/menu/menu.dart';
 
@@ -52,7 +53,8 @@ class _NotificacionesState extends State<MyHome> {
               backgroundColor: Colors.blue.shade700,
               title: Text(""),
               actions: [
-                IconButton( //Boton de buscador
+                IconButton(
+                  //Boton de buscador
                   icon: Icon(Icons.search),
                   onPressed: () {
                     showSearch(context: context, delegate: BuscadorWP());
@@ -61,46 +63,44 @@ class _NotificacionesState extends State<MyHome> {
               ],
             ),
           ),
-
           body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                alignment: Alignment.topCenter,
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 50,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Notificaciones',
-                        style: TextStyle(
-                          color: Color(0xff212871),
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
+            value: SystemUiOverlayStyle.light,
+            child: GestureDetector(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    alignment: Alignment.topCenter,
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 50,
                       ),
-                      SizedBox(
-                        height: 10,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Notificaciones',
+                            style: TextStyle(
+                              color: Color(0xff212871),
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          buildCard2(),
+                        ],
                       ),
-                      buildCard2(),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-    )
-    );
+        ));
   }
 
   buildCard2() {
@@ -123,6 +123,13 @@ class _NotificacionesState extends State<MyHome> {
                       itemCount: lists.length,
                       itemBuilder: (BuildContext context, int index) {
                         var now = new DateTime.now();
+                        var now2;
+                        var juntar = lists[index]["ProgrammingDate"] +
+                            'T' +
+                            lists[index]["EndTime"];
+                        var ti = DateTime.parse(juntar);
+                        now2 = DateTime.parse(lists[index]["ProgrammingDate"]);
+
                         if (lists[index]["StatusStreet"] == "V") {
                           return Card(
                             child: Padding(

@@ -176,6 +176,19 @@
 
     @*<script src="~/Js/ValidacionStreet.js"></script>*@
     <script>
+        function padLeft(n) {
+            return ("00" + n).slice(-2);
+        }
+
+        function formatDate() {
+            var d = new Date,
+                dformat = [d.getFullYear(),
+                padLeft(d.getMonth() + 1),
+                padLeft(d.getDate())
+                ].join('-');
+            return dformat
+        }
+        $('#programmingDate').attr('min', formatDate());
         //#region parqueo
         var loader = function (e) {
             let file = e.target.files;
