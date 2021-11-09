@@ -51,13 +51,24 @@
                     var numRegisters  = contentJson.length;
 
                     let pointMarker = [];
+                    let markerTwo = [];
                     var informationMarker = [];
                     for (var a = 0; a < numRegisters ; a++) {
                         row = contentJson[a];
 
                         var Coordinates = { lat: Number(row[rowPosition[4]]), lng: Number(row[rowPosition[5]]) };
+                        if (row[rowPosition[8]] == 'Tarifado') {
+                            var CoordinatesTwo = { lat: Number(row[rowPosition[6]]), lng: Number(row[rowPosition[7]]) };
+                            line = new google.maps.Polyline({ path: [Coordinates, CoordinatesTwo], map: map });
+                            markerTwo[row[rowPosition[8]]] = new google.maps.Marker({
+                                position: CoordinatesTwo,
+                                map: map,
+                                title: row[rowPosition[2]]
+                            });
+                            markerTwo[row[rowPosition[8]]].setIcon('/Imagen/endMarker.png')
+                        }
                         //#region marker with your data
-                        var contentMarker = '<h4>' + row[rowPosition[2]] + '</h4>' + '<p>' + row[rowPosition[8]] + '</p>';
+                        var contentMarker = '<h4>' + row[rowPosition[2]] + '</h4>' + '<p>' + row[rowPosition[11]] + '</p>';
                         pointMarker[row[rowPosition[8]]] = new google.maps.Marker({
                             position: Coordinates,
                             map: map,

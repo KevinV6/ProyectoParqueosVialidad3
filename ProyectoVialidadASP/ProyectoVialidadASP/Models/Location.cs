@@ -13,6 +13,9 @@ namespace ProyectoVialidadASP.Models
         public string NameStreet { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
+        public string EndLatitude { get; set; }
+        public string EndLongitude { get; set; }
+        public string Parking { get; set; }
         public byte ParkingSpaces { get; set; }
         public string Price { get; set; }
         public string Description { get; set; }
@@ -33,6 +36,9 @@ namespace ProyectoVialidadASP.Models
         /// <param name="nameStreet"></param>
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
+        /// <param name="endLatitude"></param>
+        /// <param name="endLongitude"></param>
+        /// <param name="parking"></param>
         /// <param name="parkingSpaces"></param>
         /// <param name="price"></param>
         /// <param name="description"></param>
@@ -40,13 +46,16 @@ namespace ProyectoVialidadASP.Models
         /// <param name="nameImage"></param>
         /// <param name="urlImageDesign"></param>
         /// <param name="nameImageDesign"></param>
-        public Location(char statusLocation, string name, string nameStreet, string latitude, string longitude, byte parkingSpaces, string price, string description, string urlImage, string nameImage, string urlImageDesign, string nameImageDesign)
+        public Location(char statusLocation, string name, string nameStreet, string latitude, string longitude, string endLatitude, string endLongitude, string parking, byte parkingSpaces, string price, string description, string urlImage, string nameImage, string urlImageDesign, string nameImageDesign)
         {
             StatusLocation = statusLocation;
             Name = name;
             NameStreet = nameStreet;
             Latitude = latitude;
             Longitude = longitude;
+            EndLatitude = endLatitude;
+            EndLongitude = endLongitude;
+            Parking = parking;
             ParkingSpaces = parkingSpaces;
             Price = price;
             Description = description;
@@ -65,6 +74,9 @@ namespace ProyectoVialidadASP.Models
        /// <param name="nameStreet"></param>
        /// <param name="latitude"></param>
        /// <param name="longitude"></param>
+       /// <param name="endLatitude"></param>
+       /// <param name="parking"></param>
+       /// <param name="endLongitude"></param>
        /// <param name="parkingSpaces"></param>
        /// <param name="price"></param>
        /// <param name="description"></param>
@@ -72,7 +84,7 @@ namespace ProyectoVialidadASP.Models
        /// <param name="nameImage"></param>
        /// <param name="urlImageDesign"></param>
        /// <param name="nameImageDesign"></param>
-        public Location(string idLocation, char statusLocation, string name, string nameStreet, string latitude, string longitude, byte parkingSpaces, string price, string description, string urlImage, string nameImage, string urlImageDesign, string nameImageDesign)
+        public Location(string idLocation, char statusLocation, string name, string nameStreet, string latitude, string longitude, string endLatitude, string endLongitude, string parking,  byte parkingSpaces, string price, string description, string urlImage, string nameImage, string urlImageDesign, string nameImageDesign)
         {
             IdLocation = idLocation;
             StatusLocation = statusLocation;
@@ -80,6 +92,9 @@ namespace ProyectoVialidadASP.Models
             NameStreet = nameStreet;
             Latitude = latitude;
             Longitude = longitude;
+            EndLatitude = endLatitude;
+            EndLongitude = endLongitude;
+            Parking = parking;
             ParkingSpaces = parkingSpaces;
             Price = price;
             Description = description;

@@ -38,6 +38,7 @@ namespace ProyectoVialidadASP.Controllers
                 {
                     string path = Path.Combine(Server.MapPath("~/Imagen/ImgFile/"), file.FileName);
                     string pathDesign = Path.Combine(Server.MapPath("~/Imagen/ImgDesign/"), fileDesign.FileName);
+                    string latitudeTwo = "", lenghtTwo = "", price;
                     file.SaveAs(path);
                     fileDesign.SaveAs(pathDesign);
                     stream = new FileStream(Path.Combine(path), FileMode.Open);
@@ -47,7 +48,19 @@ namespace ProyectoVialidadASP.Controllers
                     await Task.Run(() => linkImage = file_Model.Upload(stream, file.FileName));
                     await Task.Run(() => linkImageDesign = file_ModelDesign.Upload(streamDesign, fileDesign.FileName));
 
-                    location = new Location('V', datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"], linkImage.Result, file.FileName, linkImageDesign.Result, fileDesign.FileName);
+                    if (datos["Select"] == "Tarifado")
+                    {
+                        latitudeTwo = datos["latitudeTwo"];
+                        lenghtTwo = datos["lenghtTwo"];
+                        price = datos["price"];
+                    }
+                    else
+                    {
+                        latitudeTwo = "0";
+                        lenghtTwo = "0";
+                        price = "0";
+                    }
+                    location = new Location('V', datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], latitudeTwo, lenghtTwo, datos["Select"], byte.Parse(datos["parkingSpaces"]), price, datos["description"], linkImage.Result, file.FileName, linkImageDesign.Result, fileDesign.FileName);
                 }
                 Location locationCloud = lp.AddLocationsTofirebase(location);
                 LocationCloud_model locationCloud_Model = new LocationCloud_model();
@@ -146,6 +159,7 @@ namespace ProyectoVialidadASP.Controllers
                 string nameImage = null;
                 string UrlImageDesign = null;
                 string nameImageDesign = null;
+                string latitudeTwo = "", lenghtTwo = "", price;
                 if (file != null)
                 {
                     string path = Path.Combine(Server.MapPath("~/Imagen/ImgFile/"), file.FileName);
@@ -174,7 +188,19 @@ namespace ProyectoVialidadASP.Controllers
                     UrlImageDesign = datos["txtUrlImgDesign"];
                     nameImageDesign = datos["txtNameImgDesign"];
                 }
-                location = new Location(datos["txtId"], char.Parse(datos["txtStatus"]), datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], byte.Parse(datos["parkingSpaces"]), datos["price"], datos["description"], UrlImage, nameImage, UrlImageDesign, nameImageDesign);
+                if (datos["Select"] == "Tarifado")
+                {
+                    latitudeTwo = datos["latitudeTwo"];
+                    lenghtTwo = datos["lenghtTwo"];
+                    price = datos["price"];
+                }
+                else
+                {
+                    latitudeTwo = "0";
+                    lenghtTwo = "0";
+                    price = "0";
+                }
+                location = new Location(datos["txtId"], char.Parse(datos["txtStatus"]), datos["name"], datos["nameStreet"], datos["latitude"], datos["lenght"], latitudeTwo, lenghtTwo, datos["Select"], byte.Parse(datos["parkingSpaces"]), price, datos["description"], UrlImage, nameImage, UrlImageDesign, nameImageDesign);
 
                 Location_model location_Model = new Location_model();
                 Location locationCloud = location_Model.UpdateLocationFromFirebaseRedirect(location);

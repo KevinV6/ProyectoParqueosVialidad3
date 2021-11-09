@@ -2,6 +2,27 @@
 
 @{
     Layout = null;
+    string SelectOne = "", SelectTwo = "";
+    switch (Model.Parking)
+    {
+        case "No Tarifado": SelectOne = "selected"; break;
+        case "Tarifado": SelectTwo = "selected"; break;
+        default:
+            break;
+    }
+    string latitude = Model.Latitude, lenght = Model.Longitude, latitudeTwo, lenghtTwo;
+
+    if (Model.EndLatitude == "0" && Model.EndLongitude == "0")
+    {
+        latitudeTwo = latitude;
+        lenghtTwo = lenght;
+    }
+    else
+    {
+        latitudeTwo = Model.EndLatitude;
+        lenghtTwo = Model.EndLongitude;
+    }
+
 }
 
 <!DOCTYPE html>
@@ -12,7 +33,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Añadir Nuevo Parqueo</title>
-    <link rel="stylesheet" href="~/Style/StyleIndex/SLocations2.css">
+    <link rel="stylesheet" href="~/Style/StyleIndex/SLocations.css">
     <!-- GOOGLE FONTs -->
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <!-- FONT AWESOME -->
@@ -43,29 +64,58 @@
                     </div>
 
                 </div>
+                <h3>Punto Inicio</h3>
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="number" name="latitude" value="@Model.Latitude" step="0.000001" required>
-                            <span class="text">Latitud</span>
-                            <span class="line"></span>
+                            <input type="number" name="latitude" value="@Model.Latitude" id="latitude" step="0.000000000000001" required readonly>
+                            <span class="text tdisabled">Latitud</span>
+                            <span class="line ldisabled"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="number" name="lenght" value="@Model.Longitude" step="0.000001" required>
-                            <span class="text">Longitud</span>
-                            <span class="line"></span>
+                            <input type="number" name="lenght" value="@Model.Longitude" id="lenght" step="0.000000000000001" required readonly>
+                            <span class="text tdisabled">Longitud</span>
+                            <span class="line ldisabled"></span>
                         </div>
                     </div>
-
+                </div>
+                <div id="dataTwo" style="display:none">
+                    <h3>Punto Final</h3>
+                    <div class="row100">
+                        <div class="col">
+                            <div class="inputBox">
+                                <input type="number" name="latitudeTwo" minlength="9" maxlength="10" value="@latitudeTwo" id="latitudeTwo" step="0.000000000000001" readonly>
+                                <span class="text tdisabled">Latitud</span>
+                                <span class="line ldisabled"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="inputBox">
+                                <input type="number" name="lenghtTwo" minlength="9" maxlength="10" value="@lenghtTwo" id="lenghtTwo" step="0.000000000000001" readonly>
+                                <span class="text tdisabled">Longitud</span>
+                                <span class="line ldisabled"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row100">
                     <div class="col">
-                        <div class="inputBox">
-                            <input type="number" name="price" value="@Model.Price" step="0.01" required>
-                            <span class="text">Tarifas</span>
-                            <span class="line"></span>
+                        <div>
+                            <div style="width: 100%; height: 50vh;" id="map"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox text">
+                            <select id="Select" style="width:100%;padding:10px 20px;outline:none;font-size:15px;" onchange="seleccionar()" name="Select">
+                                <option id="one" value="No Tarifado" @SelectOne>No Tarifado</option>
+                                <option id="two" value="Tarifado" @SelectTwo>Tarifado</option>
+                            </select>
+                            <span class="text tdisabled">Tipo</span>
+
                         </div>
                     </div>
                     <div class="col">
@@ -85,7 +135,13 @@
                             <span class="line"></span>
                         </div>
                     </div>
-
+                    <div class="col" id="DataPrice" style="display:none">
+                        <div class="inputBox">
+                            <input type="number" name="price" value="@Model.Price" step="0.01">
+                            <span class="text">Tarifas</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
                 </div>
                 <h3>Imagen del Parqueo</h3>
                 <div class="row100">
@@ -95,7 +151,7 @@
                             <input hidden="hidden" type="text" name="txtStatus" value="@Model.StatusLocation">
                             <input hidden="hidden" type="text" name="txtUrlImg" value="@Model.UrlImage">
                             <input hidden="hidden" type="text" name="txtNameImg" value="@Model.NameImage">
-                            <input type="file" name="file" accept="image/png,image/jpeg,image/jpg" id="file" hidden onchange="vista_preliminar(event)" >
+                            <input type="file" name="file" accept="image/png,image/jpeg,image/jpg" id="file" hidden onchange="vista_preliminar(event)">
                             <label for="file" id="selector">@Model.NameImage</label>
                             <br>
                             <img class="imgWhite" src="@Model.UrlImage" alt="" id="imgFoto">
@@ -109,7 +165,7 @@
                         <div class="inputBox text ">
                             <input hidden="hidden" type="text" name="txtUrlImgDesign" value="@Model.UrlImageDesign">
                             <input hidden="hidden" type="text" name="txtNameImgDesign" value="@Model.NameImageDesign">
-                            <input type="file" name="fileDesign" accept="image/png,image/jpeg,image/jpg" id="croquis" hidden onchange="vista_preliminarCroquis(event)" >
+                            <input type="file" name="fileDesign" accept="image/png,image/jpeg,image/jpg" id="croquis" hidden onchange="vista_preliminarCroquis(event)">
                             <label for="croquis" id="selectorCroquis">@Model.NameImage</label>
                             <br>
                             <img class="imgWhite" src="@Model.UrlImageDesign" alt="" id="imgFotoCroquis">
@@ -130,7 +186,114 @@
             </div>
         </section>
     </form>
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtFqDJ3PeclA4FbDx9-uYvhil8NV1Mu7E&callback=initMap">
+    </script>
     <script>
+        //#region Mapa
+        var marker;
+        var dato;
+        var coords = {};
+
+        initMap = function () {
+
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    coords = {
+                        lng: -66.155439,
+                        lat: -17.392097
+                    };
+                    setMapa(coords);
+                    seleccionar();
+                }, function (error) { console.log(error); });
+
+        }
+
+        function seleccionar() {
+            let Select = document.getElementById('Select');
+            dato = Select.value;
+            document.getElementById("latitude").value = @latitude;
+            document.getElementById("lenght").value = @lenght;
+
+                document.getElementById("latitudeTwo").value = @latitudeTwo;
+                document.getElementById("lenghtTwo").value = @lenghtTwo;
+
+
+            var dataTwo = document.getElementById("dataTwo");
+            var price = document.getElementById("DataPrice");
+
+            setMapa(coords);
+            if (dato == 'No Tarifado') {
+                dataTwo.style.display = "none";
+                price.style.display = "none";
+            } else {
+                dataTwo.style.display = "block";
+                price.style.display = "block";
+            }
+        }
+
+        function setMapa(coords) {
+            var map = new google.maps.Map(document.getElementById('map'),
+                {
+                    zoom: 13,
+                    center: new google.maps.LatLng(Number(@latitude), Number(@lenght)),
+
+                });
+
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                animation: google.maps.Animation.DROP,
+                position: new google.maps.LatLng(Number(@latitude), Number(@lenght)),
+
+            });
+
+            marker.addListener('click');
+            if (dato == 'Tarifado') {
+                var initialMarker = { lat: Number(document.getElementById("latitude").value), lng: Number(document.getElementById("lenght").value) };
+                var finalMarker = { lat: Number(document.getElementById("latitudeTwo").value), lng: Number(document.getElementById("lenghtTwo").value) };
+                var line = new google.maps.Polyline();
+            }
+            marker.addListener('dragend', function (event) {
+                document.getElementById("latitude").value = this.getPosition().lat();
+                document.getElementById("lenght").value = this.getPosition().lng();
+                if (dato == 'Tarifado') {
+                    var initialMarker = { lat: Number(document.getElementById("latitude").value), lng: Number(document.getElementById("lenght").value) };
+                    var finalMarker = { lat: Number(document.getElementById("latitudeTwo").value), lng: Number(document.getElementById("lenghtTwo").value) };
+                    line.setMap(null);
+                    line = new google.maps.Polyline({ path: [initialMarker, finalMarker], map: map })
+                }
+            });
+
+            ////
+
+            if (dato == 'Tarifado') {
+                markerTwo = new google.maps.Marker({
+                    map: map,
+                    draggable: true,
+                    animation: google.maps.Animation.DROP,
+                    position: new google.maps.LatLng(Number(@latitudeTwo), Number(@lenghtTwo)),
+
+                });
+                markerTwo.setIcon('/Imagen/endMarker.png')
+                markerTwo.addListener('click');
+                var initialMarker = { lat: Number(document.getElementById("latitude").value), lng: Number(document.getElementById("lenght").value) };
+                var finalMarker = { lat: Number(document.getElementById("latitudeTwo").value), lng: Number(document.getElementById("lenghtTwo").value) };
+                var line = new google.maps.Polyline({ path: [initialMarker, finalMarker], map: map });
+                markerTwo.addListener('dragend', function (event) {
+                    document.getElementById("latitudeTwo").value = this.getPosition().lat();
+                    document.getElementById("lenghtTwo").value = this.getPosition().lng();
+                    var initialMarker = { lat: Number(document.getElementById("latitude").value), lng: Number(document.getElementById("lenght").value) };
+                    var finalMarker = { lat: Number(document.getElementById("latitudeTwo").value), lng: Number(document.getElementById("lenghtTwo").value) };
+                    line.setMap(null);
+                    line = new google.maps.Polyline({ path: [initialMarker, finalMarker], map: map })
+                });
+            }
+
+        }
+
+        //#endregion
+
         //#region parqueo
         var loader = function (e) {
             let file = e.target.files;
@@ -174,7 +337,7 @@
             }
             leer_img.readAsDataURL(event.target.files[0])
         }
-        //#endregion
+            //#endregion
     </script>
 </body>
 </html>

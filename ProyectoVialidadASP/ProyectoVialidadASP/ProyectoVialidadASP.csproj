@@ -327,6 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Imagen\endMarker.png" />
     <Content Include="Imagen\icoBloqueado.png" />
     <Content Include="Imagen\ImgHome\car.jpg" />
     <Content Include="Imagen\ImgHome\close.png" />
@@ -347,10 +348,10 @@
     <Content Include="Style\StyleIndex\SIndex.css" />
     <Content Include="Style\StyleIndex\SLocationList.css" />
     <Content Include="Style\StyleIndex\SLocationList2.css" />
-    <Content Include="Style\StyleIndex\SLocations2.css" />
+    <Content Include="Style\StyleIndex\SLocations.css" />
     <Content Include="Style\StyleIndex\SLogin2.css" />
     <Content Include="Style\StyleIndex\SMap.css" />
-    <Content Include="Style\StyleIndex\SStreets.css" />
+    <Content Include="Style\StyleIndex\SStreets2.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

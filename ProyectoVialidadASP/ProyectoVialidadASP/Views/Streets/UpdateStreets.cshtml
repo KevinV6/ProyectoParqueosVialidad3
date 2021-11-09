@@ -2,6 +2,7 @@
 
 @{
     Layout = null;
+    string latitude = Model.InitialLatitude, lenght = Model.InitialLongitude, latitudeTwo=Model.EndLatitude, lenghtTwo=Model.EndLongitude;
 }
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>UpdateStreets</title>
-	<link href="~/Style/StyleIndex/SStreets.css" rel="stylesheet" />
+	<link href="~/Style/StyleIndex/SStreets2.css" rel="stylesheet" />
 	<!-- GOOGLE FONTs -->
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<!-- FONT AWESOME -->
@@ -21,9 +22,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 </head>
 <body>
-    
-	<form action="/Streets/UpdateStreetsRedirect" method="post" enctype="multipart/form-data">
-		<section>
+
+    <form action="/Streets/UpdateStreetsRedirect" method="post" enctype="multipart/form-data">
+        <section>
             <div class="container">
                 <h2>Modificar Calle No Disponibles</h2>
 
@@ -50,8 +51,6 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            code
-
                             <span class="text">Fecha de Programacion</span>
                         </div>
                     </div>
@@ -83,16 +82,16 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="latitudeOne" value="@Model.InitialLatitude" id="" required>
-                            <span class="text">Latitud</span>
-                            <span class="line"></span>
+                            <input type="text" name="latitudeOne" value="@Model.InitialLatitude" id="latitudeOne" required readonly>
+                            <span class="text tdisabled">Latitud</span>
+                            <span class="line ldisabled"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="lenghtOne" value="@Model.InitialLongitude" id="" required>
-                            <span class="text">Longitud</span>
-                            <span class="line"></span>
+                            <input type="text" name="lenghtOne" value="@Model.InitialLongitude" id="lenghtOne" required readonly>
+                            <span class="text tdisabled">Longitud</span>
+                            <span class="line ldisabled"></span>
                         </div>
                     </div>
                 </div>
@@ -100,16 +99,23 @@
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="latitudeTwo" value="@Model.EndLatitude" id="" required>
-                            <span class="text">Latitud</span>
-                            <span class="line"></span>
+                            <input type="text" name="latitudeTwo" value="@Model.EndLatitude" id="latitudeTwo" required readonly>
+                            <span class="text tdisabled">Latitud</span>
+                            <span class="line ldisabled"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="lenghtTwo" value="@Model.EndLongitude" id="" required>
-                            <span class="text">Longitud</span>
-                            <span class="line"></span>
+                            <input type="text" name="lenghtTwo" value="@Model.EndLongitude" id="lenghtTwo" required readonly>
+                            <span class="text tdisabled">Longitud</span>
+                            <span class="line ldisabled"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div>
+                            <div style="width: 100%; height: 50vh;" id="map"></div>
                         </div>
                     </div>
                 </div>
@@ -121,7 +127,7 @@
                             <span class="line"></span>
                         </div>
                     </div>
-                    
+
                 </div>
                 <h3>Imagen del Parqueo</h3>
                 <div class="row100">
@@ -131,7 +137,7 @@
                             <input hidden="hidden" type="text" name="txtStatus" value="@Model.StatusStreet">
                             <input hidden="hidden" type="text" name="txtUrlImg" value="@Model.UrlImage">
                             <input hidden="hidden" type="text" name="txtNameImg" value="@Model.NameImage">
-                            <input type="file" name="file" accept="image/png,image/jpeg,image/jpg" id="file" hidden onchange="vista_preliminar(event)" >
+                            <input type="file" name="file" accept="image/png,image/jpeg,image/jpg" id="file" hidden onchange="vista_preliminar(event)">
                             <label for="file" id="selector">@Model.NameImage</label>
                             <br>
                             <img class="imgWhite" src="@Model.UrlImage" alt="" id="imgFoto">
@@ -148,9 +154,102 @@
                     </div>
                 </div>
             </div>
-		</section>
-	</form>
+        </section>
+    </form>
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtFqDJ3PeclA4FbDx9-uYvhil8NV1Mu7E&callback=initMap">
+    </script>
     <script>
+        //#region Mapa
+        var marker;
+        var dato;
+        var coords = {};
+
+        initMap = function () {
+
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    coords = {
+                        lng: -66.155439,
+                        lat: -17.392097
+                    };
+                    setMapa(coords);
+                    seleccionar();
+                }, function (error) { console.log(error); });
+
+        }
+
+        function seleccionar() {
+
+            document.getElementById("latitudeOne").value = @latitude;
+            document.getElementById("lenghtOne").value = @lenght;
+            document.getElementById("latitudeTwo").value = @latitudeTwo;
+            document.getElementById("lenghtTwo").value = @lenghtTwo;
+            setMapa(coords);
+        }
+
+        function setMapa(coords) {
+            var map = new google.maps.Map(document.getElementById('map'),
+                {
+                    zoom: 13,
+                    center: new google.maps.LatLng(@latitude, @lenght),
+
+                });
+
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                animation: google.maps.Animation.DROP,
+                position: new google.maps.LatLng(@latitude, @lenght),
+
+            });
+
+            marker.addListener('click');
+
+            var initialMarker = { lat: Number(document.getElementById("latitudeOne").value), lng: Number(document.getElementById("lenghtOne").value) };
+            var finalMarker = { lat: Number(document.getElementById("latitudeTwo").value), lng: Number(document.getElementById("lenghtTwo").value) };
+            var line = new google.maps.Polyline();
+
+            marker.addListener('dragend', function (event) {
+                document.getElementById("latitudeOne").value = this.getPosition().lat();
+                document.getElementById("lenghtOne").value = this.getPosition().lng();
+
+                var initialMarker = { lat: Number(document.getElementById("latitudeOne").value), lng: Number(document.getElementById("lenghtOne").value) };
+                var finalMarker = { lat: Number(document.getElementById("latitudeTwo").value), lng: Number(document.getElementById("lenghtTwo").value) };
+                line.setMap(null);
+                line = new google.maps.Polyline({ path: [initialMarker, finalMarker], map: map })
+
+            });
+
+            ////
+
+
+            markerTwo = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                animation: google.maps.Animation.DROP,
+                position: new google.maps.LatLng(@latitudeTwo, @lenghtTwo),
+
+            });
+            markerTwo.setIcon('/Imagen/endMarker.png')
+            markerTwo.addListener('click');
+            var initialMarker = { lat: Number(document.getElementById("latitudeOne").value), lng: Number(document.getElementById("lenghtOne").value) };
+            var finalMarker = { lat: Number(document.getElementById("latitudeTwo").value), lng: Number(document.getElementById("lenghtTwo").value) };
+            var line = new google.maps.Polyline({ path: [initialMarker, finalMarker], map: map });
+            markerTwo.addListener('dragend', function (event) {
+                document.getElementById("latitudeTwo").value = this.getPosition().lat();
+                document.getElementById("lenghtTwo").value = this.getPosition().lng();
+                var initialMarker = { lat: Number(document.getElementById("latitudeOne").value), lng: Number(document.getElementById("lenghtOne").value) };
+                var finalMarker = { lat: Number(document.getElementById("latitudeTwo").value), lng: Number(document.getElementById("lenghtTwo").value) };
+                line.setMap(null);
+                line = new google.maps.Polyline({ path: [initialMarker, finalMarker], map: map })
+            });
+
+        }
+
+        //#endregion
+
+        //#region Date
         function padLeft(n) {
             return ("00" + n).slice(-2);
         }
@@ -164,6 +263,7 @@
             return dformat
         }
         $('#programmingDate').attr('min', formatDate());
+        //#endregion
         //#region parqueo
         var loader = function (e) {
             let file = e.target.files;
@@ -185,7 +285,7 @@
             }
             leer_img.readAsDataURL(event.target.files[0])
         }
-                        //#endregion
+                            //#endregion
     </script>
 </body>
 </html>

@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Streets</title>
-    <link href="~/Style/StyleIndex/SStreets.css" rel="stylesheet" />
+    <link href="~/Style/StyleIndex/SStreets2.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- GOOGLE FONTs -->
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
@@ -106,17 +106,17 @@
                     <div class="col">
                         <div class="inputBox">
 
-                            <input type="text" name="latitudeOne" id="Latitud1" required>
-                            <span class="text">Latitud</span>
-                            <span class="line"></span>
+                            <input type="number" name="latitudeOne" id="latitudeOne" required readonly>
+                            <span class="text tdisabled">Latitud</span>
+                            <span class="line ldisabled"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
 
-                            <input type="text" name="lenghtOne" id="Longitud1" required>
-                            <span class="text">Longitud</span>
-                            <span class="line"></span>
+                            <input type="number" name="lenghtOne" id="lenghtOne" required readonly>
+                            <span class="text tdisabled">Longitud</span>
+                            <span class="line ldisabled"></span>
                         </div>
                     </div>
                 </div>
@@ -125,17 +125,24 @@
                     <div class="col">
                         <div class="inputBox">
 
-                            <input type="text" name="latitudeTwo" id="Latitud2" required>
-                            <span class="text">Latitud</span>
-                            <span class="line"></span>
+                            <input type="number" name="latitudeTwo" id="latitudeTwo" required readonly>
+                            <span class="text tdisabled">Latitud</span>
+                            <span class="line ldisabled"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="inputBox">
 
-                            <input type="text" name="lenghtTwo" id="Longitud2" required>
-                            <span class="text">Longitud</span>
-                            <span class="line"></span>
+                            <input type="number" name="lenghtTwo" id="lenghtTwo" required readonly>
+                            <span class="text tdisabled">Longitud</span>
+                            <span class="line ldisabled"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="col">
+                        <div>
+                            <div style="width: 100%; height: 50vh;" id="map"></div>
                         </div>
                     </div>
                 </div>
@@ -147,7 +154,7 @@
                             <span class="line"></span>
                         </div>
                     </div>
-                    
+
                 </div>
                 <h3>Imagen de la calle no disponible</h3>
                 <div class="row100">
@@ -173,9 +180,101 @@
             </div>
         </section>
     </form>
-
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtFqDJ3PeclA4FbDx9-uYvhil8NV1Mu7E&callback=initMap">
+    </script>
     @*<script src="~/Js/ValidacionStreet.js"></script>*@
     <script>
+        //#region Mapa
+        var marker;
+        var dato;
+        var coords = {};
+
+        initMap = function () {
+
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    coords = {
+                        lng: -66.155439,
+                        lat: -17.392097
+                    };
+                    setMapa(coords);
+                    seleccionar();
+                }, function (error) { console.log(error); });
+
+        }
+
+        function seleccionar() {
+            
+            document.getElementById("latitudeOne").value = -17.392097;
+            document.getElementById("lenghtOne").value = -66.155439;
+            document.getElementById("latitudeTwo").value = -17.390810;
+            document.getElementById("lenghtTwo").value = -66.141201;
+            setMapa(coords);
+        }
+
+        function setMapa(coords) {
+            var map = new google.maps.Map(document.getElementById('map'),
+                {
+                    zoom: 13,
+                    center: new google.maps.LatLng(coords.lat, coords.lng),
+
+                });
+
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                animation: google.maps.Animation.DROP,
+                position: new google.maps.LatLng(coords.lat, coords.lng),
+
+            });
+
+            marker.addListener('click');
+
+            var initialMarker = { lat: Number(document.getElementById("latitudeOne").value), lng: Number(document.getElementById("lenghtOne").value) };
+            var finalMarker = { lat: Number(document.getElementById("latitudeTwo").value), lng: Number(document.getElementById("lenghtTwo").value) };
+            var line = new google.maps.Polyline();
+
+            marker.addListener('dragend', function (event) {
+                document.getElementById("latitudeOne").value = this.getPosition().lat();
+                document.getElementById("lenghtOne").value = this.getPosition().lng();
+
+                var initialMarker = { lat: Number(document.getElementById("latitudeOne").value), lng: Number(document.getElementById("lenghtOne").value) };
+                var finalMarker = { lat: Number(document.getElementById("latitudeTwo").value), lng: Number(document.getElementById("lenghtTwo").value) };
+                line.setMap(null);
+                line = new google.maps.Polyline({ path: [initialMarker, finalMarker], map: map })
+
+            });
+
+            ////
+
+
+            markerTwo = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                animation: google.maps.Animation.DROP,
+                position: new google.maps.LatLng(-17.390810, -66.141201),
+
+            });
+            markerTwo.setIcon('/Imagen/endMarker.png')
+            markerTwo.addListener('click');
+            var initialMarker = { lat: Number(document.getElementById("latitudeOne").value), lng: Number(document.getElementById("lenghtOne").value) };
+            var finalMarker = { lat: Number(document.getElementById("latitudeTwo").value), lng: Number(document.getElementById("lenghtTwo").value) };
+            var line = new google.maps.Polyline({ path: [initialMarker, finalMarker], map: map });
+            markerTwo.addListener('dragend', function (event) {
+                document.getElementById("latitudeTwo").value = this.getPosition().lat();
+                document.getElementById("lenghtTwo").value = this.getPosition().lng();
+                var initialMarker = { lat: Number(document.getElementById("latitudeOne").value), lng: Number(document.getElementById("lenghtOne").value) };
+                var finalMarker = { lat: Number(document.getElementById("latitudeTwo").value), lng: Number(document.getElementById("lenghtTwo").value) };
+                line.setMap(null);
+                line = new google.maps.Polyline({ path: [initialMarker, finalMarker], map: map })
+            });
+
+        }
+
+        //#endregion
+
+        //#region Fecha
         function padLeft(n) {
             return ("00" + n).slice(-2);
         }
@@ -189,6 +288,7 @@
             return dformat
         }
         $('#programmingDate').attr('min', formatDate());
+        //#endregion
         //#region parqueo
         var loader = function (e) {
             let file = e.target.files;
@@ -210,7 +310,7 @@
             }
             leer_img.readAsDataURL(event.target.files[0])
         }
-                    //#endregion
+                            //#endregion
     </script>
 </body>
 </html>
