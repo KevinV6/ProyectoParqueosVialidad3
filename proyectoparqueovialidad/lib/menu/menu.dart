@@ -19,25 +19,10 @@ class MenuLateral extends StatelessWidget{
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.fill,
-                        image:  AssetImage('assets/image/Menu/header.jpg'))
+                        image:  AssetImage('assets/image/Menu/header3.png')),
                 ),
                 child: Column(
-                  children: [
-                    Expanded(child:Image.asset('assets/image/Menu/logo.png'),
-                    ),
-                    Positioned(
-                      bottom: 12.0,
-                      left: 16.0,
-                      child: Text("Card Drop",
-                        style: TextStyle (
-                            color: Colors.black,
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    )
-                  ],
-                )
-
+                ),
             ),
             ListTile(
               onTap: () {
@@ -65,8 +50,6 @@ class MenuLateral extends StatelessWidget{
               leading: Icon(Icons.account_circle_rounded),
               title: Text('Iniciar Sesion'),
             ),
-            Spacer(),
-
           ],
         ),
       ),

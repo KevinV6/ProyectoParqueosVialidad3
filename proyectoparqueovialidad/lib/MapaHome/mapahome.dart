@@ -21,49 +21,23 @@ class MenuPrinci extends StatefulWidget {
 
 class _MenuPrinciState extends State<MenuPrinci> {
   Completer<GoogleMapController> _controller = Completer();
-  //GoogleMapController? _controller;
   Location location = Location();
   Location currentLocation = Location();
   late LocationData _currentPosition;
   late String _address, _dateTime;
   MapType currentMapType = MapType.normal;
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+  List<Map<dynamic, dynamic>> lists = [];
 
-  crearmarcadores() {
-    FirebaseFirestore.instance.collection("Locations").get().then((docs) {
-      if (docs.docs.isNotEmpty) {
-        for (int i = 0; i < docs.docs.length; ++i) {
-          if (docs.docs[i].data()['StatusLocation'] == "V") {
-            initMarker(docs.docs[i].data(), docs.docs[i].id);
-          }
-        }
-      }
-    });
-  }
-
-  void initMarker(lugar, lugaresid) {
-    var markerIdVal = lugaresid;
-    final MarkerId markerId = MarkerId(markerIdVal);
-
-    final Marker marker = Marker(
-      markerId: markerId,
-      position: LatLng(lugar['Latitude'], lugar['Longitude']),
-      infoWindow: InfoWindow(title: lugar['Name']),
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-    );
-
-    setState(() {
-      markers[markerId] = marker;
-    });
-  }
-
-  var error;
+  Set<Polyline> _polylines = Set<Polyline>();
 
   static final CameraPosition initCameraPosition = CameraPosition(
       bearing: 30,
       target: LatLng(-17.3755459, -66.2543883),
       tilt: 45,
       zoom: 13.5);
+
+  var error;
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +51,7 @@ class _MenuPrinciState extends State<MenuPrinci> {
               backgroundColor: Colors.blue.shade700,
               title: Text(""),
               actions: [
-                IconButton(
-                  //Boton de buscador
+                IconButton( //Boton de buscador
                   icon: Icon(Icons.search),
                   onPressed: () {
                     showSearch(context: context, delegate: BuscadorWP());
@@ -87,17 +60,17 @@ class _MenuPrinciState extends State<MenuPrinci> {
               ],
             ),
           ),
+
           body: Stack(
             children: [
               GoogleMap(
                 mapType: currentMapType,
-                onMapCreated: (GoogleMapController controller) {
-                  _controller.complete(controller);
-                },
-                myLocationEnabled: true,
-                markers: Set<Marker>.of(markers.values),
+                onMapCreated: _OnMapCreated,
                 initialCameraPosition: initCameraPosition,
                 compassEnabled: true,
+                polylines: _polylines,
+                markers: Set<Marker>.of(markers.values),
+                myLocationEnabled: true,
               ),
               Container(
                 padding: EdgeInsets.all(15),
@@ -122,7 +95,78 @@ class _MenuPrinciState extends State<MenuPrinci> {
               ),
             ],
           ),
-        ));
+        )
+    );
+  }
+
+  createRuts() {
+    FirebaseFirestore.instance.collection("Locations").get().then((docs) {
+      if (docs.docs.isNotEmpty) {
+        for (int i = 0; i < docs.docs.length; ++i) {
+          if (docs.docs[i].data()['StatusLocation'] == "V") {
+            if (docs.docs[i].data()['Parking'] == "No Tarifado") {
+              initMarker(docs.docs[i].data(), docs.docs[i].id);
+            } else {
+              initRut(docs.docs[i].data(), docs.docs[i].id);
+            }
+          }
+        }
+      }
+    });
+  }
+
+  void initMarker(lugar, lugaresid) {
+    var markerIdVal = lugaresid;
+    final MarkerId markerId = MarkerId(markerIdVal);
+
+    final Marker marker = Marker(
+      markerId: markerId,
+      position: LatLng(lugar['Latitude'], lugar['Longitude']),
+      infoWindow: InfoWindow(title: lugar['Name'], snippet: "Sin costo"),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+    );
+
+    setState(() {
+      markers[markerId] = marker;
+    });
+  }
+
+
+
+  void initRut(data, idData) {
+    var markerIdVal = idData;
+    final MarkerId markerId = MarkerId(markerIdVal);
+
+    final Marker marker = Marker(
+      markerId: markerId,
+      position: LatLng(data['Latitude'], data['Longitude']),
+      infoWindow: InfoWindow(title: data['Name'],snippet: " Tarifa: " + data['Price'] + " Bs."),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
+    );
+
+    final Polyline polyline = Polyline(
+      startCap: Cap.roundCap,
+      endCap: Cap.roundCap,
+      polylineId: PolylineId(idData),
+      visible: true,
+      points: [
+        new LatLng(data['Latitude'], data['Longitude']),
+        new LatLng(data['LatitudeTwo'], data['LongitudeTwo'])
+      ],
+      width: 3,
+      color: Color.fromRGBO(232, 199, 93, 1.0),
+    );
+
+    setState(() {
+      _polylines.add(polyline);
+      markers[markerId] = marker;
+    });
+  }
+
+  void _OnMapCreated(GoogleMapController mapController) {
+    setState(() {
+      _controller.complete(mapController);
+    });
   }
 
   void getLocation() async{
@@ -181,11 +225,11 @@ class _MenuPrinciState extends State<MenuPrinci> {
 
 
 
+
   @override
   void initState() {
-    crearmarcadores();
+    createRuts();
     super.initState();
     getLoc();
   }
-
 }

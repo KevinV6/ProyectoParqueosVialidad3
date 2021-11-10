@@ -83,7 +83,7 @@ flutter:
       - assets/image/SocialButton/twitter.png
       - assets/image/SocialButton/facebook.png
       - assets/image/SobreNosotros/parqueo.png
-
+      - assets/image/Menu/header3.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
