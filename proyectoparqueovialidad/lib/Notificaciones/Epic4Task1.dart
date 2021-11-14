@@ -122,15 +122,13 @@ class _NotificacionesState extends State<MyHome> {
                       shrinkWrap: true,
                       itemCount: lists.length,
                       itemBuilder: (BuildContext context, int index) {
-                        var now = new DateTime.now();
-                        var now2;
-                        var juntar = lists[index]["ProgrammingDate"] +
+                        var dateNow = new DateTime.now();
+                        var data = lists[index]["ProgrammingDate"] +
                             'T' +
                             lists[index]["EndTime"];
-                        var ti = DateTime.parse(juntar);
-                        now2 = DateTime.parse(lists[index]["ProgrammingDate"]);
-
-                        if (lists[index]["StatusStreet"] == "V") {
+                        var dateData = DateTime.parse(data);
+                        if (dateNow.isBefore(dateData) &&
+                            lists[index]["StatusStreet"] == "V") {
                           return Card(
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),

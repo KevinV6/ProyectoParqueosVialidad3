@@ -47,7 +47,8 @@ class _RutasState extends State<Rutas> {
               backgroundColor: Colors.blue.shade700,
               title: Text(""),
               actions: [
-                IconButton( //Boton de buscador
+                IconButton(
+                  //Boton de buscador
                   icon: Icon(Icons.search),
                   onPressed: () {
                     showSearch(context: context, delegate: BuscadorWP());
@@ -56,50 +57,54 @@ class _RutasState extends State<Rutas> {
               ],
             ),
           ),
-
           body: Stack(
-        children: [
-          GoogleMap(
-            mapType: currentMapType,
-            onMapCreated: _OnMapCreated,
-            initialCameraPosition: initCameraPosition,
-            compassEnabled: true,
-            polylines: _polylines,
-            markers: Set<Marker>.of(markers.values),
-            myLocationEnabled: true,
-          ),
-          Container(
-            padding: EdgeInsets.all(15),
-            alignment: Alignment.topRight,
-            child: FloatingActionButton(
-              backgroundColor: Colors.teal,
-              child: Icon(Icons.map, size: 30),
-              onPressed: _onMapTypeChanged,
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(15),
-            alignment: Alignment.bottomCenter,
-            child: FloatingActionButton(
-              backgroundColor: Colors.black12,
-              child: Icon(
-                Icons.location_searching,
-                color: Colors.white,
+            children: [
+              GoogleMap(
+                mapType: currentMapType,
+                onMapCreated: _OnMapCreated,
+                initialCameraPosition: initCameraPosition,
+                compassEnabled: true,
+                polylines: _polylines,
+                markers: Set<Marker>.of(markers.values),
+                myLocationEnabled: true,
               ),
-              onPressed: getLocation,
-            ),
+              Container(
+                padding: EdgeInsets.all(15),
+                alignment: Alignment.topRight,
+                child: FloatingActionButton(
+                  backgroundColor: Colors.teal,
+                  child: Icon(Icons.map, size: 30),
+                  onPressed: _onMapTypeChanged,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(15),
+                alignment: Alignment.bottomCenter,
+                child: FloatingActionButton(
+                  backgroundColor: Colors.black12,
+                  child: Icon(
+                    Icons.location_searching,
+                    color: Colors.white,
+                  ),
+                  onPressed: getLocation,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    )
-    );
+        ));
   }
 
   createRuts() {
     FirebaseFirestore.instance.collection("Streets").get().then((docs) {
       if (docs.docs.isNotEmpty) {
         for (int i = 0; i < docs.docs.length; ++i) {
-          if (docs.docs[i].data()['StatusStreet'] == "V") {
+          var dateNow = new DateTime.now();
+          var data = docs.docs[i].data()['ProgrammingDate '].toString() +
+              "T" +
+              docs.docs[i].data()['EndTime'].toString();
+          var dateData = DateTime.parse(data);
+          if (dateNow.isBefore(dateData) &&
+              docs.docs[i].data()['StatusStreet'] == "V") {
             initRut(docs.docs[i].data(), docs.docs[i].id);
           }
         }
@@ -114,7 +119,8 @@ class _RutasState extends State<Rutas> {
     final Marker marker = Marker(
       markerId: markerId,
       position: LatLng(data['InitialLatitude'], data['InitialLongitude']),
-      infoWindow: InfoWindow(title: data['Name'], snippet: data['Description']),
+      infoWindow:
+          InfoWindow(title: data['Name'], snippet: data['Description ']),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
     );
 
@@ -143,7 +149,7 @@ class _RutasState extends State<Rutas> {
     });
   }
 
-  void getLocation() async{
+  void getLocation() async {
     final GoogleMapController controller = await _controller.future;
     LocationData currentLocation;
     var location = new Location();
@@ -152,7 +158,7 @@ class _RutasState extends State<Rutas> {
     } on PlatformException catch (e) {
       if (e.code == 'PERMISSION_DENIED') {
         error = 'Permission denied';
-      }else if(e.code == "PERMISSION_DENIED_NEVER_ASK"){
+      } else if (e.code == "PERMISSION_DENIED_NEVER_ASK") {
         error = 'Permission denied';
       }
       currentLocation = '' as LocationData;
@@ -167,8 +173,7 @@ class _RutasState extends State<Rutas> {
     ));
   }
 
-
-  getLoc() async{
+  getLoc() async {
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
 
@@ -187,18 +192,14 @@ class _RutasState extends State<Rutas> {
         return;
       }
     }
-
   }
-
 
   void _onMapTypeChanged() {
     setState(() {
-      currentMapType = currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
+      currentMapType =
+          currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
     });
   }
-
-
-
 
   @override
   void initState() {

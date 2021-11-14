@@ -55,31 +55,33 @@
                     var informationMarker = [];
                     for (var a = 0; a < numRegisters ; a++) {
                         row = contentJson[a];
-
-                        var Coordinates = { lat: Number(row[rowPosition[4]]), lng: Number(row[rowPosition[5]]) };
-                        if (row[rowPosition[8]] == 'Tarifado') {
-                            var CoordinatesTwo = { lat: Number(row[rowPosition[6]]), lng: Number(row[rowPosition[7]]) };
-                            line = new google.maps.Polyline({ path: [Coordinates, CoordinatesTwo], map: map });
-                            markerTwo[row[rowPosition[8]]] = new google.maps.Marker({
-                                position: CoordinatesTwo,
+                        if (row[rowPosition[1]]=='V') {
+                            var Coordinates = { lat: Number(row[rowPosition[4]]), lng: Number(row[rowPosition[5]]) };
+                            if (row[rowPosition[8]] == 'Tarifado') {
+                                var CoordinatesTwo = { lat: Number(row[rowPosition[6]]), lng: Number(row[rowPosition[7]]) };
+                                line = new google.maps.Polyline({ path: [Coordinates, CoordinatesTwo], map: map });
+                                markerTwo[row[rowPosition[8]]] = new google.maps.Marker({
+                                    position: CoordinatesTwo,
+                                    map: map,
+                                    title: row[rowPosition[2]]
+                                });
+                                markerTwo[row[rowPosition[8]]].setIcon('/Imagen/endMarker.png')
+                            }
+                            //#region marker with your data
+                            var contentMarker = '<h4>' + row[rowPosition[2]] + '</h4>' + '<p>' + row[rowPosition[11]] + '</p>';
+                            pointMarker[row[rowPosition[8]]] = new google.maps.Marker({
+                                position: Coordinates,
                                 map: map,
                                 title: row[rowPosition[2]]
                             });
-                            markerTwo[row[rowPosition[8]]].setIcon('/Imagen/endMarker.png')
-                        }
-                        //#region marker with your data
-                        var contentMarker = '<h4>' + row[rowPosition[2]] + '</h4>' + '<p>' + row[rowPosition[11]] + '</p>';
-                        pointMarker[row[rowPosition[8]]] = new google.maps.Marker({
-                            position: Coordinates,
-                            map: map,
-                            title: row[rowPosition[2]]
-                        });
-                        
-                        informationMarker[row[rowPosition[8]]] = new google.maps.InfoWindow({
-                            content: contentMarker
-                        });
-                        informationMarker[row[rowPosition[8]]].open(mapHtml, pointMarker[row[rowPosition[8]]]);
+
+                            informationMarker[row[rowPosition[8]]] = new google.maps.InfoWindow({
+                                content: contentMarker
+                            });
+                            informationMarker[row[rowPosition[8]]].open(mapHtml, pointMarker[row[rowPosition[8]]]);
                         //#endregion
+                        }
+                        
                     }
                 }
                 requestLocation.send()
@@ -102,41 +104,43 @@
                     var informationMarker = [];
                     for (var a = 0; a < numRegisters; a++) {
                         row = contentJson[a];
+                        if (row[rowPosition[1]] == 'V') {
+                            var initialMarker = { lat: Number(row[rowPosition[8]]), lng: Number(row[rowPosition[9]]) };
+                            var finalMarker = { lat: Number(row[rowPosition[10]]), lng: Number(row[rowPosition[11]]) };
 
-                        var initialMarker = { lat: Number(row[rowPosition[8]]), lng: Number(row[rowPosition[9]]) };
-                        var finalMarker = { lat: Number(row[rowPosition[10]]), lng: Number(row[rowPosition[11]]) };
 
+                            var dateFirebase = row[rowPosition[5]];
+                            var dateData = new Date(dateFirebase.substr(0, 4), dateFirebase.substr(5, 2) - 1, dateFirebase.substr(8, 2));
+                            var currentDate = new Date;
 
-                        var dateFirebase = row[rowPosition[5]];
-                        var dateData = new Date(dateFirebase.substr(0, 4), dateFirebase.substr(5, 2) - 1, dateFirebase.substr(8, 2));
-                        var currentDate = new Date;
+                            if (dateData > currentDate) {
 
-                        if (dateData > currentDate) {
+                                //#region marker Streets not available
+                                var contentMarkerTwo = '<h4>' + row[rowPosition[3]] + '</h4>' + '<p>' + row[rowPosition[4]] + '</p>';
+                                pointMarker[row[rowPosition[2]]] = new google.maps.Marker({
+                                    position: initialMarker,
+                                    map: map,
+                                    title: row[rowPosition[3]]
+                                });
+                                pointMarker[row[rowPosition[2]]].setIcon('/Imagen/icoBloqueado.png');
+                                markerTwo[row[rowPosition[8]]] = new google.maps.Marker({
+                                    position: finalMarker,
+                                    map: map,
+                                    title: row[rowPosition[3]]
+                                });
+                                markerTwo[row[rowPosition[8]]].setIcon('/Imagen/icoBloqueado.png');
+                                var line = new google.maps.Polyline({ path: [initialMarker, finalMarker], map: map })
 
-                            //#region marker Streets not available
-                            var contentMarkerTwo = '<h4>' + row[rowPosition[3]] + '</h4>' + '<p>' + row[rowPosition[4]] + '</p>';
-                            pointMarker[row[rowPosition[2]]] = new google.maps.Marker({
-                                position: initialMarker,
-                                map: map,
-                                title: row[rowPosition[3]]
-                            });
-                            pointMarker[row[rowPosition[2]]].setIcon('/Imagen/icoBloqueado.png');
-                            markerTwo[row[rowPosition[8]]] = new google.maps.Marker({
-                                position: finalMarker,
-                                map: map,
-                                title: row[rowPosition[3]]
-                            });
-                            markerTwo[row[rowPosition[8]]].setIcon('/Imagen/icoBloqueado.png');
-                            var line = new google.maps.Polyline({ path: [initialMarker, finalMarker], map: map })
+                                console.log(row[rowPosition[8]])
 
-                            console.log(row[rowPosition[8]])
-
-                            informationMarker[row[rowPosition[4]]] = new google.maps.InfoWindow({
-                                content: contentMarkerTwo
-                            });
-                            informationMarker[row[rowPosition[4]]].open(mapHtml, markerTwo[row[rowPosition[8]]]);
-                            //#endregion completion of marking
+                                informationMarker[row[rowPosition[4]]] = new google.maps.InfoWindow({
+                                    content: contentMarkerTwo
+                                });
+                                informationMarker[row[rowPosition[4]]].open(mapHtml, markerTwo[row[rowPosition[8]]]);
+                                //#endregion completion of marking
+                            }
                         }
+                        
                     }
                 }
                 requestStreet.send()
