@@ -250,7 +250,7 @@ class _InfoParqueoState extends State<InfoParqueo> {
         ),
         back: Container(
           child: Text(
-            widget.idfon['Price'],
+            'Tarifa:' + widget.idfon['Price'] + ' Bs.',
             style: TextStyle(
               color: Color(0xff212871),
               fontSize: 20,
